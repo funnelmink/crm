@@ -257,7 +257,7 @@ export const SignInUpForm = () => {
       )}
       {signInUpStep === SignInUpStep.Init && (
         <FooterNote>
-          By using Twenty, you agree to the Terms of Service and Privacy Policy.
+          By using funnelmink, you agree to the Terms of Service and Privacy Policy.
         </FooterNote>
       )}
     </>

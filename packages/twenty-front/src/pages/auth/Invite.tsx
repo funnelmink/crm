@@ -75,7 +75,7 @@ export const Invite = () => {
             />
           </StyledContentContainer>
           <FooterNote>
-            By using Twenty, you agree to the Terms of Service and Privacy
+            By using funnelmink, you agree to the Terms of Service and Privacy
             Policy.
           </FooterNote>
         </>
