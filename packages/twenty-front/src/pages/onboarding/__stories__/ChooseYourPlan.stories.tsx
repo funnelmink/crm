@@ -5,21 +5,19 @@ import { graphql, HttpResponse } from 'msw';
 
 import { AppPath } from '@/types/AppPath';
 import { GET_CURRENT_USER } from '@/users/graphql/queries/getCurrentUser';
+import { ChooseYourPlan } from '~/pages/onboarding/ChooseYourPlan';
 import {
   PageDecorator,
   PageDecoratorArgs,
 } from '~/testing/decorators/PageDecorator';
-import { PrefetchLoadingDecorator } from '~/testing/decorators/PrefetchLoadingDecorator';
 import { graphqlMocks } from '~/testing/graphqlMocks';
 import { mockedOnboardingUsersData } from '~/testing/mock-data/users';
 import { sleep } from '~/testing/sleep';
 
-import { ChooseYourPlan } from '../ChooseYourPlan';
-
 const meta: Meta<PageDecoratorArgs> = {
-  title: 'Pages/Auth/ChooseYourPlan',
+  title: 'Pages/Onboarding/ChooseYourPlan',
   component: ChooseYourPlan,
-  decorators: [PrefetchLoadingDecorator, PageDecorator],
+  decorators: [PageDecorator],
   args: { routePath: AppPath.PlanRequired },
   parameters: {
     msw: {

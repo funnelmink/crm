@@ -3,23 +3,21 @@ import { Meta, StoryObj } from '@storybook/react';
 import { within } from '@storybook/test';
 import { graphql, HttpResponse } from 'msw';
 
-import { AppPath } from '@/types/AppPath';
-import { GET_CURRENT_USER } from '@/users/graphql/queries/getCurrentUser';
+import { AppPath } from '~/modules/types/AppPath';
+import { GET_CURRENT_USER } from '~/modules/users/graphql/queries/getCurrentUser';
+import { SyncEmails } from '~/pages/onboarding/SyncEmails';
 import {
   PageDecorator,
   PageDecoratorArgs,
 } from '~/testing/decorators/PageDecorator';
-import { PrefetchLoadingDecorator } from '~/testing/decorators/PrefetchLoadingDecorator';
 import { graphqlMocks } from '~/testing/graphqlMocks';
 import { mockedOnboardingUsersData } from '~/testing/mock-data/users';
 
-import { CreateProfile } from '../CreateProfile';
-
 const meta: Meta<PageDecoratorArgs> = {
-  title: 'Pages/Auth/CreateProfile',
-  component: CreateProfile,
-  decorators: [PrefetchLoadingDecorator, PageDecorator],
-  args: { routePath: AppPath.CreateProfile },
+  title: 'Pages/Onboarding/SyncEmails',
+  component: SyncEmails,
+  decorators: [PageDecorator],
+  args: { routePath: AppPath.SyncEmails },
   parameters: {
     msw: {
       handlers: [
@@ -38,11 +36,11 @@ const meta: Meta<PageDecoratorArgs> = {
 
 export default meta;
 
-export type Story = StoryObj<typeof CreateProfile>;
+export type Story = StoryObj<typeof SyncEmails>;
 
 export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await canvas.findByText('Create profile');
+    await canvas.findByText('Emails and Calendar');
   },
 };
