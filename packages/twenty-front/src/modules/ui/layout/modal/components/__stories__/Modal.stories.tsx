@@ -26,7 +26,7 @@ export const Default: Story = {
           that I expect you to, anyways. :)
         </Modal.Content>
         <Modal.Footer>
-          By using funnelmink, you're opting for the finest CRM experience you'll
+          By using Funnelmink, you're opting for the finest CRM experience you'll
           ever encounter.
         </Modal.Footer>
       </>

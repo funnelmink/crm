@@ -74,7 +74,7 @@ export const Invite = () => {
             />
           </StyledContentContainer>
           <FooterNote>
-            By using funnelmink, you agree to the Terms of Service and Privacy
+            By using Funnelmink, you agree to the Terms of Service and Privacy
             Policy.
           </FooterNote>
         </>
