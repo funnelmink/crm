@@ -1,9 +1,10 @@
 version: "3.9"
-name: twenty
+name: funnelmink
 
 services:
   change-vol-ownership:
     image: ubuntu
+    platform: linux/amd64
     user: root
     volumes:
       - server-local-data:/tmp/server-local-data
@@ -14,7 +15,8 @@ services:
       && chown -R 1000:1000 /tmp/docker-data"
 
   server:
-    image: twentycrm/twenty:${TAG}
+    image: jarwarren/funnelmink:${TAG}
+    platform: linux/amd64
     volumes:
       - server-local-data:/app/packages/twenty-server/${STORAGE_LOCAL_PATH:-.local-storage}
       - docker-data:/app/docker-data
@@ -67,7 +69,8 @@ services:
     restart: always
 
   worker:
-    image: twentycrm/twenty:${TAG}
+    image: jarwarren/funnelmink:${TAG}
+    platform: linux/amd64
     command: ["yarn", "worker:prod"]
     environment:
       ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
@@ -111,6 +114,7 @@ services:
 
   db:
     image: twentycrm/twenty-postgres:${TAG}
+    platform: linux/amd64
     volumes:
       - db-data:/bitnami/postgresql
     environment:
