@@ -64,8 +64,8 @@ services:
       NODE_ENV: ${NODE_ENV}
       PG_DATABASE_URL: postgres://twenty:twenty@${PG_DATABASE_HOST}/default
       PORT: 3000
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
       REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
       REFRESH_TOKEN_EXPIRES_IN: ${REFRESH_TOKEN_EXPIRES_IN}
       SENTRY_DSN: ${SENTRY_DSN}
@@ -135,8 +135,8 @@ services:
       MESSAGING_PROVIDER_GMAIL_ENABLED: ${MESSAGING_PROVIDER_GMAIL_ENABLED}
       NODE_ENV: ${NODE_ENV}
       PG_DATABASE_URL: postgres://twenty:twenty@${PG_DATABASE_HOST}/default
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
       REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
       REFRESH_TOKEN_EXPIRES_IN: ${REFRESH_TOKEN_EXPIRES_IN}
       SENTRY_DSN: ${SENTRY_DSN}
@@ -170,7 +170,17 @@ services:
       retries: 10
     restart: always
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+
 volumes:
   docker-data:
   db-data:
+  redis-data:
   server-local-data:
