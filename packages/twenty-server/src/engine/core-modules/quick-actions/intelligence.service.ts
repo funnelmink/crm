@@ -40,8 +40,8 @@ export class IntelligenceService {
           Authorization: `Bearer ${this.environmentService.get(
             'OPENROUTER_API_KEY',
           )}`,
-          'HTTP-Referer': `https://twenty.com`,
-          'X-Title': `Twenty CRM`,
+          'HTTP-Referer': `https://funnelmink.com`,
+          'X-Title': `Funnelmink CRM`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

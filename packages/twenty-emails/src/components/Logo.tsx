@@ -7,8 +7,8 @@ const logoStyle = {
 export const Logo = () => {
   return (
     <Img
-      src="https://app.twenty.com/icons/windows11/Square150x150Logo.scale-100.png"
-      alt="Twenty logo"
+      src="https://app.funnelmink.com/icons/windows11/Square150x150Logo.scale-100.png"
+      alt="Funnelmink logo"
       width="40"
       height="40"
       style={logoStyle}

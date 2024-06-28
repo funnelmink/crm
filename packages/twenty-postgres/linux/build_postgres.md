@@ -1,5 +1,5 @@
 
-This doc explains how to build postgresql for Twenty
+This doc explains how to build postgresql for Funnelmink
 
 Build .control, .so and .pg_graphql--version.sql
 > docker buildx create --name mybuilder

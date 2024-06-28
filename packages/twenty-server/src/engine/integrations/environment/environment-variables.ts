@@ -344,7 +344,7 @@ export class EnvironmentVariables {
 
   EMAIL_SYSTEM_ADDRESS = 'system@yourdomain.com';
 
-  EMAIL_FROM_NAME = 'Felix from Twenty';
+  EMAIL_FROM_NAME = 'Ron from Funnelmink';
 
   EMAIL_DRIVER: EmailDriver = EmailDriver.Logger;
 

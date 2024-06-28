@@ -32,7 +32,7 @@ export const PasswordUpdateNotifyEmail = ({
         immediately.
         <br />
       </MainText>
-      <CallToAction value="Connect to Twenty" href={link} />
+      <CallToAction value="Connect to Funnelmink" href={link} />
     </BaseEmail>
   );
 };

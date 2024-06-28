@@ -40,6 +40,6 @@ export const useSettingsIntegrationCategories =
       }),
       SETTINGS_INTEGRATION_ZAPIER_CATEGORY,
       SETTINGS_INTEGRATION_WINDMILL_CATEGORY,
-      SETTINGS_INTEGRATION_REQUEST_CATEGORY,
+      // SETTINGS_INTEGRATION_REQUEST_CATEGORY, we'll ask for integration requests through the support channel instead
     ];
   };
