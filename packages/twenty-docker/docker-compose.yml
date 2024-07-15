@@ -178,8 +178,23 @@ services:
       - redis-data:/data
     restart: unless-stopped
 
+  backup:
+    image: postgres:latest
+    platform: linux/amd64
+    depends_on:
+      - db
+    environment:
+      BACKUP_ADMIN_PASSWORD: ${BACKUP_ADMIN_PASSWORD}
+      BACKUP_S3_ENDPOINT: ${BACKUP_S3_ENDPOINT}
+      BACKUP_S3_NAME: ${BACKUP_S3_NAME}
+      BACKUP_S3_REGION: ${BACKUP_S3_REGION}
+      BACKUP_S3_PREFIX: ${BACKUP_S3_PREFIX}
+    volumes:
+      - backup-data:/backup
+    entrypoint: /bin/sh -c 'while true; do PGPASSWORD="${BACKUP_ADMIN_PASSWORD}" pg_isready -q -h db -U twenty && PGPASSWORD="${POSTGRES_ADMIN_PASSWORD}" pg_dump -Fc -h db -U twenty default > /backup/${BACKUP_S3_PREFIX}_db_backup_$(date +%Y-%m-%d).dump && aws s3 cp /backup/${BACKUP_S3_PREFIX}_db_backup_$(date +%Y-%m-%d).dump ${BACKUP_S3_ENDPOINT}/$BACKUP_S3_NAME/$(date +%Y-%m-%d)/ --region $BACKUP_S3_REGION && break; sleep 5; done'
 
 volumes:
+  backup-data:
   docker-data:
   db-data:
   redis-data:
