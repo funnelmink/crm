@@ -30,6 +30,9 @@ async function bootstrap() {
 
   await CommandFactory.runApplication(app);
 
-  app.close();
+  await app.close();
 }
-bootstrap();
+bootstrap().then(r => r).catch(e => {
+  console.error(e);
+  process.exit(1);
+});

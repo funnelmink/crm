@@ -9,7 +9,7 @@ const external_sites =
 
 export default defineManifest({
   manifest_version: 3,
-  name: 'Twenty',
+  name: 'Funnelmink',
   description: packageData.description,
   version: packageData.version,
 

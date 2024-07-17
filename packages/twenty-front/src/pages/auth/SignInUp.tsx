@@ -25,11 +25,11 @@ export const SignInUp = () => {
       signInUpStep === SignInUpStep.Init ||
       signInUpStep === SignInUpStep.Email
     ) {
-      return 'Welcome to Twenty';
+      return 'Welcome to Funnelmink';
     }
     return signInUpMode === SignInUpMode.SignIn
-      ? 'Sign in to Twenty'
-      : 'Sign up to Twenty';
+      ? 'Sign in to Funnelmink'
+      : 'Sign up to Funnelmink';
   }, [signInUpMode, signInUpStep]);
 
   if (isDefined(currentWorkspace)) {

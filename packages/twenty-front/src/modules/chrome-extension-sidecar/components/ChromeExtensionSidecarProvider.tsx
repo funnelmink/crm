@@ -18,8 +18,8 @@ const AppInaccessible = ({ message }: { message: string }) => {
   return (
     <StyledContainer>
       <img
-        src="/images/integrations/twenty-logo.svg"
-        alt="twenty-icon"
+        src="/images/integrations/fm-logo.png"
+        alt="funnelmink-icon"
         height={40}
         width={40}
       />
@@ -40,7 +40,7 @@ export const ChromeExtensionSidecarProvider: React.FC<
 
   if (!isDefined(chromeExtensionId))
     return (
-      <AppInaccessible message={`Twenty is not accessible inside an iframe.`} />
+      <AppInaccessible message={`Funnelmink is not accessible inside an iframe.`} />
     );
 
   if (isDefined(isLoadingTokensFromExtension) && !isLoadingTokensFromExtension)

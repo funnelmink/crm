@@ -5,43 +5,39 @@ import { MainText } from 'src/components/MainText';
 import { ShadowText } from 'src/components/ShadowText';
 import { SubTitle } from 'src/components/SubTitle';
 
-export const WhatIsTwenty = () => {
+export const WhatIsFunnelmink = () => {
   return (
     <>
-      <SubTitle value="What is Twenty?" />
+      <SubTitle value="What is Funnelmink?" />
       <MainText>
-        A software to help businesses manage their customer data and
-        relationships efficiently.
+        Software to help small and medium-sized businesses manage their customer data and
+        relationships.
       </MainText>
       <Row>
         <Column>
           <ShadowText>
-            <Link href="https://twenty.com/" value="Website" />
+            <Link href="https://funnelmink.com/" value="Website" />
           </ShadowText>
         </Column>
         <Column>
           <ShadowText>
-            <Link href="https://github.com/twentyhq/twenty" value="Github" />
+            <Link href="https://github.com/funnelmink/crm" value="Github" />
           </ShadowText>
         </Column>
         <Column>
           <ShadowText>
-            <Link href="https://twenty.com/user-guide" value="User guide" />
+            <Link href="https://funnelmink.com/user-guide" value="User guide" />
           </ShadowText>
         </Column>
         <Column>
           <ShadowText>
-            <Link href="https://docs.twenty.com/" value="Developers" />
+            <Link href="https://docs.funnelmink.com/" value="Developers" />
           </ShadowText>
         </Column>
       </Row>
       <ShadowText>
-        Twenty.com Public Benefit Corporation
-        <br />
-        2261 Market Street #5275
-        <br />
-        San Francisco, CA 94114
+        Funnelmink LLC
       </ShadowText>
     </>
   );
-};
+}
