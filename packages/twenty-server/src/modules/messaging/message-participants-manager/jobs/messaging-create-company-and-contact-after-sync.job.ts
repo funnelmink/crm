@@ -9,14 +9,24 @@ import {
   FeatureFlagEntity,
   FeatureFlagKeys,
 } from 'src/engine/core-modules/feature-flag/feature-flag.entity';
-import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
-import { CreateCompanyAndContactService } from 'src/modules/connected-account/auto-companies-and-contacts-creation/services/create-company-and-contact.service';
+import {
+  InjectObjectMetadataRepository,
+} from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
 import { MessageChannelRepository } from 'src/modules/messaging/common/repositories/message-channel.repository';
 import { MessageParticipantRepository } from 'src/modules/messaging/common/repositories/message-participant.repository';
-import { MessageChannelWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
-import { MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
-import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import {
+  MessageChannelWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import {
+  MessageParticipantWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+import {
+  ConnectedAccountWorkspaceEntity,
+} from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
 import { ConnectedAccountRepository } from 'src/modules/connected-account/repositories/connected-account.repository';
+import {
+  CreateClientService,
+} from 'src/modules/connected-account/auto-companies-and-contacts-creation/create-client.service';
 
 export type MessagingCreateCompanyAndContactAfterSyncJobData = {
   workspaceId: string;
@@ -25,13 +35,13 @@ export type MessagingCreateCompanyAndContactAfterSyncJobData = {
 
 @Injectable()
 export class MessagingCreateCompanyAndContactAfterSyncJob
-  implements MessageQueueJob<MessagingCreateCompanyAndContactAfterSyncJobData>
-{
+  implements MessageQueueJob<MessagingCreateCompanyAndContactAfterSyncJobData> {
   private readonly logger = new Logger(
     MessagingCreateCompanyAndContactAfterSyncJob.name,
   );
+
   constructor(
-    private readonly createCompanyAndContactService: CreateCompanyAndContactService,
+    private readonly createClientService: CreateClientService,
     @InjectObjectMetadataRepository(MessageChannelWorkspaceEntity)
     private readonly messageChannelService: MessageChannelRepository,
     @InjectObjectMetadataRepository(MessageParticipantWorkspaceEntity)
@@ -40,7 +50,8 @@ export class MessagingCreateCompanyAndContactAfterSyncJob
     private readonly featureFlagRepository: Repository<FeatureFlagEntity>,
     @InjectObjectMetadataRepository(ConnectedAccountWorkspaceEntity)
     private readonly connectedAccountRepository: ConnectedAccountRepository,
-  ) {}
+  ) {
+  }
 
   async handle(
     data: MessagingCreateCompanyAndContactAfterSyncJobData,
@@ -85,15 +96,15 @@ export class MessagingCreateCompanyAndContactAfterSyncJob
 
     const contactsToCreate = isContactCreationForSentAndReceivedEmailsEnabled
       ? await this.messageParticipantRepository.getByMessageChannelIdWithoutPersonIdAndWorkspaceMemberId(
-          messageChannelId,
-          workspaceId,
-        )
+        messageChannelId,
+        workspaceId,
+      )
       : await this.messageParticipantRepository.getByMessageChannelIdWithoutPersonIdAndWorkspaceMemberIdAndMessageOutgoing(
-          messageChannelId,
-          workspaceId,
-        );
+        messageChannelId,
+        workspaceId,
+      );
 
-    await this.createCompanyAndContactService.createCompaniesAndContactsAndUpdateParticipants(
+    await this.createClientService.createClientsAndUpdateParticipants(
       connectedAccount,
       contactsToCreate,
       workspaceId,

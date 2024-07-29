@@ -35,13 +35,13 @@ type MockedActivity = Pick<
       | 'companyId'
       | 'targetObjectNameSingular'
     > & {
-      activity: Pick<Activity, 'id' | 'createdAt' | 'updatedAt' | '__typename'>;
-      person?: Pick<Person, 'id' | 'name' | 'avatarUrl' | '__typename'> | null;
-      company?: Pick<
-        Company,
-        'id' | 'name' | 'domainName' | '__typename'
-      > | null;
-    }
+    activity: Pick<Activity, 'id' | 'createdAt' | 'updatedAt' | '__typename'>;
+    person?: Pick<Person, 'id' | 'name' | 'avatarUrl' | '__typename'> | null;
+    company?: Pick<
+      Company,
+      'id' | 'name' | 'domainName' | '__typename'
+    > | null;
+  }
   >;
 };
 
@@ -112,7 +112,7 @@ export const mockedActivities: Array<MockedActivity> = [
           name: 'Airbnb',
           domainName: 'airbnb.com',
         },
-        person: null,
+        client: null,
         activityId: '89bb825c-171e-4bcc-9cf7-43448d6fb230',
         activity: {
           __typename: 'Activity',
@@ -135,7 +135,7 @@ export const mockedActivities: Array<MockedActivity> = [
           name: 'Aircall',
           domainName: 'aircall.io',
         },
-        person: null,
+        client: null,
         activityId: 'b396e6b9-dc5c-4643-bcff-61b6cf7523ae',
         activity: {
           __typename: 'Activity',
@@ -173,7 +173,7 @@ export const mockedActivities: Array<MockedActivity> = [
         updatedAt: '2023-04-26T10:23:42.33625+00:00',
         targetObjectNameSingular: 'person',
         personId: '7dfbc3f7-6e5e-4128-957e-8d86808cdf6b', // Alexandre
-        person: {
+        client: {
           __typename: 'Person',
           id: '7dfbc3f7-6e5e-4128-957e-8d86808cdf6b',
           name: {
@@ -201,12 +201,12 @@ export const mockedActivities: Array<MockedActivity> = [
         companyId: null,
         targetObjectNameSingular: 'person',
         company: null,
-        person: {
+        client: {
           __typename: 'Person',
           id: '7dfbc3f7-6e5e-4128-957e-8d86808cdf6d',
           name: {
             firstName: 'Jean',
-            lastName: "d'Eau",
+            lastName: 'd\'Eau',
           },
           avatarUrl: '',
         },

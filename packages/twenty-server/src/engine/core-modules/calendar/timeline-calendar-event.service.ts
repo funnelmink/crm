@@ -3,26 +3,32 @@ import { Injectable } from '@nestjs/common';
 import { Any } from 'typeorm';
 import omit from 'lodash.omit';
 
-import { TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE } from 'src/engine/core-modules/calendar/constants/calendar.constants';
-import { TimelineCalendarEventsWithTotal } from 'src/engine/core-modules/calendar/dtos/timeline-calendar-events-with-total.dto';
+import {
+  TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE,
+} from 'src/engine/core-modules/calendar/constants/calendar.constants';
+import {
+  TimelineCalendarEventsWithTotal,
+} from 'src/engine/core-modules/calendar/dtos/timeline-calendar-events-with-total.dto';
 import { InjectWorkspaceRepository } from 'src/engine/twenty-orm/decorators/inject-workspace-repository.decorator';
 import { WorkspaceRepository } from 'src/engine/twenty-orm/repository/workspace.repository';
 import { CalendarEventWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-event.workspace-entity';
-import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
 import { CalendarChannelVisibility } from 'src/modules/calendar/standard-objects/calendar-channel.workspace-entity';
+import { ClientRepository } from 'src/modules/funnelmink/client.repository';
+import { ClientWorkspaceEntity } from 'src/modules/funnelmink/client.workspace-entity';
 
 @Injectable()
 export class TimelineCalendarEventService {
   constructor(
     @InjectWorkspaceRepository(CalendarEventWorkspaceEntity)
     private readonly calendarEventRepository: WorkspaceRepository<CalendarEventWorkspaceEntity>,
-    @InjectWorkspaceRepository(PersonWorkspaceEntity)
-    private readonly personRepository: WorkspaceRepository<PersonWorkspaceEntity>,
-  ) {}
+    @InjectWorkspaceRepository(ClientWorkspaceEntity)
+    private readonly clientRepository: WorkspaceRepository<ClientRepository>,
+  ) {
+  }
 
   // TODO: Align return type with the entities to avoid mapping
-  async getCalendarEventsFromPersonIds(
-    personIds: string[],
+  async getCalendarEventsFromClientIds(
+    clientIds: string[],
     page = 1,
     pageSize: number = TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE,
   ): Promise<TimelineCalendarEventsWithTotal> {
@@ -31,8 +37,8 @@ export class TimelineCalendarEventService {
     const calendarEventIds = await this.calendarEventRepository.find({
       where: {
         calendarEventParticipants: {
-          person: {
-            id: Any(personIds),
+          client: {
+            id: Any(clientIds),
           },
         },
       },
@@ -63,7 +69,7 @@ export class TimelineCalendarEventService {
       },
       relations: {
         calendarEventParticipants: {
-          person: true,
+          client: true,
           workspaceMember: true,
         },
         calendarChannelEventAssociations: {
@@ -81,24 +87,19 @@ export class TimelineCalendarEventService {
       const participants = event.calendarEventParticipants.map(
         (participant) => ({
           calendarEventId: event.id,
-          personId: participant.person?.id,
+          clientId: participant.client?.id,
           workspaceMemberId: participant.workspaceMember?.id,
-          firstName:
-            participant.person?.name.firstName ||
+          name:
+            participant.client?.name ||
             participant.workspaceMember?.name.firstName ||
             '',
-          lastName:
-            participant.person?.name.lastName ||
-            participant.workspaceMember?.name.lastName ||
-            '',
           displayName:
-            participant.person?.name.firstName ||
-            participant.person?.name.lastName ||
+            participant.client?.name ||
             participant.workspaceMember?.name.firstName ||
             participant.workspaceMember?.name.lastName ||
             '',
           avatarUrl:
-            participant.person?.avatarUrl ||
+            participant.client?.avatarUrl ||
             participant.workspaceMember?.avatarUrl ||
             '',
           handle: participant.handle,
@@ -128,37 +129,37 @@ export class TimelineCalendarEventService {
     };
   }
 
-  async getCalendarEventsFromCompanyId(
-    companyId: string,
-    page = 1,
-    pageSize: number = TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE,
-  ): Promise<TimelineCalendarEventsWithTotal> {
-    const personIds = await this.personRepository.find({
-      where: {
-        company: {
-          id: companyId,
-        },
-      },
-      select: {
-        id: true,
-      },
-    });
-
-    if (personIds.length <= 0) {
-      return {
-        totalNumberOfCalendarEvents: 0,
-        timelineCalendarEvents: [],
-      };
-    }
-
-    const formattedPersonIds = personIds.map(({ id }) => id);
-
-    const messageThreads = await this.getCalendarEventsFromPersonIds(
-      formattedPersonIds,
-      page,
-      pageSize,
-    );
-
-    return messageThreads;
-  }
+  // async getCalendarEventsFromCompanyId(
+  //   companyId: string,
+  //   page = 1,
+  //   pageSize: number = TIMELINE_CALENDAR_EVENTS_DEFAULT_PAGE_SIZE,
+  // ): Promise<TimelineCalendarEventsWithTotal> {
+  //   const personIds = await this.personRepository.find({
+  //     where: {
+  //       company: {
+  //         id: companyId,
+  //       },
+  //     },
+  //     select: {
+  //       id: true,
+  //     },
+  //   });
+  //
+  //   if (personIds.length <= 0) {
+  //     return {
+  //       totalNumberOfCalendarEvents: 0,
+  //       timelineCalendarEvents: [],
+  //     };
+  //   }
+  //
+  //   const formattedPersonIds = personIds.map(({ id }) => id);
+  //
+  //   const messageThreads = await this.getCalendarEventsFromPersonIds(
+  //     formattedPersonIds,
+  //     page,
+  //     pageSize,
+  //   );
+  //
+  //   return messageThreads;
+  // }
 }

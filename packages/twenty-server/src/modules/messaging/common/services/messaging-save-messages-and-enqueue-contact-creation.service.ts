@@ -8,24 +8,32 @@ import { MessageQueue } from 'src/engine/integrations/message-queue/message-queu
 import { MessageQueueService } from 'src/engine/integrations/message-queue/services/message-queue.service';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
 import { ObjectRecord } from 'src/engine/workspace-manager/workspace-sync-metadata/types/object-record';
-import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
 import {
-  CreateCompanyAndContactJobData,
-  CreateCompanyAndContactJob,
-} from 'src/modules/connected-account/auto-companies-and-contacts-creation/jobs/create-company-and-contact.job';
+  ConnectedAccountWorkspaceEntity,
+} from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
 import {
   FeatureFlagEntity,
   FeatureFlagKeys,
 } from 'src/engine/core-modules/feature-flag/feature-flag.entity';
-import { MessageChannelWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
+import {
+  MessageChannelWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
 import {
   GmailMessage,
   Participant,
   ParticipantWithMessageId,
 } from 'src/modules/messaging/message-import-manager/drivers/gmail/types/gmail-message';
 import { MessagingMessageService } from 'src/modules/messaging/common/services/messaging-message.service';
-import { MessagingMessageParticipantService } from 'src/modules/messaging/common/services/messaging-message-participant.service';
-import { MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+import {
+  MessagingMessageParticipantService,
+} from 'src/modules/messaging/common/services/messaging-message-participant.service';
+import {
+  MessageParticipantWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+import {
+  CreateClientJob,
+  CreateClientJobData,
+} from 'src/modules/connected-account/auto-companies-and-contacts-creation/create-client.job';
 
 @Injectable()
 export class MessagingSaveMessagesAndEnqueueContactCreationService {
@@ -38,7 +46,8 @@ export class MessagingSaveMessagesAndEnqueueContactCreationService {
     @InjectRepository(FeatureFlagEntity, 'core')
     private readonly featureFlagRepository: Repository<FeatureFlagEntity>,
     private readonly eventEmitter: EventEmitter2,
-  ) {}
+  ) {
+  }
 
   async saveMessagesAndEnqueueContactCreationJob(
     messagesToSave: GmailMessage[],
@@ -82,14 +91,14 @@ export class MessagingSaveMessagesAndEnqueueContactCreationService {
 
           return messageId
             ? message.participants.map((participant: Participant) => ({
-                ...participant,
-                messageId,
-                shouldCreateContact:
-                  messageChannel.isContactAutoCreationEnabled &&
-                  (isContactCreationForSentAndReceivedEmailsEnabled ||
-                    message.participants.find((p) => p.role === 'from')
-                      ?.handle === connectedAccount.handle),
-              }))
+              ...participant,
+              messageId,
+              shouldCreateContact:
+                messageChannel.isContactAutoCreationEnabled &&
+                (isContactCreationForSentAndReceivedEmailsEnabled ||
+                  message.participants.find((p) => p.role === 'from')
+                    ?.handle === connectedAccount.handle),
+            }))
             : [];
         });
 
@@ -115,8 +124,8 @@ export class MessagingSaveMessagesAndEnqueueContactCreationService {
         (participant) => participant.shouldCreateContact,
       );
 
-      await this.messageQueueService.add<CreateCompanyAndContactJobData>(
-        CreateCompanyAndContactJob.name,
+      await this.messageQueueService.add<CreateClientJobData>(
+        CreateClientJob.name,
         {
           workspaceId,
           connectedAccount,

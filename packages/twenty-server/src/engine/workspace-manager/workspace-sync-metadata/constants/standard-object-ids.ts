@@ -17,7 +17,7 @@ export const STANDARD_OBJECT_IDS = {
   calendarEventParticipant: '20202020-a1c3-47a6-9732-27e5b1e8436d',
   calendarEvent: '20202020-8f1d-4eef-9f85-0d1965e27221',
   comment: '20202020-435f-4de9-89b5-97e32233bf5f',
-  company: '20202020-b374-4779-a561-80086cb2e17f',
+  // company: '20202020-b374-4779-a561-80086cb2e17f',
   connectedAccount: '20202020-977e-46b2-890b-c3002ddfd5c5',
   favorite: '20202020-ab56-4e05-92a3-e2414a499860',
   auditLog: '20202020-0566-476a-b4c4-a0f9781bd80a',
@@ -26,8 +26,8 @@ export const STANDARD_OBJECT_IDS = {
   messageParticipant: '20202020-a433-4456-aa2d-fd9cb26b774a',
   messageThread: '20202020-849a-4c3e-84f5-a25a7d802271',
   message: '20202020-3f6b-4425-80ab-e468899ab4b2',
-  opportunity: '20202020-9549-49dd-b2b2-883999db8938',
-  person: '20202020-e674-48e5-a542-72570eee7213',
+  // opportunity: '20202020-9549-49dd-b2b2-883999db8938',
+  // person: '20202020-e674-48e5-a542-72570eee7213',
   timelineActivity: '20202020-6736-4337-b5c4-8b39fae325a5',
   viewField: '20202020-4d19-4655-95bf-b2a04cf206d4',
   viewFilter: '20202020-6fb6-4631-aded-b7d67e952ec8',
@@ -35,4 +35,16 @@ export const STANDARD_OBJECT_IDS = {
   view: '20202020-722e-4739-8e2c-0c372d661f49',
   webhook: '20202020-be4d-4e08-811d-0fffcd13ffd4',
   workspaceMember: '20202020-3319-4234-a34c-82d5c0e881a6',
+
+  // --------------------
+  // Funnelmink
+  // --------------------
+
+  client: '24242424-b374-4779-a561-80086cb2e17f',
+  crew: '24242424-9549-49dd-b2b2-883999db8938',
+  equipment: '24242424-e674-48e5-a542-72570eee7213',
+  jobs: '24242424-1408-4f38-b8a8-4d5e3e26e24d',
+  material: '24242424-4c00-401d-8cda-ec6a4c41cd7d',
+  service: '24242424-0408-4f38-b8a8-4d5e3e26e24d',
+  workorder: '24242424-39aa-4a89-843b-eb5f2a8b677f',
 };

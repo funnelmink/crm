@@ -1,12 +1,13 @@
 import { Relation } from 'src/engine/workspace-manager/workspace-sync-metadata/interfaces/relation.interface';
 
-import { ACTIVITY_TARGET_STANDARD_FIELD_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-field-ids';
-import { STANDARD_OBJECT_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
+import {
+  ACTIVITY_TARGET_STANDARD_FIELD_IDS,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-field-ids';
+import {
+  STANDARD_OBJECT_IDS,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
 import { CustomWorkspaceEntity } from 'src/engine/twenty-orm/custom.workspace-entity';
 import { ActivityWorkspaceEntity } from 'src/modules/activity/standard-objects/activity.workspace-entity';
-import { CompanyWorkspaceEntity } from 'src/modules/company/standard-objects/company.workspace-entity';
-import { OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
-import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
 import { WorkspaceEntity } from 'src/engine/twenty-orm/decorators/workspace-entity.decorator';
 import { WorkspaceIsSystem } from 'src/engine/twenty-orm/decorators/workspace-is-system.decorator';
 import { WorkspaceIsNullable } from 'src/engine/twenty-orm/decorators/workspace-is-nullable.decorator';
@@ -14,6 +15,14 @@ import { WorkspaceDynamicRelation } from 'src/engine/twenty-orm/decorators/works
 import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
 import { WorkspaceRelation } from 'src/engine/twenty-orm/decorators/workspace-relation.decorator';
 import { BaseWorkspaceEntity } from 'src/engine/twenty-orm/base.workspace-entity';
+import { CrewWorkspaceEntity } from 'src/modules/funnelmink/crew.workspace-entity';
+import { STANDARD_ICONS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-icons';
+import { MaterialWorkspaceEntity } from 'src/modules/funnelmink/material.workspace-entity';
+import { EquipmentWorkspaceEntity } from 'src/modules/funnelmink/equipment.workspace-entity';
+import { ServiceWorkspaceEntity } from 'src/modules/funnelmink/service.workspace-entity';
+import { JobWorkspaceEntity } from 'src/modules/funnelmink/job.workspace-entity';
+import { WorkOrderWorkspaceEntity } from 'src/modules/funnelmink/workorder.workspace-entity';
+import { ClientWorkspaceEntity } from 'src/modules/funnelmink/client.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.activityTarget,
@@ -39,43 +48,95 @@ export class ActivityTargetWorkspaceEntity extends BaseWorkspaceEntity {
   activity: Relation<ActivityWorkspaceEntity>;
 
   @WorkspaceRelation({
-    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.person,
+    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.crew,
     type: RelationMetadataType.MANY_TO_ONE,
-    label: 'Person',
-    description: 'ActivityTarget person',
-    icon: 'IconUser',
-    joinColumn: 'personId',
-    inverseSideTarget: () => PersonWorkspaceEntity,
+    label: 'Crew',
+    description: 'ActivityTarget crew',
+    icon: STANDARD_ICONS.crew,
+    joinColumn: 'crewId',
+    inverseSideTarget: () => CrewWorkspaceEntity,
     inverseSideFieldKey: 'activityTargets',
   })
   @WorkspaceIsNullable()
-  person: Relation<PersonWorkspaceEntity>;
+  crews: Relation<CrewWorkspaceEntity>;
 
   @WorkspaceRelation({
-    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.company,
+    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.material,
     type: RelationMetadataType.MANY_TO_ONE,
-    label: 'Company',
-    description: 'ActivityTarget company',
-    icon: 'IconBuildingSkyscraper',
-    joinColumn: 'companyId',
-    inverseSideTarget: () => CompanyWorkspaceEntity,
+    label: 'Material',
+    description: 'ActivityTarget material',
+    icon: STANDARD_ICONS.material,
+    joinColumn: 'materialId',
+    inverseSideTarget: () => MaterialWorkspaceEntity,
     inverseSideFieldKey: 'activityTargets',
   })
   @WorkspaceIsNullable()
-  company: Relation<CompanyWorkspaceEntity>;
+  material: Relation<MaterialWorkspaceEntity>;
 
   @WorkspaceRelation({
-    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.opportunity,
+    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.equipment,
     type: RelationMetadataType.MANY_TO_ONE,
-    label: 'Opportunity',
+    label: 'Equipment',
     description: 'ActivityTarget opportunity',
-    icon: 'IconTargetArrow',
-    joinColumn: 'opportunityId',
-    inverseSideTarget: () => OpportunityWorkspaceEntity,
+    icon: STANDARD_ICONS.equipment,
+    joinColumn: 'equipmentId',
+    inverseSideTarget: () => EquipmentWorkspaceEntity,
     inverseSideFieldKey: 'activityTargets',
   })
   @WorkspaceIsNullable()
-  opportunity: Relation<OpportunityWorkspaceEntity>;
+  equipment: Relation<EquipmentWorkspaceEntity>;
+
+  @WorkspaceRelation({
+    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.service,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Service',
+    description: 'ActivityTarget service',
+    icon: STANDARD_ICONS.service,
+    joinColumn: 'serviceId',
+    inverseSideTarget: () => ServiceWorkspaceEntity,
+    inverseSideFieldKey: 'activityTargets',
+  })
+  @WorkspaceIsNullable()
+  service: Relation<ServiceWorkspaceEntity>;
+
+  @WorkspaceRelation({
+    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.job,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Job',
+    description: 'ActivityTarget job',
+    icon: STANDARD_ICONS.job,
+    joinColumn: 'jobId',
+    inverseSideTarget: () => JobWorkspaceEntity,
+    inverseSideFieldKey: 'activityTargets',
+  })
+  @WorkspaceIsNullable()
+  job: Relation<JobWorkspaceEntity>;
+
+  @WorkspaceRelation({
+    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.workorder,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Work Order',
+    description: 'ActivityTarget work order',
+    icon: STANDARD_ICONS.workorder,
+    joinColumn: 'workorderId',
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    inverseSideFieldKey: 'activityTargets',
+  })
+  @WorkspaceIsNullable()
+  workorder: Relation<WorkOrderWorkspaceEntity>;
+
+  @WorkspaceRelation({
+    standardId: ACTIVITY_TARGET_STANDARD_FIELD_IDS.client,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Client',
+    description: 'ActivityTarget client',
+    icon: STANDARD_ICONS.client,
+    joinColumn: 'clientId',
+    inverseSideTarget: () => ClientWorkspaceEntity,
+    inverseSideFieldKey: 'activityTargets',
+  })
+  @WorkspaceIsNullable()
+  client: Relation<ClientWorkspaceEntity>;
 
   @WorkspaceDynamicRelation({
     type: RelationMetadataType.MANY_TO_ONE,

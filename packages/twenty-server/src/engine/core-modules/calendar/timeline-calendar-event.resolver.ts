@@ -7,15 +7,17 @@ import { User } from 'src/engine/core-modules/user/user.entity';
 import { AuthUser } from 'src/engine/decorators/auth/auth-user.decorator';
 import { JwtAuthGuard } from 'src/engine/guards/jwt.auth.guard';
 import { TIMELINE_CALENDAR_EVENTS_MAX_PAGE_SIZE } from 'src/engine/core-modules/calendar/constants/calendar.constants';
-import { TimelineCalendarEventsWithTotal } from 'src/engine/core-modules/calendar/dtos/timeline-calendar-events-with-total.dto';
+import {
+  TimelineCalendarEventsWithTotal,
+} from 'src/engine/core-modules/calendar/dtos/timeline-calendar-events-with-total.dto';
 import { TimelineCalendarEventService } from 'src/engine/core-modules/calendar/timeline-calendar-event.service';
 import { UserService } from 'src/engine/core-modules/user/services/user.service';
 import { UUIDScalarType } from 'src/engine/api/graphql/workspace-schema-builder/graphql-types/scalars';
 
 @ArgsType()
-class GetTimelineCalendarEventsFromPersonIdArgs {
+class GetTimelineCalendarEventsFromClientIdArgs {
   @Field(() => UUIDScalarType)
-  personId: string;
+  clientId: string;
 
   @Field(() => Int)
   page: number;
@@ -44,17 +46,18 @@ export class TimelineCalendarEventResolver {
   constructor(
     private readonly timelineCalendarEventService: TimelineCalendarEventService,
     private readonly userService: UserService,
-  ) {}
+  ) {
+  }
 
   @Query(() => TimelineCalendarEventsWithTotal)
-  async getTimelineCalendarEventsFromPersonId(
+  async getTimelineCalendarEventsFromClientId(
     @AuthUser() user: User,
     @Args()
-    { personId, page, pageSize }: GetTimelineCalendarEventsFromPersonIdArgs,
+      { clientId, page, pageSize }: GetTimelineCalendarEventsFromClientIdArgs,
   ) {
     const timelineCalendarEvents =
-      await this.timelineCalendarEventService.getCalendarEventsFromPersonIds(
-        [personId],
+      await this.timelineCalendarEventService.getCalendarEventsFromClientIds(
+        [clientId],
         page,
         pageSize,
       );
@@ -62,19 +65,19 @@ export class TimelineCalendarEventResolver {
     return timelineCalendarEvents;
   }
 
-  @Query(() => TimelineCalendarEventsWithTotal)
-  async getTimelineCalendarEventsFromCompanyId(
-    @AuthUser() user: User,
-    @Args()
-    { companyId, page, pageSize }: GetTimelineCalendarEventsFromCompanyIdArgs,
-  ) {
-    const timelineCalendarEvents =
-      await this.timelineCalendarEventService.getCalendarEventsFromCompanyId(
-        companyId,
-        page,
-        pageSize,
-      );
-
-    return timelineCalendarEvents;
-  }
+  // @Query(() => TimelineCalendarEventsWithTotal)
+  // async getTimelineCalendarEventsFromCompanyId(
+  //   @AuthUser() user: User,
+  //   @Args()
+  //     { companyId, page, pageSize }: GetTimelineCalendarEventsFromCompanyIdArgs,
+  // ) {
+  //   const timelineCalendarEvents =
+  //     await this.timelineCalendarEventService.getCalendarEventsFromCompanyId(
+  //       companyId,
+  //       page,
+  //       pageSize,
+  //     );
+  //
+  //   return timelineCalendarEvents;
+  // }
 }
