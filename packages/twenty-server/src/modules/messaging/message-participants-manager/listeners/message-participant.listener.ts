@@ -5,12 +5,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadata/object-metadata.entity';
-import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
+import {
+  InjectObjectMetadataRepository,
+} from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
 import { TimelineActivityRepository } from 'src/modules/timeline/repositiories/timeline-activity.repository';
-import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
+import {
+  TimelineActivityWorkspaceEntity,
+} from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
 import { ObjectRecord } from 'src/engine/workspace-manager/workspace-sync-metadata/types/object-record';
-import { MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+import {
+  MessageParticipantWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
 
 @Injectable()
 export class MessageParticipantListener {
@@ -20,7 +26,8 @@ export class MessageParticipantListener {
     private readonly workspaceDataSourceService: WorkspaceDataSourceService,
     @InjectRepository(ObjectMetadataEntity, 'metadata')
     private readonly objectMetadataRepository: Repository<ObjectMetadataEntity>,
-  ) {}
+  ) {
+  }
 
   @OnEvent('messageParticipant.matched')
   public async handleMessageParticipantMatched(payload: {
@@ -45,7 +52,7 @@ export class MessageParticipantListener {
       });
 
     const messageParticipantsWithPersonId = messageParticipants.filter(
-      (participant) => participant.personId,
+      (participant) => participant.clientId,
     );
 
     if (messageParticipantsWithPersonId.length === 0) {
@@ -59,7 +66,7 @@ export class MessageParticipantListener {
         name: 'message.linked',
         properties: null,
         objectName: 'message',
-        recordId: participant.personId,
+        recordId: participant.clientId,
         workspaceMemberId: payload.userId,
         workspaceId: payload.workspaceId,
         linkedObjectMetadataId: messageObjectMetadata.id,

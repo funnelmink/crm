@@ -5,16 +5,13 @@ import { UUIDScalarType } from 'src/engine/api/graphql/workspace-schema-builder/
 @ObjectType('TimelineCalendarEventParticipant')
 export class TimelineCalendarEventParticipant {
   @Field(() => UUIDScalarType, { nullable: true })
-  personId: string;
+  clientId: string;
 
   @Field(() => UUIDScalarType, { nullable: true })
   workspaceMemberId: string;
 
   @Field()
-  firstName: string;
-
-  @Field()
-  lastName: string;
+  name: string;
 
   @Field()
   displayName: string;

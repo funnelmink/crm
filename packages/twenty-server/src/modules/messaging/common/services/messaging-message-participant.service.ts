@@ -3,16 +3,26 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 
 import { EntityManager } from 'typeorm';
 
-import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
-import { PersonRepository } from 'src/modules/person/repositories/person.repository';
-import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
+import {
+  InjectObjectMetadataRepository,
+} from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
-import { getFlattenedValuesAndValuesStringForBatchRawQuery } from 'src/modules/calendar/utils/get-flattened-values-and-values-string-for-batch-raw-query.util';
-import { AddPersonIdAndWorkspaceMemberIdService } from 'src/modules/calendar-messaging-participant/services/add-person-id-and-workspace-member-id/add-person-id-and-workspace-member-id.service';
+import {
+  getFlattenedValuesAndValuesStringForBatchRawQuery,
+} from 'src/modules/calendar/utils/get-flattened-values-and-values-string-for-batch-raw-query.util';
 import { ObjectRecord } from 'src/engine/workspace-manager/workspace-sync-metadata/types/object-record';
 import { MessageParticipantRepository } from 'src/modules/messaging/common/repositories/message-participant.repository';
-import { MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
-import { ParticipantWithMessageId } from 'src/modules/messaging/message-import-manager/drivers/gmail/types/gmail-message';
+import {
+  MessageParticipantWorkspaceEntity,
+} from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
+import {
+  ParticipantWithMessageId,
+} from 'src/modules/messaging/message-import-manager/drivers/gmail/types/gmail-message';
+import { ClientWorkspaceEntity } from 'src/modules/funnelmink/client.workspace-entity';
+import { ClientRepository } from 'src/modules/funnelmink/client.repository';
+import {
+  AddClientIdAndWorkspaceMemberIdService,
+} from 'src/modules/calendar-messaging-participant/services/add-client-id-and-workspace-member-id/add-client-id-and-workspace-member-id.service';
 
 // Todo: this is not the right place for this file. The code needs to be refactored in term of business modules with a precise scope.
 // Putting it here to avoid circular dependencies for now.
@@ -22,14 +32,15 @@ export class MessagingMessageParticipantService {
     private readonly workspaceDataSourceService: WorkspaceDataSourceService,
     @InjectObjectMetadataRepository(MessageParticipantWorkspaceEntity)
     private readonly messageParticipantRepository: MessageParticipantRepository,
-    @InjectObjectMetadataRepository(PersonWorkspaceEntity)
-    private readonly personRepository: PersonRepository,
-    private readonly addPersonIdAndWorkspaceMemberIdService: AddPersonIdAndWorkspaceMemberIdService,
+    @InjectObjectMetadataRepository(ClientWorkspaceEntity)
+    private readonly personRepository: ClientRepository,
+    private readonly addPersonIdAndWorkspaceMemberIdService: AddClientIdAndWorkspaceMemberIdService,
     private readonly eventEmitter: EventEmitter2,
-  ) {}
+  ) {
+  }
 
   public async updateMessageParticipantsAfterPeopleCreation(
-    createdPeople: ObjectRecord<PersonWorkspaceEntity>[],
+    createdPeople: ObjectRecord<ClientWorkspaceEntity>[],
     workspaceId: string,
     transactionManager?: EntityManager,
   ): Promise<ObjectRecord<MessageParticipantWorkspaceEntity>[]> {
@@ -94,7 +105,7 @@ export class MessagingMessageParticipantService {
       this.workspaceDataSourceService.getSchemaName(workspaceId);
 
     const messageParticipantsToSave =
-      await this.addPersonIdAndWorkspaceMemberIdService.addPersonIdAndWorkspaceMemberId(
+      await this.addPersonIdAndWorkspaceMemberIdService.addClientIdAndWorkspaceMemberId(
         participants,
         workspaceId,
         transactionManager,

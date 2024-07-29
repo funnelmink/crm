@@ -12,32 +12,52 @@ import {
   FeatureFlagEntity,
   FeatureFlagKeys,
 } from 'src/engine/core-modules/feature-flag/feature-flag.entity';
-import { GoogleCalendarClientProvider } from 'src/modules/calendar/services/providers/google-calendar/google-calendar.provider';
-import { CalendarChannelEventAssociationRepository } from 'src/modules/calendar/repositories/calendar-channel-event-association.repository';
+import {
+  GoogleCalendarClientProvider,
+} from 'src/modules/calendar/services/providers/google-calendar/google-calendar.provider';
+import {
+  CalendarChannelEventAssociationRepository,
+} from 'src/modules/calendar/repositories/calendar-channel-event-association.repository';
 import { CalendarChannelRepository } from 'src/modules/calendar/repositories/calendar-channel.repository';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
 import { CalendarEventRepository } from 'src/modules/calendar/repositories/calendar-event.repository';
 import { formatGoogleCalendarEvent } from 'src/modules/calendar/utils/format-google-calendar-event.util';
-import { CalendarEventParticipantRepository } from 'src/modules/calendar/repositories/calendar-event-participant.repository';
-import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
-import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
+import {
+  CalendarEventParticipantRepository,
+} from 'src/modules/calendar/repositories/calendar-event-participant.repository';
+import {
+  ConnectedAccountWorkspaceEntity,
+} from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import {
+  InjectObjectMetadataRepository,
+} from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
 import { CalendarEventWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-event.workspace-entity';
-import { CalendarChannelWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-channel.workspace-entity';
-import { CalendarChannelEventAssociationWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-channel-event-association.workspace-entity';
-import { CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-event-participant.workspace-entity';
+import {
+  CalendarChannelWorkspaceEntity,
+} from 'src/modules/calendar/standard-objects/calendar-channel.workspace-entity';
+import {
+  CalendarChannelEventAssociationWorkspaceEntity,
+} from 'src/modules/calendar/standard-objects/calendar-channel-event-association.workspace-entity';
+import {
+  CalendarEventParticipantWorkspaceEntity,
+} from 'src/modules/calendar/standard-objects/calendar-event-participant.workspace-entity';
 import { BlocklistWorkspaceEntity } from 'src/modules/connected-account/standard-objects/blocklist.workspace-entity';
-import { CalendarEventCleanerService } from 'src/modules/calendar/services/calendar-event-cleaner/calendar-event-cleaner.service';
-import { CalendarEventParticipantService } from 'src/modules/calendar/services/calendar-event-participant/calendar-event-participant.service';
+import {
+  CalendarEventCleanerService,
+} from 'src/modules/calendar/services/calendar-event-cleaner/calendar-event-cleaner.service';
+import {
+  CalendarEventParticipantService,
+} from 'src/modules/calendar/services/calendar-event-participant/calendar-event-participant.service';
 import { CalendarEventWithParticipants } from 'src/modules/calendar/types/calendar-event';
 import { filterOutBlocklistedEvents } from 'src/modules/calendar/utils/filter-out-blocklisted-events.util';
 import { InjectMessageQueue } from 'src/engine/integrations/message-queue/decorators/message-queue.decorator';
 import { MessageQueue } from 'src/engine/integrations/message-queue/message-queue.constants';
 import { MessageQueueService } from 'src/engine/integrations/message-queue/services/message-queue.service';
-import {
-  CreateCompanyAndContactJob,
-  CreateCompanyAndContactJobData,
-} from 'src/modules/connected-account/auto-companies-and-contacts-creation/jobs/create-company-and-contact.job';
 import { ObjectRecord } from 'src/engine/workspace-manager/workspace-sync-metadata/types/object-record';
+import {
+  CreateClientJob,
+  CreateClientJobData,
+} from 'src/modules/connected-account/auto-companies-and-contacts-creation/create-client.job';
 
 @Injectable()
 export class GoogleCalendarSyncService {
@@ -67,7 +87,8 @@ export class GoogleCalendarSyncService {
     @InjectMessageQueue(MessageQueue.emailQueue)
     private readonly messageQueueService: MessageQueueService,
     private readonly eventEmitter: EventEmitter2,
-  ) {}
+  ) {
+  }
 
   public async startGoogleCalendarSync(
     workspaceId: string,
@@ -291,9 +312,9 @@ export class GoogleCalendarSyncService {
 
     const blocklist = isBlocklistEnabled
       ? await this.blocklistRepository.getByWorkspaceMemberId(
-          workspaceMemberId,
-          workspaceId,
-        )
+        workspaceMemberId,
+        workspaceId,
+      )
       : [];
 
     return blocklist.map((blocklist) => blocklist.handle);
@@ -516,8 +537,8 @@ export class GoogleCalendarSyncService {
       });
 
       if (calendarChannel.isContactAutoCreationEnabled) {
-        await this.messageQueueService.add<CreateCompanyAndContactJobData>(
-          CreateCompanyAndContactJob.name,
+        await this.messageQueueService.add<CreateClientJobData>(
+          CreateClientJob.name,
           {
             workspaceId,
             connectedAccount,

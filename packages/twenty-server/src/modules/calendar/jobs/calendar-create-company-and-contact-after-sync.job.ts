@@ -2,14 +2,26 @@ import { Injectable, Logger } from '@nestjs/common';
 
 import { MessageQueueJob } from 'src/engine/integrations/message-queue/interfaces/message-queue-job.interface';
 
-import { InjectObjectMetadataRepository } from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
+import {
+  InjectObjectMetadataRepository,
+} from 'src/engine/object-metadata-repository/object-metadata-repository.decorator';
 import { CalendarChannelRepository } from 'src/modules/calendar/repositories/calendar-channel.repository';
-import { CalendarEventParticipantRepository } from 'src/modules/calendar/repositories/calendar-event-participant.repository';
-import { CalendarChannelWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-channel.workspace-entity';
-import { CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-event-participant.workspace-entity';
-import { CreateCompanyAndContactService } from 'src/modules/connected-account/auto-companies-and-contacts-creation/services/create-company-and-contact.service';
+import {
+  CalendarEventParticipantRepository,
+} from 'src/modules/calendar/repositories/calendar-event-participant.repository';
+import {
+  CalendarChannelWorkspaceEntity,
+} from 'src/modules/calendar/standard-objects/calendar-channel.workspace-entity';
+import {
+  CalendarEventParticipantWorkspaceEntity,
+} from 'src/modules/calendar/standard-objects/calendar-event-participant.workspace-entity';
 import { ConnectedAccountRepository } from 'src/modules/connected-account/repositories/connected-account.repository';
-import { ConnectedAccountWorkspaceEntity } from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import {
+  ConnectedAccountWorkspaceEntity,
+} from 'src/modules/connected-account/standard-objects/connected-account.workspace-entity';
+import {
+  CreateClientService,
+} from 'src/modules/connected-account/auto-companies-and-contacts-creation/create-client.service';
 
 export type CalendarCreateCompanyAndContactAfterSyncJobData = {
   workspaceId: string;
@@ -18,20 +30,21 @@ export type CalendarCreateCompanyAndContactAfterSyncJobData = {
 
 @Injectable()
 export class CalendarCreateCompanyAndContactAfterSyncJob
-  implements MessageQueueJob<CalendarCreateCompanyAndContactAfterSyncJobData>
-{
+  implements MessageQueueJob<CalendarCreateCompanyAndContactAfterSyncJobData> {
   private readonly logger = new Logger(
     CalendarCreateCompanyAndContactAfterSyncJob.name,
   );
+
   constructor(
-    private readonly createCompanyAndContactService: CreateCompanyAndContactService,
+    private readonly createCompanyAndContactService: CreateClientService,
     @InjectObjectMetadataRepository(CalendarChannelWorkspaceEntity)
     private readonly calendarChannelService: CalendarChannelRepository,
     @InjectObjectMetadataRepository(CalendarEventParticipantWorkspaceEntity)
     private readonly calendarEventParticipantRepository: CalendarEventParticipantRepository,
     @InjectObjectMetadataRepository(ConnectedAccountWorkspaceEntity)
     private readonly connectedAccountRepository: ConnectedAccountRepository,
-  ) {}
+  ) {
+  }
 
   async handle(
     data: CalendarCreateCompanyAndContactAfterSyncJobData,
@@ -76,7 +89,7 @@ export class CalendarCreateCompanyAndContactAfterSyncJob
         workspaceId,
       );
 
-    await this.createCompanyAndContactService.createCompaniesAndContactsAndUpdateParticipants(
+    await this.createCompanyAndContactService.createClientsAndUpdateParticipants(
       connectedAccount,
       calendarEventParticipantsWithoutPersonIdAndWorkspaceMemberId,
       workspaceId,

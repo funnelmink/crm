@@ -2,8 +2,13 @@ import { DataSource, EntityManager } from 'typeorm';
 
 import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadata/object-metadata.entity';
 import { viewPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/view';
-import { companyPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/company';
-import { personPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/person';
+import { clientPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/funnelmink/client';
+import { jobPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/funnelmink/job';
+import { crewPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/funnelmink/crew';
+import { equipmentPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/funnelmink/equipment';
+import { materialPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/funnelmink/material';
+import { servicePrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/funnelmink/service';
+import { workorderPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/funnelmink/workorder';
 
 export const standardObjectsPrefillData = async (
   workspaceDataSource: DataSource,
@@ -31,9 +36,14 @@ export const standardObjectsPrefillData = async (
     return acc;
   }, {});
 
-  workspaceDataSource.transaction(async (entityManager: EntityManager) => {
-    await companyPrefillData(entityManager, schemaName);
-    await personPrefillData(entityManager, schemaName);
+  await workspaceDataSource.transaction(async (entityManager: EntityManager) => {
+    await clientPrefillData(entityManager, schemaName);
+    await crewPrefillData(entityManager, schemaName);
+    await equipmentPrefillData(entityManager, schemaName);
+    await jobPrefillData(entityManager, schemaName);
+    await materialPrefillData(entityManager, schemaName);
+    await servicePrefillData(entityManager, schemaName);
+    await workorderPrefillData(entityManager, schemaName);
     await viewPrefillData(entityManager, schemaName, objectMetadataMap);
   });
 };

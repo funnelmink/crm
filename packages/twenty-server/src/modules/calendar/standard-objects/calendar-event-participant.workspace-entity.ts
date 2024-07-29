@@ -1,11 +1,16 @@
 import { Relation } from 'src/engine/workspace-manager/workspace-sync-metadata/interfaces/relation.interface';
 
 import { FieldMetadataType } from 'src/engine/metadata-modules/field-metadata/field-metadata.entity';
-import { CALENDAR_EVENT_PARTICIPANT_STANDARD_FIELD_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-field-ids';
-import { STANDARD_OBJECT_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
+import {
+  CALENDAR_EVENT_PARTICIPANT_STANDARD_FIELD_IDS,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-field-ids';
+import {
+  STANDARD_OBJECT_IDS,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
 import { CalendarEventWorkspaceEntity } from 'src/modules/calendar/standard-objects/calendar-event.workspace-entity';
-import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
-import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import {
+  WorkspaceMemberWorkspaceEntity,
+} from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
 import { BaseWorkspaceEntity } from 'src/engine/twenty-orm/base.workspace-entity';
 import { WorkspaceEntity } from 'src/engine/twenty-orm/decorators/workspace-entity.decorator';
 import { WorkspaceIsSystem } from 'src/engine/twenty-orm/decorators/workspace-is-system.decorator';
@@ -14,6 +19,8 @@ import { WorkspaceField } from 'src/engine/twenty-orm/decorators/workspace-field
 import { WorkspaceRelation } from 'src/engine/twenty-orm/decorators/workspace-relation.decorator';
 import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
 import { WorkspaceIsNullable } from 'src/engine/twenty-orm/decorators/workspace-is-nullable.decorator';
+import { ClientWorkspaceEntity } from 'src/modules/funnelmink/client.workspace-entity';
+import { STANDARD_ICONS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-icons';
 
 export enum CalendarEventParticipantResponseStatus {
   NEEDS_ACTION = 'NEEDS_ACTION',
@@ -110,17 +117,17 @@ export class CalendarEventParticipantWorkspaceEntity extends BaseWorkspaceEntity
   calendarEvent: Relation<CalendarEventWorkspaceEntity>;
 
   @WorkspaceRelation({
-    standardId: CALENDAR_EVENT_PARTICIPANT_STANDARD_FIELD_IDS.person,
+    standardId: CALENDAR_EVENT_PARTICIPANT_STANDARD_FIELD_IDS.client,
     type: RelationMetadataType.MANY_TO_ONE,
-    label: 'Person',
-    description: 'Person',
-    icon: 'IconUser',
-    joinColumn: 'personId',
-    inverseSideTarget: () => PersonWorkspaceEntity,
+    label: 'Client',
+    description: 'Client',
+    icon: STANDARD_ICONS.client,
+    joinColumn: 'clientId',
+    inverseSideTarget: () => ClientWorkspaceEntity,
     inverseSideFieldKey: 'calendarEventParticipants',
   })
   @WorkspaceIsNullable()
-  person: Relation<PersonWorkspaceEntity>;
+  client: Relation<ClientWorkspaceEntity>;
 
   @WorkspaceRelation({
     standardId: CALENDAR_EVENT_PARTICIPANT_STANDARD_FIELD_IDS.workspaceMember,

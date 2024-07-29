@@ -1,10 +1,15 @@
 import { Relation } from 'src/engine/workspace-manager/workspace-sync-metadata/interfaces/relation.interface';
 
 import { FieldMetadataType } from 'src/engine/metadata-modules/field-metadata/field-metadata.entity';
-import { MESSAGE_PARTICIPANT_STANDARD_FIELD_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-field-ids';
-import { STANDARD_OBJECT_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
-import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
-import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import {
+  MESSAGE_PARTICIPANT_STANDARD_FIELD_IDS,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-field-ids';
+import {
+  STANDARD_OBJECT_IDS,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
+import {
+  WorkspaceMemberWorkspaceEntity,
+} from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
 import { BaseWorkspaceEntity } from 'src/engine/twenty-orm/base.workspace-entity';
 import { WorkspaceEntity } from 'src/engine/twenty-orm/decorators/workspace-entity.decorator';
 import { WorkspaceIsNotAuditLogged } from 'src/engine/twenty-orm/decorators/workspace-is-not-audit-logged.decorator';
@@ -14,6 +19,8 @@ import { WorkspaceRelation } from 'src/engine/twenty-orm/decorators/workspace-re
 import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
 import { WorkspaceIsNullable } from 'src/engine/twenty-orm/decorators/workspace-is-nullable.decorator';
 import { MessageWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message.workspace-entity';
+import { ClientWorkspaceEntity } from 'src/modules/funnelmink/client.workspace-entity';
+import { STANDARD_ICONS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-icons';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.messageParticipant,
@@ -38,7 +45,7 @@ export class MessageParticipantWorkspaceEntity extends BaseWorkspaceEntity {
       { value: 'cc', label: 'Cc', position: 2, color: 'orange' },
       { value: 'bcc', label: 'Bcc', position: 3, color: 'red' },
     ],
-    defaultValue: "'from'",
+    defaultValue: '\'from\'',
   })
   role: string;
 
@@ -75,15 +82,15 @@ export class MessageParticipantWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceRelation({
     standardId: MESSAGE_PARTICIPANT_STANDARD_FIELD_IDS.person,
     type: RelationMetadataType.MANY_TO_ONE,
-    label: 'Person',
-    description: 'Person',
-    icon: 'IconUser',
-    joinColumn: 'personId',
-    inverseSideTarget: () => PersonWorkspaceEntity,
+    label: 'Client',
+    description: 'Client',
+    icon: STANDARD_ICONS.client,
+    joinColumn: 'clientId',
+    inverseSideTarget: () => ClientWorkspaceEntity,
     inverseSideFieldKey: 'messageParticipants',
   })
   @WorkspaceIsNullable()
-  person: Relation<PersonWorkspaceEntity>;
+  client: Relation<ClientWorkspaceEntity>;
 
   @WorkspaceRelation({
     standardId: MESSAGE_PARTICIPANT_STANDARD_FIELD_IDS.workspaceMember,
