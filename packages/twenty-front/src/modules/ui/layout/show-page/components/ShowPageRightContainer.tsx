@@ -28,8 +28,7 @@ const StyledShowPageRightContainer = styled.div<{ isMobile: boolean }>`
   flex: 1 0 0;
   flex-direction: column;
   justify-content: start;
-  overflow: ${(isMobile) => (isMobile ? 'none' : 'hidden')};
-  width: calc(100% + 4px);
+  width: 100%;
 `;
 
 const StyledTabListContainer = styled.div`
@@ -67,9 +66,7 @@ export const ShowPageRightContainer = ({
   summary,
   isRightDrawer = false,
 }: ShowPageRightContainerProps) => {
-  const { activeTabIdState } = useTabList(
-    TAB_LIST_COMPONENT_ID + isRightDrawer,
-  );
+  const { activeTabIdState } = useTabList(TAB_LIST_COMPONENT_ID);
   const activeTabId = useRecoilValue(activeTabIdState);
 
   const targetObjectNameSingular =
@@ -148,7 +145,7 @@ export const ShowPageRightContainer = ({
       <StyledTabListContainer>
         <TabList
           loading={loading}
-          tabListId={TAB_LIST_COMPONENT_ID + isRightDrawer}
+          tabListId={TAB_LIST_COMPONENT_ID}
           tabs={tabs}
         />
       </StyledTabListContainer>

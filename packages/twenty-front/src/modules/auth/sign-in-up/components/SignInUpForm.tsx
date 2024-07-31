@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
-import { Controller } from 'react-hook-form';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
+import { Controller } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Key } from 'ts-key-enum';
 import { IconGoogle, IconMicrosoft } from 'twenty-ui';
@@ -28,23 +28,23 @@ import { ActionLink } from '@/ui/navigation/link/components/ActionLink';
 import { isDefined } from '~/utils/isDefined';
 
 const StyledContentContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing(8)};
-  margin-top: ${({ theme }) => theme.spacing(4)};
+    margin-bottom: ${({ theme }) => theme.spacing(8)};
+    margin-top: ${({ theme }) => theme.spacing(4)};
 `;
 
 const StyledForm = styled.form`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 `;
 
 const StyledFullWidthMotionDiv = styled(motion.div)`
-  width: 100%;
+    width: 100%;
 `;
 
 const StyledInputContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing(3)};
+    margin-bottom: ${({ theme }) => theme.spacing(3)};
 `;
 
 export const SignInUpForm = () => {
@@ -168,9 +168,9 @@ export const SignInUpForm = () => {
                   name="email"
                   control={form.control}
                   render={({
-                    field: { onChange, onBlur, value },
-                    fieldState: { error },
-                  }) => (
+                             field: { onChange, onBlur, value },
+                             fieldState: { error },
+                           }) => (
                     <StyledInputContainer>
                       <TextInput
                         autoFocus
@@ -207,9 +207,9 @@ export const SignInUpForm = () => {
                   name="password"
                   control={form.control}
                   render={({
-                    field: { onChange, onBlur, value },
-                    fieldState: { error },
-                  }) => (
+                             field: { onChange, onBlur, value },
+                             fieldState: { error },
+                           }) => (
                     <StyledInputContainer>
                       <TextInput
                         autoFocus
@@ -258,7 +258,23 @@ export const SignInUpForm = () => {
       )}
       {signInUpStep === SignInUpStep.Init && (
         <FooterNote>
-          By using Funnelmink, you agree to the Terms of Service and Privacy Policy.
+          By using Funnelmink, you agree to the{' '}
+          <a
+            href="https://funnelmink.com/legal/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Terms of Service
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://funnelmink.com/legal/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Privacy Policy
+          </a>
+          .
         </FooterNote>
       )}
     </>
