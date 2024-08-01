@@ -15,7 +15,7 @@ import {
   WorkspaceSyncMetadataService,
 } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
 import * as process from 'node:process';
-import { funnelminkObjectsPrefillData } from 'src/funnelmink/funnelmink-objects-prefill-data';
+import { prefillWorkspaceWithFunnelminkFSMObjects } from 'src/funnelmink/funnelmink-objects-prefill-data';
 
 @Injectable()
 export class WorkspaceManagerService {
@@ -52,14 +52,17 @@ export class WorkspaceManagerService {
       dataSourceId: dataSourceMetadata.id,
     });
 
+    await this.prefillWorkspaceWithStandardObjects(
+      dataSourceMetadata,
+      workspaceId,
+    );
+
     if (process.env.FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS === 'true') {
-      // createFunnelminkObjects
-      // prefillFunnelminkObjects
-      // disableAndDeleteStandardObjects
-    } else {
-      await this.prefillWorkspaceWithStandardObjects(
+      await prefillWorkspaceWithFunnelminkFSMObjects(
         dataSourceMetadata,
         workspaceId,
+        this.workspaceDataSourceService,
+        this.objectMetadataService,
       );
     }
   }
@@ -198,28 +201,5 @@ export class WorkspaceManagerService {
     await this.dataSourceService.delete(workspaceId);
     // Delete schema
     await this.workspaceDataSourceService.deleteWorkspaceDBSchema(workspaceId);
-  }
-
-  private async prefillWorkspaceWithFunnelminkFSMObjects(
-    dataSourceMetadata: DataSourceEntity,
-    workspaceId: string,
-  ) {
-    const workspaceDataSource =
-      await this.workspaceDataSourceService.connectToWorkspaceDataSource(
-        workspaceId,
-      );
-
-    if (!workspaceDataSource) {
-      throw new Error('Could not connect to workspace data source');
-    }
-
-    const createdObjectMetadata =
-      await this.objectMetadataService.findManyWithinWorkspace(workspaceId);
-
-    await funnelminkObjectsPrefillData(
-      workspaceDataSource,
-      dataSourceMetadata.schema,
-      createdObjectMetadata,
-    );
   }
 }
