@@ -398,6 +398,15 @@ export class EnvironmentVariables {
   AUTH_GOOGLE_APIS_CALLBACK_URL: string;
 
   CHROME_EXTENSION_ID: string;
+
+  // ---------------------------------------
+  // Funnelmink
+  // ---------------------------------------
+
+  @CastToBoolean()
+  @IsBoolean()
+  @IsOptional()
+  FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS = true;
 }
 
 export const validate = (

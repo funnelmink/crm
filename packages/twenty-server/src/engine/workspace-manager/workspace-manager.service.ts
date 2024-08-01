@@ -5,9 +5,17 @@ import { DataSourceService } from 'src/engine/metadata-modules/data-source/data-
 import { ObjectMetadataService } from 'src/engine/metadata-modules/object-metadata/object-metadata.service';
 import { WorkspaceMigrationService } from 'src/engine/metadata-modules/workspace-migration/workspace-migration.service';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
-import { demoObjectsPrefillData } from 'src/engine/workspace-manager/demo-objects-prefill-data/demo-objects-prefill-data';
-import { standardObjectsPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/standard-objects-prefill-data';
-import { WorkspaceSyncMetadataService } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
+import {
+  demoObjectsPrefillData,
+} from 'src/engine/workspace-manager/demo-objects-prefill-data/demo-objects-prefill-data';
+import {
+  standardObjectsPrefillData,
+} from 'src/engine/workspace-manager/standard-objects-prefill-data/standard-objects-prefill-data';
+import {
+  WorkspaceSyncMetadataService,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
+import * as process from 'node:process';
+import { funnelminkObjectsPrefillData } from 'src/funnelmink/funnelmink-objects-prefill-data';
 
 @Injectable()
 export class WorkspaceManagerService {
@@ -17,7 +25,8 @@ export class WorkspaceManagerService {
     private readonly objectMetadataService: ObjectMetadataService,
     private readonly dataSourceService: DataSourceService,
     private readonly workspaceSyncMetadataService: WorkspaceSyncMetadataService,
-  ) {}
+  ) {
+  }
 
   /**
    * Init a workspace by creating a new data source and running all migrations
@@ -43,10 +52,16 @@ export class WorkspaceManagerService {
       dataSourceId: dataSourceMetadata.id,
     });
 
-    await this.prefillWorkspaceWithStandardObjects(
-      dataSourceMetadata,
-      workspaceId,
-    );
+    if (process.env.FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS === 'true') {
+      // createFunnelminkObjects
+      // prefillFunnelminkObjects
+      // disableAndDeleteStandardObjects
+    } else {
+      await this.prefillWorkspaceWithStandardObjects(
+        dataSourceMetadata,
+        workspaceId,
+      );
+    }
   }
 
   /**
@@ -183,5 +198,28 @@ export class WorkspaceManagerService {
     await this.dataSourceService.delete(workspaceId);
     // Delete schema
     await this.workspaceDataSourceService.deleteWorkspaceDBSchema(workspaceId);
+  }
+
+  private async prefillWorkspaceWithFunnelminkFSMObjects(
+    dataSourceMetadata: DataSourceEntity,
+    workspaceId: string,
+  ) {
+    const workspaceDataSource =
+      await this.workspaceDataSourceService.connectToWorkspaceDataSource(
+        workspaceId,
+      );
+
+    if (!workspaceDataSource) {
+      throw new Error('Could not connect to workspace data source');
+    }
+
+    const createdObjectMetadata =
+      await this.objectMetadataService.findManyWithinWorkspace(workspaceId);
+
+    await funnelminkObjectsPrefillData(
+      workspaceDataSource,
+      dataSourceMetadata.schema,
+      createdObjectMetadata,
+    );
   }
 }
