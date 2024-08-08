@@ -6,15 +6,19 @@ import { WorkspaceMigrationModule } from 'src/engine/metadata-modules/workspace-
 import { WorkspaceDataSourceModule } from 'src/engine/workspace-datasource/workspace-datasource.module';
 import { WorkspaceHealthModule } from 'src/engine/workspace-manager/workspace-health/workspace-health.module';
 import { WorkspaceStatusModule } from 'src/engine/workspace-manager/workspace-status/workspace-manager.module';
-import { WorkspaceSyncMetadataModule } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.module';
+import {
+  WorkspaceSyncMetadataModule,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.module';
 
 import { WorkspaceManagerService } from './workspace-manager.service';
+import { FieldMetadataModule } from 'src/engine/metadata-modules/field-metadata/field-metadata.module';
 
 @Module({
   imports: [
     WorkspaceDataSourceModule,
     WorkspaceMigrationModule,
     ObjectMetadataModule,
+    FieldMetadataModule,
     DataSourceModule,
     WorkspaceSyncMetadataModule,
     WorkspaceHealthModule,
@@ -23,4 +27,5 @@ import { WorkspaceManagerService } from './workspace-manager.service';
   exports: [WorkspaceManagerService],
   providers: [WorkspaceManagerService],
 })
-export class WorkspaceManagerModule {}
+export class WorkspaceManagerModule {
+}

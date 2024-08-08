@@ -29,7 +29,7 @@ export const FUNNELMINK_ICONS = {
   phone: 'IconPhone',
   position: 'IconHierarchy2',
   stage: 'IconTargetArrow',
-  stickyNote: 'IconSticker2',
+  stickyNote: 'IconNote',
   timelineActivities: 'IconTimelineEvent',
   xLink: 'IconBrandX',
 };

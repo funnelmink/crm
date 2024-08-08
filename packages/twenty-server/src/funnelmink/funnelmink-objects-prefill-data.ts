@@ -12,12 +12,16 @@ import {
 import { FUNNELMINK_ICONS } from 'src/funnelmink/funnelmink-constants';
 import { CreateObjectInput } from 'src/engine/metadata-modules/object-metadata/dtos/create-object.input';
 import { object } from 'zod';
+import { CreateFieldInput } from 'src/engine/metadata-modules/field-metadata/dtos/create-field.input';
+import { FieldMetadataType } from 'src/engine/metadata-modules/field-metadata/field-metadata.entity';
+import { FieldMetadataService } from 'src/engine/metadata-modules/field-metadata/field-metadata.service';
 
 export const prefillWorkspaceWithFunnelminkFSMObjects = async (
   dataSourceMetadata: DataSourceEntity,
   workspaceId: string,
   workspaceDataSourceService: WorkspaceDataSourceService,
   objectMetadataService: ObjectMetadataService,
+  fieldMetadataService: FieldMetadataService,
 ) => {
   const workspaceDataSource =
     await workspaceDataSourceService.connectToWorkspaceDataSource(
@@ -28,16 +32,11 @@ export const prefillWorkspaceWithFunnelminkFSMObjects = async (
     throw new Error('Could not connect to workspace data source');
   }
 
-  // loop through create funnelmink objects (function)
-  await createFunnelminkObjects(workspaceId, objectMetadataService);
-
-  // loop through and add create fields (function)
-  // - go item by item
-  // - check my prior branch for which fields go on what
-  // - stickyNote, etc
+  // loop through create funnelmink objects and fields
+  await createFunnelminkObjects(workspaceId, objectMetadataService, fieldMetadataService);
 
   // loop through and create relationships (function)
-  // - again, check my prior branch
+
 
   // lastly, prefill data (function)
 };
@@ -97,9 +96,10 @@ const disableStandardObjects = async (
 const createFunnelminkObjects = async (
   workspaceId: string,
   objectMetadataService: ObjectMetadataService,
+  fieldMetadataService: FieldMetadataService,
 ) => {
 
-  for (const object of objects) {
+  for (const object of fsmObjects) {
     const input: CreateObjectInput = {
       dataSourceId: '',
       workspaceId: workspaceId,
@@ -112,71 +112,23 @@ const createFunnelminkObjects = async (
       isRemote: object.isRemote,
     };
     const objectMetadata = await objectMetadataService.createOne(input);
-
-    // create fields
-    // - go item by item
-    // - check my prior branch for which fields go on what
-    // - stickyNote, etc
+    for (const field of object.fields) {
+      const jnput: CreateFieldInput = {
+        workspaceId: workspaceId,
+        objectMetadataId: objectMetadata.id,
+        name: field.name,
+        label: field.label,
+        type: field.type,
+        icon: field.icon,
+        isRemoteCreation: false,
+      };
+      await fieldMetadataService.createOne(jnput);
+    }
   }
 
-// - figure out where new objects are normally made (SettingsNewObject.tsx)
-  //    - (if I can't find a resolver, because it might not exist, then I'll have to create the objects manually)
-  //    - (this could be done by looking up the `companyPrefillData`, `personPrefillData`, and `viewPrefillData` implementations)
-  // - save sends the following data
-  /*
-  export const settingsDataModelObjectAboutFormSchema =
-    objectMetadataItemSchema.pick({
-    description: true,
-    icon: true,
-    labelPlural: true,
-    labelSingular: true,
-  });
-  * */
-  // - find the resolver
-  // - manually send my data to that same resolver
 };
 
-/* OBJECTS
-*     const objectMetadata = await this.objectMetadataService.createOne({
-      nameSingular: camelCase(localTableNameSingular),
-      namePlural: camelCase(localTableNamePlural),
-      labelSingular: camelToTitleCase(camelCase(localTableBaseName)),
-      labelPlural: camelToTitleCase(plural(camelCase(localTableBaseName))),
-      description: 'Remote table',
-      dataSourceId: dataSourceMetadataId,
-      workspaceId: workspaceId,
-      icon: 'IconPlug',
-      isRemote: true,
-      primaryKeyColumnType: distantTableIdColumn.udtName,
-      primaryKeyFieldMetadataSettings: mapUdtNameToFieldSettings(
-        distantTableIdColumn.udtName,
-      ),
-    } satisfies CreateObjectInput);
-    *
-    *
-    * FIELDS
-    *   private async createFieldMetadataForForeignTableColumn(
-    workspaceId: string,
-    columnName: string,
-    columnType: string,
-    objectMetadataId: string,
-  ): Promise<FieldMetadataEntity<'default'>> {
-    return this.fieldMetadataService.createOne({
-      name: columnName,
-      label: camelToTitleCase(columnName),
-      description: 'Field of remote',
-      type: mapUdtNameToFieldType(columnType),
-      workspaceId: workspaceId,
-      objectMetadataId: objectMetadataId,
-      isRemoteCreation: true,
-      isNullable: true,
-      icon: 'IconPlug',
-      settings: mapUdtNameToFieldSettings(columnType),
-    } satisfies CreateFieldInput);
-  }
-* */
-
-const objects = [
+const fsmObjects = [
   {
     nameSingular: 'workOrder',
     namePlural: 'workOrders',
@@ -185,6 +137,37 @@ const objects = [
     description: 'A Work Order',
     isRemote: false,
     icon: FUNNELMINK_ICONS.workorder,
+    fields: [
+      {
+        name: 'stickyNote',
+        label: 'Sticky Note',
+        icon: FUNNELMINK_ICONS.stickyNote,
+        type: FieldMetadataType.TEXT,
+      },
+      {
+        name: 'description',
+        label: 'Description',
+        icon: FUNNELMINK_ICONS.description,
+        type: FieldMetadataType.TEXT,
+      },
+    ],
+    relationships: [
+      {
+        name: 'company',
+        destination: 'company',
+        type: 'manyToOne',
+      },
+      {
+        name: 'person',
+        destination: 'person',
+        type: 'manyToOne',
+      },
+      {
+        name: 'jobs',
+        destination: 'job',
+        type: 'oneToMany',
+      },
+    ],
   },
   {
     nameSingular: 'service',
@@ -194,6 +177,27 @@ const objects = [
     description: 'A Service',
     isRemote: false,
     icon: FUNNELMINK_ICONS.service,
+    fields: [
+      {
+        name: 'stickyNote',
+        label: 'Sticky Note',
+        icon: FUNNELMINK_ICONS.stickyNote,
+        type: FieldMetadataType.TEXT,
+      },
+      {
+        name: 'description',
+        label: 'Description',
+        icon: FUNNELMINK_ICONS.description,
+        type: FieldMetadataType.TEXT,
+      },
+    ],
+    relationships: [
+      {
+        name: 'jobs',
+        destination: 'job',
+        type: 'manyToMany',
+      },
+    ],
   },
   {
     nameSingular: 'crew',
@@ -203,6 +207,32 @@ const objects = [
     description: 'A Crew',
     isRemote: false,
     icon: FUNNELMINK_ICONS.crew,
+    fields: [
+      {
+        name: 'stickyNote',
+        label: 'Sticky Note',
+        icon: FUNNELMINK_ICONS.stickyNote,
+        type: FieldMetadataType.TEXT,
+      },
+    ],
+    relationships: [
+      {
+        name: 'jobs',
+        destination: 'job',
+        type: 'oneToMany',
+      },
+      {
+        name: 'Crew Lead',
+        description: 'The Crew Lead',
+        destination: 'Workspace Members',
+        type: 'belongsToOne',
+      },
+      {
+        name: 'crewMembers',
+        destination: 'member',
+        type: 'manyToMany',
+      },
+    ],
   },
   {
     nameSingular: 'equipment',
@@ -212,6 +242,14 @@ const objects = [
     description: 'Equipment',
     isRemote: false,
     icon: FUNNELMINK_ICONS.equipment,
+    fields: [
+      {
+        name: 'stickyNote',
+        label: 'Sticky Note',
+        icon: FUNNELMINK_ICONS.stickyNote,
+        type: FieldMetadataType.TEXT,
+      },
+    ],
   },
   {
     nameSingular: 'material',
@@ -221,6 +259,14 @@ const objects = [
     description: 'Material',
     isRemote: false,
     icon: FUNNELMINK_ICONS.material,
+    fields: [
+      {
+        name: 'stickyNote',
+        label: 'Sticky Note',
+        icon: FUNNELMINK_ICONS.stickyNote,
+        type: FieldMetadataType.TEXT,
+      },
+    ],
   },
   {
     nameSingular: 'job',
@@ -230,5 +276,19 @@ const objects = [
     description: 'Job',
     isRemote: false,
     icon: FUNNELMINK_ICONS.job,
+    fields: [
+      {
+        name: 'stickyNote',
+        label: 'Sticky Note',
+        icon: FUNNELMINK_ICONS.stickyNote,
+        type: FieldMetadataType.TEXT,
+      },
+      {
+        name: 'description',
+        label: 'Description',
+        icon: FUNNELMINK_ICONS.description,
+        type: FieldMetadataType.TEXT,
+      },
+    ],
   },
 ];

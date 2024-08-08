@@ -16,6 +16,7 @@ import {
 } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
 import * as process from 'node:process';
 import { prefillWorkspaceWithFunnelminkFSMObjects } from 'src/funnelmink/funnelmink-objects-prefill-data';
+import { FieldMetadataService } from 'src/engine/metadata-modules/field-metadata/field-metadata.service';
 
 @Injectable()
 export class WorkspaceManagerService {
@@ -25,6 +26,7 @@ export class WorkspaceManagerService {
     private readonly objectMetadataService: ObjectMetadataService,
     private readonly dataSourceService: DataSourceService,
     private readonly workspaceSyncMetadataService: WorkspaceSyncMetadataService,
+    private readonly fieldMetadataService: FieldMetadataService,
   ) {
   }
 
@@ -63,6 +65,7 @@ export class WorkspaceManagerService {
         workspaceId,
         this.workspaceDataSourceService,
         this.objectMetadataService,
+        this.fieldMetadataService,
       );
     }
   }
