@@ -1,13 +1,23 @@
 import { Injectable } from '@nestjs/common';
 
+import { DataSourceEntity } from 'src/engine/metadata-modules/data-source/data-source.entity';
 import { DataSourceService } from 'src/engine/metadata-modules/data-source/data-source.service';
 import { ObjectMetadataService } from 'src/engine/metadata-modules/object-metadata/object-metadata.service';
 import { WorkspaceMigrationService } from 'src/engine/metadata-modules/workspace-migration/workspace-migration.service';
-import { standardObjectsPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/standard-objects-prefill-data';
-import { demoObjectsPrefillData } from 'src/engine/workspace-manager/demo-objects-prefill-data/demo-objects-prefill-data';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
-import { DataSourceEntity } from 'src/engine/metadata-modules/data-source/data-source.entity';
-import { WorkspaceSyncMetadataService } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
+import {
+  demoObjectsPrefillData,
+} from 'src/engine/workspace-manager/demo-objects-prefill-data/demo-objects-prefill-data';
+import {
+  standardObjectsPrefillData,
+} from 'src/engine/workspace-manager/standard-objects-prefill-data/standard-objects-prefill-data';
+import {
+  WorkspaceSyncMetadataService,
+} from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
+import * as process from 'node:process';
+import { prefillWorkspaceWithFunnelminkFSMObjects } from 'src/funnelmink/funnelmink-objects-prefill-data';
+import { FieldMetadataService } from 'src/engine/metadata-modules/field-metadata/field-metadata.service';
+import { RelationMetadataService } from '../metadata-modules/relation-metadata/relation-metadata.service';
 
 @Injectable()
 export class WorkspaceManagerService {
@@ -17,7 +27,10 @@ export class WorkspaceManagerService {
     private readonly objectMetadataService: ObjectMetadataService,
     private readonly dataSourceService: DataSourceService,
     private readonly workspaceSyncMetadataService: WorkspaceSyncMetadataService,
-  ) {}
+    private readonly fieldMetadataService: FieldMetadataService,
+    private readonly relationMetadataService: RelationMetadataService,
+  ) {
+  }
 
   /**
    * Init a workspace by creating a new data source and running all migrations
@@ -47,6 +60,17 @@ export class WorkspaceManagerService {
       dataSourceMetadata,
       workspaceId,
     );
+
+    if (process.env.FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS === 'true') {
+      await prefillWorkspaceWithFunnelminkFSMObjects(
+        dataSourceMetadata,
+        workspaceId,
+        this.workspaceDataSourceService,
+        this.objectMetadataService,
+        this.fieldMetadataService,
+        this.relationMetadataService,
+      );
+    }
   }
 
   /**

@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { Logo } from '@/auth/components/Logo';
@@ -17,8 +17,8 @@ import { useAddUserToWorkspaceMutation } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
 
 const StyledContentContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing(8)};
-  margin-top: ${({ theme }) => theme.spacing(4)};
+    margin-bottom: ${({ theme }) => theme.spacing(8)};
+    margin-top: ${({ theme }) => theme.spacing(4)};
 `;
 
 export const Invite = () => {
@@ -74,8 +74,23 @@ export const Invite = () => {
             />
           </StyledContentContainer>
           <FooterNote>
-            By using Funnelmink, you agree to the Terms of Service and Privacy
-            Policy.
+            By using Funnelmink, you agree to the{' '}
+            <a
+              href="https://funnelmink.com/legal/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Terms of Service
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://funnelmink.com/legal/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Privacy Policy
+            </a>
+            .
           </FooterNote>
         </>
       ) : (
