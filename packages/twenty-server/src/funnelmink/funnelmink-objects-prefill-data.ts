@@ -98,8 +98,13 @@ const createFunnelminkRelations = async (
     const parentMetadata = objectMetadatas.find(
       (metadata) => metadata.namePlural === relation.fromName,
     );
+    let toName = relation.toName;
+
+    if (relation.toName === 'crewLead') {
+      toName = 'workspaceMembers';
+    }
     const childMetadata = objectMetadatas.find(
-      (metadata) => metadata.namePlural === relation.toName,
+      (metadata) => metadata.namePlural === toName,
     );
 
     if (!parentMetadata || !childMetadata) {
@@ -286,16 +291,16 @@ const fsmRelationships = [
     toName: 'workorders',
     type: RelationMetadataType.ONE_TO_MANY,
   },
-  {
-    description: 'The Jobs where this Service is performed',
-    fromIcon: FUNNELMINK_ICONS.service,
-    fromLabel: 'Services',
-    fromName: 'services',
-    toIcon: FUNNELMINK_ICONS.job,
-    toLabel: 'Jobs',
-    toName: 'jobs',
-    type: RelationMetadataType.MANY_TO_MANY,
-  },
+  // {
+  //   description: 'The Jobs where this Service is performed',
+  //   fromIcon: FUNNELMINK_ICONS.service,
+  //   fromLabel: 'Services',
+  //   fromName: 'services',
+  //   toIcon: FUNNELMINK_ICONS.job,
+  //   toLabel: 'Jobs',
+  //   toName: 'jobs',
+  //   type: RelationMetadataType.MANY_TO_MANY,
+  // },
   {
     description: 'The Jobs this Crew is assigned to',
     fromIcon: FUNNELMINK_ICONS.job,
@@ -316,35 +321,35 @@ const fsmRelationships = [
     toName: 'crewLead',
     type: RelationMetadataType.ONE_TO_MANY,
   },
-  {
-    description: 'The Crew Members',
-    fromIcon: FUNNELMINK_ICONS.crew,
-    fromLabel: 'Crews',
-    fromName: 'crews',
-    toIcon: FUNNELMINK_ICONS.member,
-    toLabel: 'Crew Members',
-    toName: 'crewMembers',
-    type: RelationMetadataType.MANY_TO_MANY,
-  },
-  {
-    description: 'The Jobs this Equipment is used for',
-    fromIcon: FUNNELMINK_ICONS.equipment,
-    fromLabel: 'Equipment',
-    fromName: 'equipments',
-    toIcon: FUNNELMINK_ICONS.job,
-    toLabel: 'Jobs',
-    toName: 'jobs',
-    type: RelationMetadataType.MANY_TO_MANY,
-  },
-
-  {
-    description: 'The Jobs this Material is used for',
-    fromIcon: FUNNELMINK_ICONS.material,
-    fromLabel: 'Materials',
-    fromName: 'materials',
-    toIcon: FUNNELMINK_ICONS.job,
-    toLabel: 'Jobs',
-    toName: 'jobs',
-    type: RelationMetadataType.MANY_TO_MANY,
-  },
+  // {
+  //   description: 'The Crew Members',
+  //   fromIcon: FUNNELMINK_ICONS.crew,
+  //   fromLabel: 'Crews',
+  //   fromName: 'crews',
+  //   toIcon: FUNNELMINK_ICONS.member,
+  //   toLabel: 'Crew Members',
+  //   toName: 'crewMembers',
+  //   type: RelationMetadataType.MANY_TO_MANY,
+  // },
+  // {
+  //   description: 'The Jobs this Equipment is used for',
+  //   fromIcon: FUNNELMINK_ICONS.equipment,
+  //   fromLabel: 'Equipment',
+  //   fromName: 'equipments',
+  //   toIcon: FUNNELMINK_ICONS.job,
+  //   toLabel: 'Jobs',
+  //   toName: 'jobs',
+  //   type: RelationMetadataType.MANY_TO_MANY,
+  // },
+  //
+  // {
+  //   description: 'The Jobs this Material is used for',
+  //   fromIcon: FUNNELMINK_ICONS.material,
+  //   fromLabel: 'Materials',
+  //   fromName: 'materials',
+  //   toIcon: FUNNELMINK_ICONS.job,
+  //   toLabel: 'Jobs',
+  //   toName: 'jobs',
+  //   type: RelationMetadataType.MANY_TO_MANY,
+  // },
 ];
