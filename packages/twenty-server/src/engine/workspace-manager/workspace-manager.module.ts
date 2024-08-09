@@ -12,6 +12,7 @@ import {
 
 import { WorkspaceManagerService } from './workspace-manager.service';
 import { FieldMetadataModule } from 'src/engine/metadata-modules/field-metadata/field-metadata.module';
+import { RelationMetadataModule } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { FieldMetadataModule } from 'src/engine/metadata-modules/field-metadata/
     WorkspaceMigrationModule,
     ObjectMetadataModule,
     FieldMetadataModule,
+    RelationMetadataModule,
     DataSourceModule,
     WorkspaceSyncMetadataModule,
     WorkspaceHealthModule,

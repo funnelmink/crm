@@ -1,14 +1,16 @@
 export const FUNNELMINK_ICONS = {
   // objects
+  company: 'IconBuildingSkyscraper',
+  person: 'IconUser',
   crew: 'IconCar',
   equipment: 'IconBackhoe',
   job: 'IconPlant',
   material: 'IconPaperBag',
   service: 'IconHeartHandshake',
   workorder: 'IconChecklist',
+  member: 'IconUserCircle',
 
   // fields
-  accountOwner: 'IconUser',
   activityTargets: 'IconCheckbox',
   address: 'IconMap',
   annualRecurringRevenue: 'IconMoneybag',
@@ -16,7 +18,6 @@ export const FUNNELMINK_ICONS = {
   avatarUrl: 'IconFileUpload',
   calendarEventParticipants: 'IconCalendar',
   createdAt: 'IconCalendar',
-  crewLead: 'IconUserCircle',
   description: 'IconInfoCircle',
   domainName: 'IconGlobe',
   email: 'IconMail',
@@ -24,7 +25,6 @@ export const FUNNELMINK_ICONS = {
   idealCustomerProfile: 'IconTarget',
   jobTitle: 'IconBriefcase',
   linkedinLink: 'IconBrandLinkedin',
-  messageParticipants: 'IconUserCircle',
   name: 'IconArticle',
   phone: 'IconPhone',
   position: 'IconHierarchy2',
