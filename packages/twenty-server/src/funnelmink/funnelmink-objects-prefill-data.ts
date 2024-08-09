@@ -1,5 +1,4 @@
 import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadata/object-metadata.entity';
-import { DataSourceEntity } from 'src/engine/metadata-modules/data-source/data-source.entity';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
 import { ObjectMetadataService } from 'src/engine/metadata-modules/object-metadata/object-metadata.service';
 import { FUNNELMINK_ICONS } from 'src/funnelmink/funnelmink-constants';
@@ -11,8 +10,11 @@ import { RelationMetadataService } from 'src/engine/metadata-modules/relation-me
 import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
 import { CreateRelationInput } from 'src/engine/metadata-modules/relation-metadata/dtos/create-relation.input';
 
+// fm TODO: this needs to be fault tolerant and reusable
+// - in the future, if a user messes with their data model, we can offer to regen missing objects (and/or fields)
+// - as this function iterates, it should catch and log errors without breaking out of the loop
+
 export const prefillWorkspaceWithFunnelminkFSMObjects = async (
-  dataSourceMetadata: DataSourceEntity,
   workspaceId: string,
   workspaceDataSourceService: WorkspaceDataSourceService,
   objectMetadataService: ObjectMetadataService,
@@ -39,9 +41,9 @@ export const prefillWorkspaceWithFunnelminkFSMObjects = async (
     relationMetadataService,
   );
 
-  // prefill data (function)
+  // fm TODO: prefill data (see `standard-objects-prefill-data.ts`)
 
-  // lastly, create views
+  // fm TODO: prefill views (see `standard-objects-prefill-data.ts`)
 };
 
 const createFunnelminkObjects = async (
