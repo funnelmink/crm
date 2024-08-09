@@ -13,6 +13,7 @@ import { navigationMemorizedUrlState } from '@/ui/navigation/states/navigationMe
 import { useIsMobile } from '@/ui/utilities/responsive/hooks/useIsMobile';
 
 import { useIsTasksPage } from '../hooks/useIsTasksPage';
+import { IconLayoutBoardSplit } from '@tabler/icons-react';
 
 export const MainNavigationDrawerItems = () => {
   const isMobile = useIsMobile();
@@ -49,6 +50,11 @@ export const MainNavigationDrawerItems = () => {
             active={isTasksPage}
             Icon={IconCheckbox}
             count={currentUserDueTaskCount}
+          />
+          <NavigationDrawerItem
+            label="Schedule"
+            to="/funnelmink/schedule"
+            Icon={IconLayoutBoardSplit}
           />
         </NavigationDrawerSection>
       )}
