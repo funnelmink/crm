@@ -204,23 +204,6 @@ const fsmObjects = [
     ],
   },
   {
-    nameSingular: 'equipment',
-    namePlural: 'equipments',
-    labelSingular: 'Equipment',
-    labelPlural: 'Equipment',
-    description: 'Equipment',
-    isRemote: false,
-    icon: FUNNELMINK_ICONS.equipment,
-    fields: [
-      {
-        name: 'stickyNote',
-        label: 'Sticky Note',
-        icon: FUNNELMINK_ICONS.stickyNote,
-        type: FieldMetadataType.TEXT,
-      },
-    ],
-  },
-  {
     nameSingular: 'material',
     namePlural: 'materials',
     labelSingular: 'Material',
@@ -266,7 +249,7 @@ const fsmObjects = [
       },
       {
         name: 'scheduledDuration',
-        label: 'Scheduled Duration',
+        label: 'Duration',
         icon: FUNNELMINK_ICONS.scheduledDuration,
         type: FieldMetadataType.NUMBER,
       },
@@ -345,17 +328,6 @@ const fsmRelationships = [
   //   toName: 'crewMembers',
   //   type: RelationMetadataType.MANY_TO_MANY,
   // },
-  // {
-  //   description: 'The Jobs this Equipment is used for',
-  //   fromIcon: FUNNELMINK_ICONS.equipment,
-  //   fromLabel: 'Equipment',
-  //   fromName: 'equipments',
-  //   toIcon: FUNNELMINK_ICONS.job,
-  //   toLabel: 'Jobs',
-  //   toName: 'jobs',
-  //   type: RelationMetadataType.MANY_TO_MANY,
-  // },
-  //
   // {
   //   description: 'The Jobs this Material is used for',
   //   fromIcon: FUNNELMINK_ICONS.material,
