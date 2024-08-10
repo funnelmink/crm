@@ -1,4 +1,5 @@
 import { ObjectMetadataItem } from '@/object-metadata/types/ObjectMetadataItem';
+import { isRequiredByFunnelmink } from '~/funnelmink/funnelmink-constants';
 
 export type ObjectTypeLabel =
   | StandardObjectTypeLabel
@@ -23,17 +24,22 @@ type RemoteObjectTypeLabel = {
 export const getObjectTypeLabel = (
   objectMetadataItem: ObjectMetadataItem,
 ): ObjectTypeLabel =>
-  objectMetadataItem.isCustom
+  isRequiredByFunnelmink(objectMetadataItem.namePlural)
     ? {
-        labelText: 'Custom',
-        labelColor: 'orange',
+        labelText: 'Standard',
+        labelColor: 'blue',
       }
-    : objectMetadataItem.isRemote
+    : objectMetadataItem.isCustom
       ? {
-          labelText: 'Remote',
-          labelColor: 'green',
+          labelText: 'Custom',
+          labelColor: 'orange',
         }
-      : {
-          labelText: 'Standard',
-          labelColor: 'blue',
-        };
+      : objectMetadataItem.isRemote
+        ? {
+            labelText: 'Remote',
+            labelColor: 'green',
+          }
+        : {
+            labelText: 'Standard',
+            labelColor: 'blue',
+          };
