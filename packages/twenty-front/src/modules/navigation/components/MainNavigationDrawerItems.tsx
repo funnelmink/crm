@@ -13,7 +13,6 @@ import { navigationMemorizedUrlState } from '@/ui/navigation/states/navigationMe
 import { useIsMobile } from '@/ui/utilities/responsive/hooks/useIsMobile';
 
 import { useIsTasksPage } from '../hooks/useIsTasksPage';
-import { IconLayoutBoardSplit } from '@tabler/icons-react';
 // eslint-disable-next-line no-restricted-imports
 
 export const MainNavigationDrawerItems = () => {
@@ -36,11 +35,11 @@ export const MainNavigationDrawerItems = () => {
             onClick={toggleCommandMenu}
             keyboard={['⌘', 'K']}
           />
-          <NavigationDrawerItem
-            label="Schedule"
-            to="/funnelmink/scheduler"
-            Icon={IconLayoutBoardSplit}
-          />
+          {/*<NavigationDrawerItem*/}
+          {/*  label="Schedule"*/}
+          {/*  to="/funnelmink/scheduler"*/}
+          {/*  Icon={IconLayoutBoardSplit}*/}
+          {/*/>*/}
           <NavigationDrawerItem
             label="Settings"
             to={'/settings/profile'}
