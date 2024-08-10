@@ -407,11 +407,6 @@ export class EnvironmentVariables {
   @IsBoolean()
   @IsOptional()
   FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS = true;
-
-  @CastToBoolean()
-  @IsBoolean()
-  @IsOptional()
-  FUNNELMINK_SCHEDULING = true;
 }
 
 export const validate = (

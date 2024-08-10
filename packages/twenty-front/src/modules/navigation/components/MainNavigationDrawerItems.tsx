@@ -37,6 +37,11 @@ export const MainNavigationDrawerItems = () => {
             keyboard={['⌘', 'K']}
           />
           <NavigationDrawerItem
+            label="Schedule"
+            to="/funnelmink/scheduler"
+            Icon={IconLayoutBoardSplit}
+          />
+          <NavigationDrawerItem
             label="Settings"
             to={'/settings/profile'}
             onClick={() => {
@@ -51,11 +56,6 @@ export const MainNavigationDrawerItems = () => {
             active={isTasksPage}
             Icon={IconCheckbox}
             count={currentUserDueTaskCount}
-          />
-          <NavigationDrawerItem
-            label="Schedule"
-            to="/funnelmink/scheduler"
-            Icon={IconLayoutBoardSplit}
           />
         </NavigationDrawerSection>
       )}
