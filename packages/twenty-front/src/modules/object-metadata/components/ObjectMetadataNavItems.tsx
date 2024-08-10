@@ -33,7 +33,11 @@ export const ObjectMetadataNavItems = ({ isRemote }: { isRemote: boolean }) => {
     return <ObjectMetadataNavItemsSkeletonLoader />;
   }
 
-  const sectionItems = {
+  type SectionItems = {
+    [key: string]: string[];
+  };
+
+  const sectionItems: SectionItems = {
     CRM: ['Companies', 'People', 'Opportunities'],
     Scheduling: ['Crews', 'Jobs'],
     Billing: ['Work Orders', 'Materials', 'Services'],
@@ -41,8 +45,8 @@ export const ObjectMetadataNavItems = ({ isRemote }: { isRemote: boolean }) => {
 
   const categorizedItems = Object.keys(sectionItems).reduce(
     (acc, section) => {
-      acc[section] = filteredActiveObjectMetadataItems.filter((item) =>
-        sectionItems[section].includes(item.labelPlural),
+      acc[section] = filteredActiveObjectMetadataItems.filter(
+        (item) => sectionItems[section].includes(item.labelPlural), // TS7053: Element implicitly has an any type because expression of type string can't be used to index type
       );
       return acc;
     },
