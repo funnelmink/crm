@@ -8,15 +8,15 @@ import { useIsPrefetchLoading } from '@/prefetch/hooks/useIsPrefetchLoading';
 import { usePrefetchedData } from '@/prefetch/hooks/usePrefetchedData';
 import { PrefetchKey } from '@/prefetch/types/PrefetchKey';
 import { NavigationDrawerItem } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerItem';
-import { NavigationDrawerSection } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerSection';
 import { NavigationDrawerSectionTitle } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerSectionTitle';
 import { useNavigationSection } from '@/ui/navigation/navigation-drawer/hooks/useNavigationSection';
 import { View } from '@/views/types/View';
 import { getObjectMetadataItemViews } from '@/views/utils/getObjectMetadataItemViews';
 
 export const ObjectMetadataNavItems = ({ isRemote }: { isRemote: boolean }) => {
-  const { toggleNavigationSection, isNavigationSectionOpenState } =
-    useNavigationSection('Objects' + (isRemote ? 'Remote' : 'Workspace'));
+  const { isNavigationSectionOpenState } = useNavigationSection(
+    'Objects' + (isRemote ? 'Remote' : 'Workspace'),
+  );
   const isNavigationSectionOpen = useRecoilValue(isNavigationSectionOpenState);
 
   const { activeObjectMetadataItems } = useFilteredObjectMetadataItems();
@@ -87,20 +87,17 @@ export const ObjectMetadataNavItems = ({ isRemote }: { isRemote: boolean }) => {
     );
 
   return (
-    <NavigationDrawerSection>
-      <NavigationDrawerSectionTitle
-        label={isRemote ? 'Remote' : 'Workspace'}
-        onClick={() => toggleNavigationSection()}
-      />
-
+    <>
       {isNavigationSectionOpen && (
         <>
           {Object.keys(categorizedItems).map((section) =>
             renderSection(section, categorizedItems[section]),
           )}
           {customItems.length > 0 && renderSection('Custom', customItems)}
+          {isRemote &&
+            renderSection('Remote', filteredActiveObjectMetadataItems)}
         </>
       )}
-    </NavigationDrawerSection>
+    </>
   );
 };
