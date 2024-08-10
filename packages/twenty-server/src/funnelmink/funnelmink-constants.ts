@@ -28,6 +28,8 @@ export const FUNNELMINK_ICONS = {
   name: 'IconArticle',
   phone: 'IconPhone',
   position: 'IconHierarchy2',
+  schedule: 'IconLayoutBoardSplit',
+  scheduledDuration: 'IconTimelineEventMinus',
   stage: 'IconTargetArrow',
   stickyNote: 'IconNote',
   timelineActivities: 'IconTimelineEvent',

@@ -10,8 +10,8 @@ import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/work
 import { demoObjectsPrefillData } from 'src/engine/workspace-manager/demo-objects-prefill-data/demo-objects-prefill-data';
 import { standardObjectsPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/standard-objects-prefill-data';
 import { WorkspaceSyncMetadataService } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
-import { prefillWorkspaceWithFunnelminkFSMObjects } from 'src/funnelmink/funnelmink-objects-prefill-data';
 import { FieldMetadataService } from 'src/engine/metadata-modules/field-metadata/field-metadata.service';
+import { addFunnelminkFSMObjectsToWorkspace } from 'src/funnelmink/funnelmink-objects';
 
 // eslint-disable-next-line no-restricted-imports
 import { RelationMetadataService } from '../metadata-modules/relation-metadata/relation-metadata.service';
@@ -60,7 +60,7 @@ export class WorkspaceManagerService {
     if (
       process.env.FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS === 'true'
     ) {
-      await prefillWorkspaceWithFunnelminkFSMObjects(
+      await addFunnelminkFSMObjectsToWorkspace(
         workspaceId,
         this.workspaceDataSourceService,
         this.objectMetadataService,

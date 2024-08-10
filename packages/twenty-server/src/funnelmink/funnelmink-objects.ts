@@ -14,7 +14,7 @@ import { CreateRelationInput } from 'src/engine/metadata-modules/relation-metada
 // - in the future, if a user messes with their data model, we can offer to regen missing objects (and/or fields)
 // - as this function iterates, it should catch and log errors without breaking out of the loop
 
-export const prefillWorkspaceWithFunnelminkFSMObjects = async (
+export const addFunnelminkFSMObjectsToWorkspace = async (
   workspaceId: string,
   workspaceDataSourceService: WorkspaceDataSourceService,
   objectMetadataService: ObjectMetadataService,
@@ -257,6 +257,18 @@ const fsmObjects = [
         label: 'Description',
         icon: FUNNELMINK_ICONS.description,
         type: FieldMetadataType.TEXT,
+      },
+      {
+        name: 'scheduledDate',
+        label: 'Scheduled Date',
+        icon: FUNNELMINK_ICONS.schedule,
+        type: FieldMetadataType.DATE_TIME,
+      },
+      {
+        name: 'scheduledDuration',
+        label: 'Scheduled Duration',
+        icon: FUNNELMINK_ICONS.scheduledDuration,
+        type: FieldMetadataType.NUMBER,
       },
     ],
   },
