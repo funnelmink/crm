@@ -14,7 +14,7 @@ import { CreateRelationInput } from 'src/engine/metadata-modules/relation-metada
 // - in the future, if a user messes with their data model, we can offer to regen missing objects (and/or fields)
 // - as this function iterates, it should catch and log errors without breaking out of the loop
 
-export const prefillWorkspaceWithFunnelminkFSMObjects = async (
+export const addFunnelminkFSMObjectsToWorkspace = async (
   workspaceId: string,
   workspaceDataSourceService: WorkspaceDataSourceService,
   objectMetadataService: ObjectMetadataService,
@@ -204,23 +204,6 @@ const fsmObjects = [
     ],
   },
   {
-    nameSingular: 'equipment',
-    namePlural: 'equipments',
-    labelSingular: 'Equipment',
-    labelPlural: 'Equipment',
-    description: 'Equipment',
-    isRemote: false,
-    icon: FUNNELMINK_ICONS.equipment,
-    fields: [
-      {
-        name: 'stickyNote',
-        label: 'Sticky Note',
-        icon: FUNNELMINK_ICONS.stickyNote,
-        type: FieldMetadataType.TEXT,
-      },
-    ],
-  },
-  {
     nameSingular: 'material',
     namePlural: 'materials',
     labelSingular: 'Material',
@@ -257,6 +240,18 @@ const fsmObjects = [
         label: 'Description',
         icon: FUNNELMINK_ICONS.description,
         type: FieldMetadataType.TEXT,
+      },
+      {
+        name: 'scheduledDate',
+        label: 'Scheduled Date',
+        icon: FUNNELMINK_ICONS.schedule,
+        type: FieldMetadataType.DATE_TIME,
+      },
+      {
+        name: 'scheduledDuration',
+        label: 'Duration',
+        icon: FUNNELMINK_ICONS.scheduledDuration,
+        type: FieldMetadataType.NUMBER,
       },
     ],
   },
@@ -333,17 +328,6 @@ const fsmRelationships = [
   //   toName: 'crewMembers',
   //   type: RelationMetadataType.MANY_TO_MANY,
   // },
-  // {
-  //   description: 'The Jobs this Equipment is used for',
-  //   fromIcon: FUNNELMINK_ICONS.equipment,
-  //   fromLabel: 'Equipment',
-  //   fromName: 'equipments',
-  //   toIcon: FUNNELMINK_ICONS.job,
-  //   toLabel: 'Jobs',
-  //   toName: 'jobs',
-  //   type: RelationMetadataType.MANY_TO_MANY,
-  // },
-  //
   // {
   //   description: 'The Jobs this Material is used for',
   //   fromIcon: FUNNELMINK_ICONS.material,

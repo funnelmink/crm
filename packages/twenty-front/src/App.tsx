@@ -81,6 +81,7 @@ import { SettingsWorkspace } from '~/pages/settings/SettingsWorkspace';
 import { SettingsWorkspaceMembers } from '~/pages/settings/SettingsWorkspaceMembers';
 import { Tasks } from '~/pages/tasks/Tasks';
 import { getPageTitleFromPath } from '~/utils/title-utils';
+import { FunnelminkScheduler } from '~/funnelmink/FunnelminkScheduler';
 
 const ProvidersThatNeedRouterContext = () => {
   const { pathname } = useLocation();
@@ -153,6 +154,7 @@ const createRouter = (isBillingEnabled?: boolean) =>
           <Route path={AppPath.Impersonate} element={<ImpersonateEffect />} />
           <Route path={AppPath.RecordIndexPage} element={<RecordIndexPage />} />
           <Route path={AppPath.RecordShowPage} element={<RecordShowPage />} />
+          <Route path={AppPath.Scheduler} element={<FunnelminkScheduler />} />
 
           <Route
             path={AppPath.SettingsCatchAll}

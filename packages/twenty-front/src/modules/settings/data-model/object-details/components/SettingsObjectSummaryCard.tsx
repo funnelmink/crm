@@ -12,6 +12,7 @@ import { DropdownMenu } from '@/ui/layout/dropdown/components/DropdownMenu';
 import { DropdownMenuItemsContainer } from '@/ui/layout/dropdown/components/DropdownMenuItemsContainer';
 import { useDropdown } from '@/ui/layout/dropdown/hooks/useDropdown';
 import { MenuItem } from '@/ui/navigation/menu-item/components/MenuItem';
+import { isRequiredByFunnelmink } from '~/funnelmink/funnelmink-constants';
 
 type SettingsObjectSummaryCardProps = {
   objectMetadataItem: ObjectMetadataItem;
@@ -81,11 +82,13 @@ export const SettingsObjectSummaryCard = ({
                     LeftIcon={IconPencil}
                     onClick={handleEdit}
                   />
-                  <MenuItem
-                    text="Deactivate"
-                    LeftIcon={IconArchive}
-                    onClick={handleDeactivate}
-                  />
+                  {!isRequiredByFunnelmink(objectMetadataItem.namePlural) && (
+                    <MenuItem
+                      text="Deactivate"
+                      LeftIcon={IconArchive}
+                      onClick={handleDeactivate}
+                    />
+                  )}
                 </DropdownMenuItemsContainer>
               </DropdownMenu>
             }
