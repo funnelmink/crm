@@ -44,6 +44,8 @@ export const addFunnelminkFSMObjectsToWorkspace = async (
   // fm TODO: prefill data (see `standard-objects-prefill-data.ts`)
 
   // fm TODO: prefill views (see `standard-objects-prefill-data.ts`)
+
+  // fm TODO: a hidden `route` object that ties Crews to Jobs
 };
 
 const createFunnelminkObjects = async (
@@ -204,6 +206,7 @@ const fsmObjects = [
     ],
   },
   {
+    // fm TODO: supplier, quantity, unitType, unitCost, defaultUnitPrice
     nameSingular: 'material',
     namePlural: 'materials',
     labelSingular: 'Material',
