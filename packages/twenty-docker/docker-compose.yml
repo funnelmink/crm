@@ -93,7 +93,7 @@ services:
   worker:
     image: jarwarren/funnelmink:${TAG}
     platform: linux/amd64
-    command: ["yarn", "worker:prod"]
+    command: [ "yarn", "worker:prod" ]
     environment:
       ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
@@ -169,6 +169,24 @@ services:
       timeout: 5s
       retries: 10
     restart: always
+
+  pgbackups:
+    image: prodrigestivill/postgres-backup-local
+    restart: always
+    volumes:
+      - /var/opt/pgbackups:/backups
+    depends_on:
+      - db
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: default
+      POSTGRES_USER: twenty
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD}
+      SCHEDULE: "0 0 * * *"
+      BACKUP_KEEP_DAYS: 7
+      BACKUP_KEEP_WEEKS: 4
+      BACKUP_KEEP_MONTHS: 6
+      HEALTHCHECK_PORT: 8080
 
   redis:
     image: redis:latest
