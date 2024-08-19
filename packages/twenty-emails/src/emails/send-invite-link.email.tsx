@@ -7,9 +7,9 @@ import { HighlightedText } from 'src/components/HighlightedText';
 import { Link } from 'src/components/Link';
 import { MainText } from 'src/components/MainText';
 import { Title } from 'src/components/Title';
-import { WhatIsTwenty } from 'src/components/WhatIsTwenty';
 import { capitalize } from 'src/utils/capitalize';
 import { getImageAbsoluteURI } from 'src/utils/getImageAbsoluteURI';
+import { WhatIsFunnelmink } from 'src/funnelmink/WhatIsFunnelmink';
 
 type SendInviteLinkEmailProps = {
   link: string;
@@ -30,7 +30,7 @@ export const SendInviteLinkEmail = ({
   const workspaceLogo = getImageAbsoluteURI(workspace.logo, serverUrl);
   return (
     <BaseEmail width={333}>
-      <Title value="Join your team on Twenty" />
+      <Title value="Join your team on Funnelmink" />
       <MainText>
         {capitalize(sender.firstName)} (
         <Link href={sender.email} value={sender.email} />) has invited you to
@@ -42,7 +42,7 @@ export const SendInviteLinkEmail = ({
         {workspace.name && <HighlightedText value={workspace.name} />}
         <CallToAction href={link} value="Accept invite" />
       </HighlightedContainer>
-      <WhatIsTwenty />
+      <WhatIsFunnelmink />
     </BaseEmail>
   );
 };
