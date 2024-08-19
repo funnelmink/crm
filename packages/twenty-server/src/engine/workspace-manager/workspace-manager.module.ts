@@ -7,6 +7,8 @@ import { WorkspaceDataSourceModule } from 'src/engine/workspace-datasource/works
 import { WorkspaceHealthModule } from 'src/engine/workspace-manager/workspace-health/workspace-health.module';
 import { WorkspaceStatusModule } from 'src/engine/workspace-manager/workspace-status/workspace-manager.module';
 import { WorkspaceSyncMetadataModule } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.module';
+import { FieldMetadataModule } from 'src/engine/metadata-modules/field-metadata/field-metadata.module';
+import { RelationMetadataModule } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.module';
 
 import { WorkspaceManagerService } from './workspace-manager.service';
 
@@ -19,6 +21,8 @@ import { WorkspaceManagerService } from './workspace-manager.service';
     WorkspaceSyncMetadataModule,
     WorkspaceHealthModule,
     WorkspaceStatusModule,
+    FieldMetadataModule,
+    RelationMetadataModule,
   ],
   exports: [WorkspaceManagerService],
   providers: [WorkspaceManagerService],
