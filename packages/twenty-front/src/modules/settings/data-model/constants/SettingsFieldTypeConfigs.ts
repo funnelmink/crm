@@ -59,12 +59,12 @@ export const SETTINGS_FIELD_TYPE_CONFIGS = {
   [FieldMetadataType.Link]: {
     label: 'Link',
     Icon: IconLink,
-    exampleValue: { url: 'www.twenty.com', label: '' },
+    exampleValue: { url: 'www.funnelmink.com', label: '' },
   },
   [FieldMetadataType.Links]: {
     label: 'Links',
     Icon: IconLink,
-    exampleValue: { primaryLinkUrl: 'twenty.com', primaryLinkLabel: '' },
+    exampleValue: { primaryLinkUrl: 'funnelmink.com', primaryLinkLabel: '' },
   },
   [FieldMetadataType.Boolean]: {
     label: 'True/False',
