@@ -1,4 +1,3 @@
-import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadata/object-metadata.entity';
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
 import { ObjectMetadataService } from 'src/engine/metadata-modules/object-metadata/object-metadata.service';
 import { FUNNELMINK_ICONS } from 'src/funnelmink/funnelmink-server-constants';
@@ -53,8 +52,6 @@ const createFunnelminkObjects = async (
   objectMetadataService: ObjectMetadataService,
   fieldMetadataService: FieldMetadataService,
 ) => {
-  const metadatas: ObjectMetadataEntity[] = [];
-
   // loop through, create objects, fields and relations
   for (const object of fsmObjects) {
     const input: CreateObjectInput = {
@@ -70,9 +67,6 @@ const createFunnelminkObjects = async (
     };
     const objectMetadata = await objectMetadataService.createOne(input);
 
-    console.log(
-      `[fm] Created object ${object.nameSingular} with ID ${objectMetadata.id}`,
-    );
     for (const field of object.fields) {
       const fieldInput: CreateFieldInput = {
         workspaceId: workspaceId,
@@ -86,7 +80,6 @@ const createFunnelminkObjects = async (
 
       await fieldMetadataService.createOne(fieldInput);
     }
-    metadatas.push(objectMetadata);
   }
 };
 
@@ -131,13 +124,7 @@ const createFunnelminkRelations = async (
       workspaceId: workspaceId,
     };
 
-    console.log(
-      `[fm] Creating relationship from ${parentMetadata.nameSingular} to ${relation.toName}`,
-    );
     await relationMetadataService.createOne(input);
-    console.log(
-      `[fm] Created relationship from ${parentMetadata.nameSingular} to ${relation.toName}`,
-    );
   }
 };
 
