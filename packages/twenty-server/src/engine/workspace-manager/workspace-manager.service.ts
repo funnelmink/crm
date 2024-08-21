@@ -8,9 +8,6 @@ import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/work
 import { demoObjectsPrefillData } from 'src/engine/workspace-manager/demo-objects-prefill-data/demo-objects-prefill-data';
 import { standardObjectsPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/standard-objects-prefill-data';
 import { WorkspaceSyncMetadataService } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
-import { addFunnelminkFSMObjectsToWorkspace } from 'src/funnelmink/funnelmink-server-objects';
-import { FieldMetadataService } from 'src/engine/metadata-modules/field-metadata/field-metadata.service';
-import { RelationMetadataService } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.service';
 
 @Injectable()
 export class WorkspaceManagerService {
@@ -20,8 +17,6 @@ export class WorkspaceManagerService {
     private readonly objectMetadataService: ObjectMetadataService,
     private readonly dataSourceService: DataSourceService,
     private readonly workspaceSyncMetadataService: WorkspaceSyncMetadataService,
-    private readonly fieldMetadataService: FieldMetadataService,
-    private readonly relationMetadataService: RelationMetadataService,
   ) {}
 
   /**
@@ -52,18 +47,6 @@ export class WorkspaceManagerService {
       dataSourceMetadata,
       workspaceId,
     );
-
-    if (
-      process.env.FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS === 'true'
-    ) {
-      await addFunnelminkFSMObjectsToWorkspace(
-        workspaceId,
-        this.workspaceDataSourceService,
-        this.objectMetadataService,
-        this.fieldMetadataService,
-        this.relationMetadataService,
-      );
-    }
   }
 
   /**
@@ -91,18 +74,6 @@ export class WorkspaceManagerService {
     });
 
     await this.prefillWorkspaceWithDemoObjects(dataSourceMetadata, workspaceId);
-
-    if (
-      process.env.FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS === 'true'
-    ) {
-      await addFunnelminkFSMObjectsToWorkspace(
-        workspaceId,
-        this.workspaceDataSourceService,
-        this.objectMetadataService,
-        this.fieldMetadataService,
-        this.relationMetadataService,
-      );
-    }
   }
 
   /**
