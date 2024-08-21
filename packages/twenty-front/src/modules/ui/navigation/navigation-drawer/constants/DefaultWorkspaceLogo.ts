@@ -1,2 +1,2 @@
 export const DEFAULT_WORKSPACE_LOGO =
-  'https://twentyhq.github.io/placeholder-images/workspaces/twenty-logo.png';
+  'https://raw.githubusercontent.com/funnelmink/crm/main/packages/twenty-front/public/icons/ios/32.png';
