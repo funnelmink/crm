@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 
 import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
 import { ObjectMetadataService } from 'src/engine/metadata-modules/object-metadata/object-metadata.service';
@@ -10,16 +10,24 @@ import { CreateRelationInput } from 'src/engine/metadata-modules/relation-metada
 import { FUNNELMINK_ICONS } from 'src/funnelmink/funnelmink-server-constants';
 import { FieldMetadataType } from 'src/engine/metadata-modules/field-metadata/field-metadata.entity';
 import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
+import { FunnelminkFsmWrapper } from 'src/funnelmink/funnelmink-fsm.wrapper';
 
 @Injectable()
 export class FunnelminkFsmService {
   private readonly logger = new Logger(FunnelminkFsmService.name);
 
   constructor(
-    private readonly workspaceDataSourceService: WorkspaceDataSourceService,
-    private readonly objectMetadataService: ObjectMetadataService,
-    private readonly fieldMetadataService: FieldMetadataService,
-    private readonly relationMetadataService: RelationMetadataService,
+    @Inject(WorkspaceDataSourceService)
+    private readonly workspaceDataSourceService: FunnelminkFsmWrapper<WorkspaceDataSourceService>,
+
+    @Inject(ObjectMetadataService)
+    private readonly objectMetadataService: FunnelminkFsmWrapper<ObjectMetadataService>,
+
+    @Inject(FieldMetadataService)
+    private readonly fieldMetadataService: FunnelminkFsmWrapper<FieldMetadataService>,
+
+    @Inject(RelationMetadataService)
+    private readonly relationMetadataService: FunnelminkFsmWrapper<RelationMetadataService>,
   ) {}
 
   async addFunnelminkFSMObjectsToWorkspace(workspaceId: string): Promise<void> {

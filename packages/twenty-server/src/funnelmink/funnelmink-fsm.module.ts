@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { WorkspaceDataSourceModule } from 'src/engine/workspace-datasource/workspace-datasource.module';
 import { ObjectMetadataModule } from 'src/engine/metadata-modules/object-metadata/object-metadata.module';
@@ -9,11 +10,18 @@ import { WorkspaceMigrationModule } from 'src/engine/metadata-modules/workspace-
 import { WorkspaceSyncMetadataModule } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.module';
 import { WorkspaceHealthModule } from 'src/engine/workspace-manager/workspace-health/workspace-health.module';
 import { WorkspaceStatusModule } from 'src/engine/workspace-manager/workspace-status/workspace-manager.module';
+import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadata/object-metadata.entity';
+import { RelationMetadataEntity } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
+import { FieldMetadataEntity } from 'src/engine/metadata-modules/field-metadata/field-metadata.entity';
 
 import { FunnelminkFsmService } from './funnelmink-fsm.service';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature(
+      [ObjectMetadataEntity, FieldMetadataEntity, RelationMetadataEntity],
+      'metadata',
+    ),
     WorkspaceDataSourceModule,
     WorkspaceMigrationModule,
     ObjectMetadataModule,
@@ -21,8 +29,6 @@ import { FunnelminkFsmService } from './funnelmink-fsm.service';
     WorkspaceSyncMetadataModule,
     WorkspaceHealthModule,
     WorkspaceStatusModule,
-    ObjectMetadataModule,
-    DataSourceModule,
     FieldMetadataModule,
     RelationMetadataModule,
   ],
