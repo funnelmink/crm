@@ -10,7 +10,7 @@ const ordinalSuffix = (number) => {
 };
 
 const fetchContributorStats = async (username: string) => {
-  const apiUrl = `https://twenty.com/api/contributors/contributorStats/${username}`;
+  const apiUrl = `https://funnelmink.com/api/contributors/contributorStats/${username}`;
 
   const response = await fetch(apiUrl);
   const data = await response.json();
@@ -18,7 +18,7 @@ const fetchContributorStats = async (username: string) => {
 };
 
 const fetchContributorImage = async (username: string) => {
-  const apiUrl = `https://twenty.com/api/contributors/${username}/og.png`;
+  const apiUrl = `https://funnelmink.com/api/contributors/${username}/og.png`;
 
   await fetch(apiUrl);
 };

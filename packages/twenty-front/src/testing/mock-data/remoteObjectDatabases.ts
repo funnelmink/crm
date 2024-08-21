@@ -7,7 +7,7 @@ export const mockedRemoteObjectIntegrations = [
     connections: [
       {
         id: '67cbfd35-8dd4-4591-b9d4-c1906281a5da',
-        name: 'Twenty_postgres',
+        name: 'Funnelmink_postgres',
         tables: [
           { name: 'Invoices', status: RemoteTableStatus.NotSynced },
           { name: 'Quotes', status: RemoteTableStatus.Synced },

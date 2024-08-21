@@ -31,6 +31,7 @@ import { Button } from '@/ui/input/button/components/Button';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { isRequiredByFunnelmink } from '~/funnelmink/funnelmink-front-constants';
 
 const objectEditFormSchema = z
   .object({})
@@ -159,15 +160,17 @@ export const SettingsObjectEdit = () => {
                 objectMetadataItem={activeObjectMetadataItem}
               />
             </Section>
-            <Section>
-              <H2Title title="Danger zone" description="Deactivate object" />
-              <Button
-                Icon={IconArchive}
-                title="Deactivate"
-                size="small"
-                onClick={handleDisable}
-              />
-            </Section>
+            {!isRequiredByFunnelmink(activeObjectMetadataItem.namePlural) && (
+              <Section>
+                <H2Title title="Danger zone" description="Deactivate object" />
+                <Button
+                  Icon={IconArchive}
+                  title="Deactivate"
+                  size="small"
+                  onClick={handleDisable}
+                />
+              </Section>
+            )}
           </SettingsPageContainer>
         </SubMenuTopBarContainer>
       </FormProvider>

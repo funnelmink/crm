@@ -15,9 +15,9 @@ import { GithubReleases, githubReleasesModel } from '@/database/model';
 import { pgGithubReleasesModel } from '@/database/schema-postgres';
 
 export const metadata: Metadata = {
-  title: 'Twenty - Releases',
+  title: 'Funnelmink - Releases',
   description:
-    'Discover the newest features and improvements in Twenty, the #1 open-source CRM.',
+    'Discover the newest features and improvements in Funnelmink, the #1 open-source CRM.',
 };
 
 export const dynamic = 'force-dynamic';

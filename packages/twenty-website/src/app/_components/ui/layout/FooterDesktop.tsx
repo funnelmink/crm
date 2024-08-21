@@ -129,7 +129,7 @@ export const FooterDesktop = () => {
       >
         <div>
           <span style={{ fontFamily: 'Inter, sans-serif' }}>©</span>
-          {new Date().getFullYear()} Twenty PBC
+          {new Date().getFullYear()} Funnelmink PBC
         </div>
         <div
           style={{

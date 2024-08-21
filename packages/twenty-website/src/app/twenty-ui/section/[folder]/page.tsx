@@ -17,7 +17,7 @@ export async function generateMetadata({
   const basePath = '/src/content/twenty-ui';
   const mainPost = await fetchArticleFromSlug(params.folder, basePath);
   return {
-    title: 'Twenty - ' + formattedSlug,
+    title: 'Funnelmink - ' + formattedSlug,
     description: mainPost?.itemInfo?.info,
   };
 }

@@ -131,7 +131,7 @@ export const ChooseYourPlan = () => {
     setIsSubmitting(false);
     if (!data?.checkoutSession.url) {
       enqueueSnackBar(
-        'Checkout session error. Please retry or contact Twenty team',
+        'Checkout session error. Please retry or contact Funnelmink team',
         {
           variant: SnackBarVariant.Error,
         },
