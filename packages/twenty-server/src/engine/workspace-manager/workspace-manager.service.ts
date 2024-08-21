@@ -8,6 +8,7 @@ import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/work
 import { demoObjectsPrefillData } from 'src/engine/workspace-manager/demo-objects-prefill-data/demo-objects-prefill-data';
 import { standardObjectsPrefillData } from 'src/engine/workspace-manager/standard-objects-prefill-data/standard-objects-prefill-data';
 import { WorkspaceSyncMetadataService } from 'src/engine/workspace-manager/workspace-sync-metadata/workspace-sync-metadata.service';
+import { FunnelminkFsmService } from 'src/funnelmink/funnelmink-fsm.service';
 
 @Injectable()
 export class WorkspaceManagerService {
@@ -17,6 +18,7 @@ export class WorkspaceManagerService {
     private readonly objectMetadataService: ObjectMetadataService,
     private readonly dataSourceService: DataSourceService,
     private readonly workspaceSyncMetadataService: WorkspaceSyncMetadataService,
+    private readonly funnelminkFsmService: FunnelminkFsmService,
   ) {}
 
   /**
@@ -45,6 +47,10 @@ export class WorkspaceManagerService {
 
     await this.prefillWorkspaceWithStandardObjects(
       dataSourceMetadata,
+      workspaceId,
+    );
+
+    await this.funnelminkFsmService.addFunnelminkFSMObjectsToWorkspace(
       workspaceId,
     );
   }
