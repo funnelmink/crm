@@ -21,6 +21,7 @@ export const companyPrefillData = async (
       'createdBySource',
       'createdByWorkspaceMemberId',
       'createdByName',
+      'workOrders',
     ])
     .orIgnore()
     .values([
@@ -38,6 +39,7 @@ export const companyPrefillData = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: null,
         createdByName: 'System',
+        workOrders: [],
       },
       {
         name: 'Qonto',
@@ -53,6 +55,7 @@ export const companyPrefillData = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: null,
         createdByName: 'System',
+        workOrders: [],
       },
       {
         name: 'Stripe',
@@ -68,6 +71,7 @@ export const companyPrefillData = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: null,
         createdByName: 'System',
+        workOrders: [],
       },
       {
         name: 'Figma',
@@ -83,6 +87,7 @@ export const companyPrefillData = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: null,
         createdByName: 'System',
+        workOrders: [],
       },
       {
         name: 'Notion',
@@ -98,6 +103,7 @@ export const companyPrefillData = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: null,
         createdByName: 'System',
+        workOrders: [],
       },
     ])
     .returning('*')

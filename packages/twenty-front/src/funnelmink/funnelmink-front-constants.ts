@@ -3,7 +3,7 @@ export const isRequiredByFunnelmink = (objectName: string): boolean =>
     'people',
     'companies',
     'opportunities',
-    'workorders',
+    'workOrders',
     'services',
     'crews',
     'materials',

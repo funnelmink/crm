@@ -1,147 +1,16 @@
-import { WorkspaceDataSourceService } from 'src/engine/workspace-datasource/workspace-datasource.service';
-import { ObjectMetadataService } from 'src/engine/metadata-modules/object-metadata/object-metadata.service';
 import { FUNNELMINK_ICONS } from 'src/funnelmink/funnelmink-server-constants';
-import { CreateObjectInput } from 'src/engine/metadata-modules/object-metadata/dtos/create-object.input';
-import { CreateFieldInput } from 'src/engine/metadata-modules/field-metadata/dtos/create-field.input';
 import { FieldMetadataType } from 'src/engine/metadata-modules/field-metadata/field-metadata.entity';
-import { FieldMetadataService } from 'src/engine/metadata-modules/field-metadata/field-metadata.service';
-import { RelationMetadataService } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.service';
 import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
-import { CreateRelationInput } from 'src/engine/metadata-modules/relation-metadata/dtos/create-relation.input';
 
-// fm TODO: this needs to be fault tolerant and reusable
-// - in the future, if a user messes with their data model, we can offer to regen missing objects (and/or fields)
-// - as this function iterates, it should catch and log errors without breaking out of the loop
-
-export const maybeAddFunnelminkFSMObjectsToWorkspace = async (
-  workspaceId: string,
-  workspaceDataSourceService: WorkspaceDataSourceService,
-  objectMetadataService: ObjectMetadataService,
-  fieldMetadataService: FieldMetadataService,
-  relationMetadataService: RelationMetadataService,
-) => {
-  if (
-    process.env.FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS !== 'true'
-  ) {
-    return;
-  }
-  const workspaceDataSource =
-    await workspaceDataSourceService.connectToWorkspaceDataSource(workspaceId);
-
-  if (!workspaceDataSource) {
-    throw new Error('Could not connect to workspace data source');
-  }
-
-  // loop through create funnelmink objects and fields
-  await createFunnelminkObjects(
-    workspaceId,
-    objectMetadataService,
-    fieldMetadataService,
-  );
-
-  await createFunnelminkRelations(
-    workspaceId,
-    objectMetadataService,
-    relationMetadataService,
-  );
-
-  // fm TODO: prefill data (see `standard-objects-prefill-data.ts`)
-
-  // fm TODO: prefill views (see `standard-objects-prefill-data.ts`)
-
-  // fm TODO: a hidden `route` object that ties Crews to Jobs
-};
-
-const createFunnelminkObjects = async (
-  workspaceId: string,
-  objectMetadataService: ObjectMetadataService,
-  fieldMetadataService: FieldMetadataService,
-) => {
-  // loop through, create objects, fields and relations
-  for (const object of fsmObjects) {
-    const input: CreateObjectInput = {
-      dataSourceId: '',
-      workspaceId: workspaceId,
-      nameSingular: object.nameSingular,
-      namePlural: object.namePlural,
-      labelSingular: object.labelSingular,
-      labelPlural: object.labelPlural,
-      description: object.description,
-      icon: object.icon,
-      isRemote: object.isRemote,
-    };
-    const objectMetadata = await objectMetadataService.createOne(input);
-
-    for (const field of object.fields) {
-      const fieldInput: CreateFieldInput = {
-        workspaceId: workspaceId,
-        objectMetadataId: objectMetadata.id,
-        name: field.name,
-        label: field.label,
-        type: field.type,
-        icon: field.icon,
-        isRemoteCreation: false,
-      };
-
-      await fieldMetadataService.createOne(fieldInput);
-    }
-  }
-};
-
-const createFunnelminkRelations = async (
-  workspaceId: string,
-  objectMetadataService: ObjectMetadataService,
-  relationMetadataService: RelationMetadataService,
-) => {
-  const objectMetadatas =
-    await objectMetadataService.findManyWithinWorkspace(workspaceId);
-
-  for (const relation of fsmRelationships) {
-    const parentMetadata = objectMetadatas.find(
-      (metadata) => metadata.namePlural === relation.fromName,
-    );
-    let toName = relation.toName;
-
-    if (relation.toName === 'crewLead') {
-      toName = 'workspaceMembers';
-    }
-    const childMetadata = objectMetadatas.find(
-      (metadata) => metadata.namePlural === toName,
-    );
-
-    if (!parentMetadata || !childMetadata) {
-      throw new Error(
-        `Could not find object metadata for ${relation.fromName} or ${relation.toName}`,
-      );
-    }
-
-    const input: CreateRelationInput = {
-      fromDescription: relation.description,
-      fromIcon: relation.fromIcon,
-      fromLabel: relation.fromLabel,
-      fromName: relation.fromName,
-      fromObjectMetadataId: childMetadata.id,
-      relationType: relation.type,
-      toIcon: relation.toIcon,
-      toLabel: relation.toLabel,
-      toName: relation.toName,
-      toObjectMetadataId: parentMetadata.id,
-      workspaceId: workspaceId,
-    };
-
-    await relationMetadataService.createOne(input);
-  }
-};
-
-const fsmObjects = [
+export const FUNNELMINK_OBJECTS = [
   {
-    nameSingular: 'workorder',
-    namePlural: 'workorders',
+    nameSingular: 'workOrder',
+    namePlural: 'workOrders',
     labelSingular: 'Work Order',
     labelPlural: 'Work Orders',
     description: 'A Work Order',
     isRemote: false,
-    icon: FUNNELMINK_ICONS.workorder,
+    icon: FUNNELMINK_ICONS.workOrder,
     fields: [
       {
         name: 'stickyNote',
@@ -252,12 +121,12 @@ const fsmObjects = [
   },
 ];
 
-const fsmRelationships = [
+export const FUNNELMINK_RELATIONSHIPS = [
   {
     description: 'The Work Orders for this Company',
-    fromIcon: FUNNELMINK_ICONS.workorder,
+    fromIcon: FUNNELMINK_ICONS.workOrder,
     fromLabel: 'Work Orders',
-    fromName: 'workorders',
+    fromName: 'workOrders',
     toIcon: FUNNELMINK_ICONS.company,
     toLabel: 'Company',
     toName: 'companies',
@@ -265,9 +134,9 @@ const fsmRelationships = [
   },
   {
     description: 'The Work Orders for this Person',
-    fromIcon: FUNNELMINK_ICONS.workorder,
+    fromIcon: FUNNELMINK_ICONS.workOrder,
     fromLabel: 'Work Orders',
-    fromName: 'workorders',
+    fromName: 'workOrders',
     toIcon: FUNNELMINK_ICONS.person,
     toLabel: 'Person',
     toName: 'people',
@@ -278,9 +147,9 @@ const fsmRelationships = [
     fromIcon: FUNNELMINK_ICONS.job,
     fromLabel: 'Jobs',
     fromName: 'jobs',
-    toIcon: FUNNELMINK_ICONS.workorder,
+    toIcon: FUNNELMINK_ICONS.workOrder,
     toLabel: 'Work Orders',
-    toName: 'workorders',
+    toName: 'workOrders',
     type: RelationMetadataType.ONE_TO_MANY,
   },
   // {

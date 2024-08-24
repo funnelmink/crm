@@ -31,6 +31,11 @@ import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/perso
 import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
 import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import {
+  FUNNELMINK_ICONS,
+  FUNNELMINK_IDS,
+} from 'src/funnelmink/funnelmink-server-constants';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/funnelmink-workorder.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.company,
@@ -274,4 +279,18 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceIsDeprecated()
   @WorkspaceIsNullable()
   addressOld: string;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.companyWorkOrders,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Work Orders',
+    description: 'Work Orders linked to the company.',
+    icon: FUNNELMINK_ICONS.workOrder,
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    inverseSideFieldKey: 'company',
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  workOrders: Relation<WorkOrderWorkspaceEntity[]>;
 }
