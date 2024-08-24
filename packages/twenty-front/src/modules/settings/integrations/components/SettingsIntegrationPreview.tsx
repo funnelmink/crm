@@ -69,7 +69,10 @@ export const SettingsIntegrationPreview = ({
           <StyledIntegrationLogo alt="" src={integrationLogoUrl} />
         </StyledIntegrationLogoContainer>
         <StyledSyncImage />
-        <StyledTwentyLogo alt="" src="/images/integrations/funnelmink-logo.svg" />
+        <StyledTwentyLogo
+          alt=""
+          src="/images/integrations/funnelmink-logo.svg"
+        />
       </StyledLogosContainer>
       <StyledLabel>Import your tables as remote objects</StyledLabel>
     </StyledCardContent>

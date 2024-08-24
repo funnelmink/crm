@@ -83,7 +83,8 @@ export const SyncEmails = () => {
     <>
       <Title noMarginTop>Emails and Calendar</Title>
       <SubTitle>
-        Sync your Emails and Calendar with Funnelmink. Choose your privacy settings.
+        Sync your Emails and Calendar with Funnelmink. Choose your privacy
+        settings.
       </SubTitle>
       <StyledSyncEmailsContainer>
         <OnboardingSyncEmailsSettingsCard
