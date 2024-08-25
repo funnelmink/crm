@@ -23,6 +23,8 @@ import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/perso
 import { TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
 import { WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
 import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/funnelmink-workorder.workspace-entity';
+import { FUNNELMINK_IDS } from 'src/funnelmink/funnelmink-server-constants';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.favorite,
@@ -170,4 +172,20 @@ export class FavoriteWorkspaceEntity extends BaseWorkspaceEntity {
     inverseSideFieldKey: 'favorites',
   })
   custom: Relation<CustomWorkspaceEntity>;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.favoriteWorkorder,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Work Order',
+    description: 'Favorite Work Order',
+    icon: FUNNELMINK_IDS.workorder,
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    inverseSideFieldKey: 'favorites',
+  })
+  @WorkspaceIsNullable()
+  workorder: Relation<WorkOrderWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('workorder')
+  workorderId: string;
 }

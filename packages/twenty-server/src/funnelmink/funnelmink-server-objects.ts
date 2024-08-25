@@ -4,13 +4,13 @@ import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metad
 
 export const FUNNELMINK_OBJECTS = [
   {
-    nameSingular: 'workOrder',
-    namePlural: 'workOrders',
+    nameSingular: 'workorder',
+    namePlural: 'workorders',
     labelSingular: 'Work Order',
     labelPlural: 'Work Orders',
     description: 'A Work Order',
     isRemote: false,
-    icon: FUNNELMINK_ICONS.workOrder,
+    icon: FUNNELMINK_ICONS.workorder,
     fields: [
       {
         name: 'stickyNote',
@@ -124,9 +124,9 @@ export const FUNNELMINK_OBJECTS = [
 export const FUNNELMINK_RELATIONSHIPS = [
   {
     description: 'The Work Orders for this Company',
-    fromIcon: FUNNELMINK_ICONS.workOrder,
+    fromIcon: FUNNELMINK_ICONS.workorder,
     fromLabel: 'Work Orders',
-    fromName: 'workOrders',
+    fromName: 'workorders',
     toIcon: FUNNELMINK_ICONS.company,
     toLabel: 'Company',
     toName: 'companies',
@@ -134,9 +134,9 @@ export const FUNNELMINK_RELATIONSHIPS = [
   },
   {
     description: 'The Work Orders for this Person',
-    fromIcon: FUNNELMINK_ICONS.workOrder,
+    fromIcon: FUNNELMINK_ICONS.workorder,
     fromLabel: 'Work Orders',
-    fromName: 'workOrders',
+    fromName: 'workorders',
     toIcon: FUNNELMINK_ICONS.person,
     toLabel: 'Person',
     toName: 'people',
@@ -147,9 +147,9 @@ export const FUNNELMINK_RELATIONSHIPS = [
     fromIcon: FUNNELMINK_ICONS.job,
     fromLabel: 'Jobs',
     fromName: 'jobs',
-    toIcon: FUNNELMINK_ICONS.workOrder,
+    toIcon: FUNNELMINK_ICONS.workorder,
     toLabel: 'Work Orders',
-    toName: 'workOrders',
+    toName: 'workorders',
     type: RelationMetadataType.ONE_TO_MANY,
   },
   // {
