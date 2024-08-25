@@ -18,6 +18,11 @@ import { OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-obj
 import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
 import { TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
 import { WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
+import {
+  FUNNELMINK_ICONS,
+  FUNNELMINK_IDS,
+} from 'src/funnelmink/funnelmink-server-constants';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/funnelmink-workorder.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.taskTarget,
@@ -125,4 +130,20 @@ export class TaskTargetWorkspaceEntity extends BaseWorkspaceEntity {
     featureFlag: FeatureFlagKey.IsWorkflowEnabled,
   })
   workflowId: string | null;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.taskWorkOrder,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Work Order',
+    description: 'TaskTarget Work Order',
+    icon: FUNNELMINK_ICONS.workOrder,
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    inverseSideFieldKey: 'taskTargets',
+  })
+  @WorkspaceIsNullable()
+  workOrder: Relation<WorkOrderWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('workOrder')
+  workOrderId: string | null;
 }

@@ -228,17 +228,17 @@ export class TimelineActivityWorkspaceEntity extends BaseWorkspaceEntity {
 
   // Funnelmink
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.timelineActivityWorkorder,
+    standardId: FUNNELMINK_IDS.timelineActivityWorkOrder,
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Work Order',
     description: 'Event Work Order',
-    icon: FUNNELMINK_ICONS.workorder,
+    icon: FUNNELMINK_ICONS.workOrder,
     inverseSideTarget: () => WorkOrderWorkspaceEntity,
     inverseSideFieldKey: 'timelineActivities',
   })
   @WorkspaceIsNullable()
-  workorder: Relation<WorkOrderWorkspaceEntity> | null;
+  workOrder: Relation<WorkOrderWorkspaceEntity> | null;
 
-  @WorkspaceJoinColumn('workorder')
-  workorderId: string | null;
+  @WorkspaceJoinColumn('workOrder')
+  workOrderId: string | null;
 }

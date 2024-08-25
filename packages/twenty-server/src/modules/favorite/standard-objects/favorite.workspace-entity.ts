@@ -175,17 +175,17 @@ export class FavoriteWorkspaceEntity extends BaseWorkspaceEntity {
 
   // Funnelmink
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.favoriteWorkorder,
+    standardId: FUNNELMINK_IDS.favoriteWorkOrder,
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Work Order',
     description: 'Favorite Work Order',
-    icon: FUNNELMINK_IDS.workorder,
+    icon: FUNNELMINK_IDS.workOrder,
     inverseSideTarget: () => WorkOrderWorkspaceEntity,
     inverseSideFieldKey: 'favorites',
   })
   @WorkspaceIsNullable()
-  workorder: Relation<WorkOrderWorkspaceEntity> | null;
+  workOrder: Relation<WorkOrderWorkspaceEntity> | null;
 
-  @WorkspaceJoinColumn('workorder')
-  workorderId: string;
+  @WorkspaceJoinColumn('workOrder')
+  workOrderId: string;
 }

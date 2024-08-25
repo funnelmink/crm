@@ -136,13 +136,13 @@ export class ActivityTargetWorkspaceEntity extends BaseWorkspaceEntity {
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Work Order',
     description: 'ActivityTarget Work Order',
-    icon: FUNNELMINK_ICONS.workorder,
+    icon: FUNNELMINK_ICONS.workOrder,
     inverseSideTarget: () => WorkOrderWorkspaceEntity,
     inverseSideFieldKey: 'activityTargets',
   })
   @WorkspaceIsNullable()
-  workorder: Relation<WorkOrderWorkspaceEntity> | null;
+  workOrder: Relation<WorkOrderWorkspaceEntity> | null;
 
-  @WorkspaceJoinColumn('workorder')
-  workorderId: string | null;
+  @WorkspaceJoinColumn('workOrder')
+  workOrderId: string | null;
 }

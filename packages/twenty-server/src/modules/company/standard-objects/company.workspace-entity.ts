@@ -286,10 +286,10 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Work Orders',
     description: 'Work Orders linked to the company.',
-    icon: FUNNELMINK_ICONS.workorder,
+    icon: FUNNELMINK_ICONS.workOrder,
     inverseSideTarget: () => WorkOrderWorkspaceEntity,
     onDelete: RelationOnDeleteAction.SET_NULL,
   })
   @WorkspaceIsNullable()
-  workorders: Relation<WorkOrderWorkspaceEntity[]>;
+  workOrders: Relation<WorkOrderWorkspaceEntity[]>;
 }
