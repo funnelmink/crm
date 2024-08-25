@@ -288,7 +288,6 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
     description: 'Work Orders linked to the company.',
     icon: FUNNELMINK_ICONS.workOrder,
     inverseSideTarget: () => WorkOrderWorkspaceEntity,
-    inverseSideFieldKey: 'company',
     onDelete: RelationOnDeleteAction.SET_NULL,
   })
   @WorkspaceIsNullable()

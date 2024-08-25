@@ -43,7 +43,6 @@ export const seedCompanies = async (
       'createdBySource',
       'createdByWorkspaceMemberId',
       'createdByName',
-      'workOrders',
     ])
     .orIgnore()
     .values([
@@ -63,7 +62,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.FACEBOOK,
@@ -81,7 +79,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.QONTO,
@@ -99,7 +96,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.MICROSOFT,
@@ -117,7 +113,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.AIRBNB,
@@ -135,7 +130,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.GOOGLE,
@@ -153,7 +147,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.NETFLIX,
@@ -171,7 +164,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.LIBEO,
@@ -189,7 +181,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.CLAAP,
@@ -207,7 +198,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.HASURA,
@@ -225,7 +215,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.WEWORK,
@@ -243,7 +232,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.SAMSUNG,
@@ -261,7 +249,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: DEV_SEED_WORKSPACE_MEMBER_IDS.TIM,
         createdByName: 'Tim Apple',
-        workOrders: [],
       },
       {
         id: DEV_SEED_COMPANY_IDS.ALGOLIA,
@@ -279,7 +266,6 @@ export const seedCompanies = async (
         createdBySource: 'MANUAL',
         createdByWorkspaceMemberId: null,
         createdByName: '',
-        workOrders: [],
       },
     ])
     .execute();

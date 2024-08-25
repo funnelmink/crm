@@ -28,7 +28,7 @@ import { WorkspaceIsNullable } from 'src/engine/twenty-orm/decorators/workspace-
   labelPlural: 'Work Orders',
   description: 'A Work Order',
   icon: FUNNELMINK_ICONS.workOrder,
-  labelIdentifierStandardId: FUNNELMINK_IDS.workOrderStandardId,
+  labelIdentifierStandardId: FUNNELMINK_IDS.workOrderName,
   softDelete: true,
 })
 export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
@@ -62,7 +62,6 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
     description: 'Company the Work Order is assigned to.',
     icon: FUNNELMINK_ICONS.company,
     inverseSideTarget: () => CompanyWorkspaceEntity,
-    inverseSideFieldKey: 'workOrders',
     onDelete: RelationOnDeleteAction.SET_NULL,
   })
   @WorkspaceIsNullable()

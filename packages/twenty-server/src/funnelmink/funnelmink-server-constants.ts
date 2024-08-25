@@ -39,11 +39,11 @@ export const FUNNELMINK_ICONS = {
 
 export const FUNNELMINK_IDS = {
   workOrder: '24242424-2945-440e-8d1a-f84672d33d5e',
-  workOrderStandardId: '24242424-39aa-4a89-843b-eb5f2a8b677f',
-  workOrderName: '24242424-4c00-401d-8cda-ec6a4c41cd7d',
   workOrderCreatedBy: '24242424-bd3d-4c60-8dca-571c71d4447a',
   workOrderCompany: '24242424-0408-4f38-b8a8-4d5e3e26e24d',
+  workOrderName: '24242424-4c00-401d-8cda-ec6a4c41cd7d',
   companyWorkOrders: '24242424-983d-416b-a5ee-bdd0da3d0f8f',
+  // workOrderStandardId: '24242424-39aa-4a89-843b-eb5f2a8b677f',
   // calendarChannelEventAssociation: '24242424-491b-4aaa-9825-afd1bae6ae00',
   // calendarChannel: '24242424-e8f2-40e1-a39c-c0e0039c5034',
   // calendarEventParticipant: '24242424-a1c3-47a6-9732-27e5b1e8436d',
