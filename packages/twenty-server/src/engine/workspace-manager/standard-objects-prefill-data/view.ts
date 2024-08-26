@@ -18,6 +18,7 @@ import {
   materialsAllView,
   servicesAllView,
   workOrdersAllView,
+  workOrdersByStatusView,
   jobsAllView,
 } from 'src/funnelmink/funnelmink-views';
 
@@ -44,6 +45,7 @@ export const viewPrefillData = async (
 
     // Funnelmink
     await workOrdersAllView(objectMetadataMap),
+    await workOrdersByStatusView(objectMetadataMap),
     await servicesAllView(objectMetadataMap),
     await crewsAllView(objectMetadataMap),
     await materialsAllView(objectMetadataMap),

@@ -4,6 +4,56 @@ import {
   FUNNELMINK_IDS,
 } from 'src/funnelmink/funnelmink-server-constants';
 
+const workOrderFields = async (
+  objectMetadataMap: Record<string, ObjectMetadataEntity>,
+) => [
+  {
+    fieldMetadataId:
+      objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
+        FUNNELMINK_IDS.workOrderName
+      ],
+    position: 0,
+    isVisible: true,
+    size: 150,
+  },
+  {
+    fieldMetadataId:
+      objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
+        FUNNELMINK_IDS.workOrderStage
+      ],
+    position: 1,
+    isVisible: true,
+    size: 150,
+  },
+  {
+    fieldMetadataId:
+      objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
+        FUNNELMINK_IDS.workOrderCompany
+      ],
+    position: 2,
+    isVisible: true,
+    size: 150,
+  },
+  {
+    fieldMetadataId:
+      objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
+        FUNNELMINK_IDS.workOrderPerson
+      ],
+    position: 3,
+    isVisible: true,
+    size: 150,
+  },
+  {
+    fieldMetadataId:
+      objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
+        FUNNELMINK_IDS.workOrderCreatedBy
+      ],
+    position: 4,
+    isVisible: true,
+    size: 150,
+  },
+];
+
 export const workOrdersAllView = async (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
@@ -16,35 +66,26 @@ export const workOrdersAllView = async (
     icon: FUNNELMINK_ICONS.listView,
     kanbanFieldMetadataId: '',
     filters: [],
-    fields: [
-      {
-        fieldMetadataId:
-          objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
-            FUNNELMINK_IDS.workOrderName
-          ],
-        position: 0,
-        isVisible: true,
-        size: 150,
-      },
-      {
-        fieldMetadataId:
-          objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
-            FUNNELMINK_IDS.workOrderCompany
-          ],
-        position: 1,
-        isVisible: true,
-        size: 150,
-      },
-      {
-        fieldMetadataId:
-          objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
-            FUNNELMINK_IDS.workOrderCreatedBy
-          ],
-        position: 2,
-        isVisible: true,
-        size: 150,
-      },
-    ],
+    fields: await workOrderFields(objectMetadataMap),
+  };
+};
+
+export const workOrdersByStatusView = async (
+  objectMetadataMap: Record<string, ObjectMetadataEntity>,
+) => {
+  return {
+    name: 'By Status',
+    objectMetadataId: objectMetadataMap[FUNNELMINK_IDS.workOrder].id,
+    type: 'kanban',
+    key: null,
+    position: 1,
+    icon: 'IconLayoutKanban',
+    kanbanFieldMetadataId:
+      objectMetadataMap[FUNNELMINK_IDS.workOrder].fields[
+        FUNNELMINK_IDS.workOrderStage
+      ],
+    filters: [],
+    fields: await workOrderFields(objectMetadataMap),
   };
 };
 
