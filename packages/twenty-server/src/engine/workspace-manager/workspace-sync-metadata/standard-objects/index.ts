@@ -37,6 +37,7 @@ import { WorkflowVersionWorkspaceEntity } from 'src/modules/workflow/common/stan
 import { WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
 import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
 import { WorkOrderWorkspaceEntity } from 'src/funnelmink/funnelmink-workorder.workspace-entity';
+import { ServiceWorkspaceEntity } from 'src/funnelmink/funnelmink-service.workspace-entity';
 
 // TODO: Maybe we should automate this with the DiscoverService of Nest.JS
 export const standardObjectMetadataDefinitions = [
@@ -88,4 +89,5 @@ export const standardObjectMetadataDefinitions = [
   WebhookWorkspaceEntity,
 
   WorkOrderWorkspaceEntity,
+  ServiceWorkspaceEntity,
 ];

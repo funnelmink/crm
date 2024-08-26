@@ -46,7 +46,7 @@ export const FUNNELMINK_ICONS = {
 export const FUNNELMINK_IDS = {
   activityWorkorder: '24242424-a1c3-47a6-9732-27e5b1e8436d',
   attachmentWorkOrder: '24242424-0566-476a-b4c4-a0f9781bd80a',
-  companyWorkorders: '24242424-983d-416b-a5ee-bdd0da3d0f8f',
+  companyWorkOrders: '24242424-983d-416b-a5ee-bdd0da3d0f8f',
   favoriteWorkOrder: '24242424-ab56-4e05-92a3-e2414a499860',
   noteWorkorder: '24242424-8f1d-4eef-9f85-0d1965e27221',
   taskWorkOrder: '24242424-a433-4456-aa2d-fd9cb26b774a',
@@ -68,7 +68,7 @@ export const FUNNELMINK_IDS = {
   serviceCreatedBy: '24242424-0b00-45cd-b6f6-6cd806fc6804',
   servicePosition: '24242424-fff0-4b44-be82-bda313884400',
   workOrderPerson: '24242424-9549-49dd-b2b2-883999db8938',
-  personWorkorders: '24242424-e674-48e5-a542-72570eee7213',
+  personWorkOrders: '24242424-e674-48e5-a542-72570eee7213',
   serviceActivityTargets: '24242424-1ba1-48ba-bc83-ef7e5990ed10',
   serviceTaskTargets: '24242424-5a9a-44e8-95df-771cd06d0fb1',
   serviceNoteTargets: '24242424-6736-4337-b5c4-8b39fae325a5',

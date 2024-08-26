@@ -1,5 +1,8 @@
 import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadata/object-metadata.entity';
-import {FUNNELMINK_ICONS, FUNNELMINK_IDS} from 'src/funnelmink/funnelmink-server-constants';
+import {
+  FUNNELMINK_ICONS,
+  FUNNELMINK_IDS,
+} from 'src/funnelmink/funnelmink-server-constants';
 
 export const workOrdersAllView = async (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
@@ -54,7 +57,7 @@ export const servicesAllView = async (
     type: 'table',
     key: 'INDEX',
     position: 0,
-    icon: 'IconList',
+    icon: FUNNELMINK_ICONS.listView,
     kanbanFieldMetadataId: '',
     filters: [],
     fields: [

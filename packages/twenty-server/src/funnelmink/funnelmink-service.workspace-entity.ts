@@ -80,6 +80,7 @@ export class ServiceWorkspaceEntity extends BaseWorkspaceEntity {
   position: number;
 
   // First-class Relations
+  // TODO: job
 
   // Second-class Relations
   @WorkspaceRelation({

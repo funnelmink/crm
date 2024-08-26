@@ -282,7 +282,7 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
 
   // Funnelmink
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.companyWorkorders,
+    standardId: FUNNELMINK_IDS.companyWorkOrders,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Work Orders',
     description: 'Work Orders linked to the company.',
