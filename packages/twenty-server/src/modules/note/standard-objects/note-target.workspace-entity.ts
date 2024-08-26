@@ -22,8 +22,8 @@ import {
   FUNNELMINK_ICONS,
   FUNNELMINK_IDS,
 } from 'src/funnelmink/funnelmink-server-constants';
-import { WorkOrderWorkspaceEntity } from 'src/funnelmink/funnelmink-workorder.workspace-entity';
-import { ServiceWorkspaceEntity } from 'src/funnelmink/funnelmink-service.workspace-entity';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
+import { ServiceWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-service.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.noteTarget,
