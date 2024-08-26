@@ -149,9 +149,18 @@ export const crewsAllView = async (
       {
         fieldMetadataId:
           objectMetadataMap[FUNNELMINK_IDS.crew].fields[
-            FUNNELMINK_IDS.crewCreatedBy
+            FUNNELMINK_IDS.crewLead
           ],
         position: 1,
+        isVisible: true,
+        size: 150,
+      },
+      {
+        fieldMetadataId:
+          objectMetadataMap[FUNNELMINK_IDS.crew].fields[
+            FUNNELMINK_IDS.crewCreatedBy
+          ],
+        position: 2,
         isVisible: true,
         size: 150,
       },

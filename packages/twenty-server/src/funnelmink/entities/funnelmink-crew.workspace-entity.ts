@@ -25,6 +25,9 @@ import { NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/not
 import { FavoriteWorkspaceEntity } from 'src/modules/favorite/standard-objects/favorite.workspace-entity';
 import { AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
+import { JobWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-job.workspace-entity';
+import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { WorkspaceJoinColumn } from 'src/engine/twenty-orm/decorators/workspace-join-column.decorator';
 
 @WorkspaceEntity({
   standardId: FUNNELMINK_IDS.crew,
@@ -80,9 +83,45 @@ export class CrewWorkspaceEntity extends BaseWorkspaceEntity {
   position: number;
 
   // First-class Relations
-  // TODO: job
-  // TODO: crew lead
-  // TODO: crew members
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.crewJobs,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Jobs',
+    description: 'Jobs assigned to the Crew',
+    icon: FUNNELMINK_ICONS.job,
+    inverseSideTarget: () => JobWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.CASCADE,
+  })
+  jobs: Relation<JobWorkspaceEntity[]>;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.crewLead,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Crew Lead',
+    description: 'The team member responsible for managing this Crew',
+    icon: FUNNELMINK_ICONS.crewLead,
+    inverseSideTarget: () => WorkspaceMemberWorkspaceEntity,
+    inverseSideFieldKey: 'crewLeadCrew',
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  crewLead: Relation<WorkspaceMemberWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('crewLead')
+  crewLeadId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.crewMembers,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Crew Members',
+    description: 'The team members assigned to this Crew',
+    icon: FUNNELMINK_ICONS.member,
+    inverseSideTarget: () => WorkspaceMemberWorkspaceEntity,
+    inverseSideFieldKey: 'crew',
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  crewMembers: Relation<WorkspaceMemberWorkspaceEntity[]>;
 
   // Second-class Relations
   @WorkspaceRelation({

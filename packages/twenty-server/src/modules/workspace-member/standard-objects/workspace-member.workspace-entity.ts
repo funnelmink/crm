@@ -32,6 +32,12 @@ import { MessageThreadSubscriberWorkspaceEntity } from 'src/modules/messaging/co
 import { TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
 import { AuditLogWorkspaceEntity } from 'src/modules/timeline/standard-objects/audit-log.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
+import {
+  FUNNELMINK_ICONS,
+  FUNNELMINK_IDS,
+} from 'src/funnelmink/funnelmink-server-constants';
+import { CrewWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-crew.workspace-entity';
+import { WorkspaceJoinColumn } from 'src/engine/twenty-orm/decorators/workspace-join-column.decorator';
 
 export enum WorkspaceMemberDateFormatEnum {
   SYSTEM = 'SYSTEM',
@@ -374,4 +380,34 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
     defaultValue: `'${WorkspaceMemberTimeFormatEnum.SYSTEM}'`,
   })
   timeFormat: string;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.memberCrewLeadCrew,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Crew Lead',
+    description: 'Crew Lead',
+    icon: FUNNELMINK_ICONS.crew,
+    inverseSideTarget: () => CrewWorkspaceEntity,
+    inverseSideFieldKey: 'crewLead',
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  crewLeadCrew: Relation<CrewWorkspaceEntity[]>;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.memberCrew,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Crew',
+    description: 'Crew',
+    icon: FUNNELMINK_ICONS.crew,
+    inverseSideTarget: () => CrewWorkspaceEntity,
+    inverseSideFieldKey: 'crewMembers',
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  crew: CrewWorkspaceEntity;
+
+  @WorkspaceJoinColumn('crew')
+  crewId: string | null;
 }

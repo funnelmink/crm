@@ -28,6 +28,7 @@ import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-o
 import { WorkspaceJoinColumn } from 'src/engine/twenty-orm/decorators/workspace-join-column.decorator';
 
 import { WorkOrderWorkspaceEntity } from './funnelmink-workorder.workspace-entity';
+import { CrewWorkspaceEntity } from './funnelmink-crew.workspace-entity';
 
 // fm TODO: duration, start, address, (more?)
 @WorkspaceEntity({
@@ -84,7 +85,7 @@ export class JobWorkspaceEntity extends BaseWorkspaceEntity {
   position: number;
 
   // First-class Relations
-  // fm TODO: material, crew, service
+  // fm TODO: material, service
   @WorkspaceRelation({
     standardId: FUNNELMINK_IDS.jobWorkOrder,
     type: RelationMetadataType.MANY_TO_ONE,
@@ -99,6 +100,21 @@ export class JobWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceJoinColumn('workOrder')
   workOrderId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.jobCrew,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Crew',
+    description: 'Crew the Job is assigned to.',
+    icon: FUNNELMINK_ICONS.crew,
+    inverseSideTarget: () => CrewWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  crew: Relation<CrewWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('crew')
+  crewId: string | null;
 
   // Second-class Relations
   @WorkspaceRelation({

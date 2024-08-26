@@ -271,7 +271,7 @@ export class TimelineActivityWorkspaceEntity extends BaseWorkspaceEntity {
     inverseSideFieldKey: 'timelineActivities',
   })
   @WorkspaceIsNullable()
-  crew: Relation<ServiceWorkspaceEntity> | null;
+  crew: Relation<CrewWorkspaceEntity> | null;
 
   @WorkspaceJoinColumn('crew')
   crewId: string | null;
