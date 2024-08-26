@@ -117,3 +117,38 @@ export const crewsAllView = async (
     ],
   };
 };
+
+export const materialsAllView = async (
+  objectMetadataMap: Record<string, ObjectMetadataEntity>,
+) => {
+  return {
+    name: 'All',
+    objectMetadataId: objectMetadataMap[FUNNELMINK_IDS.material].id,
+    type: 'table',
+    key: 'INDEX',
+    position: 0,
+    icon: FUNNELMINK_ICONS.listView,
+    kanbanFieldMetadataId: '',
+    filters: [],
+    fields: [
+      {
+        fieldMetadataId:
+          objectMetadataMap[FUNNELMINK_IDS.material].fields[
+            FUNNELMINK_IDS.materialName
+          ],
+        position: 0,
+        isVisible: true,
+        size: 150,
+      },
+      {
+        fieldMetadataId:
+          objectMetadataMap[FUNNELMINK_IDS.material].fields[
+            FUNNELMINK_IDS.materialCreatedBy
+          ],
+        position: 1,
+        isVisible: true,
+        size: 150,
+      },
+    ],
+  };
+};

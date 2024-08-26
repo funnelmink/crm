@@ -15,6 +15,7 @@ import { tasksByStatusView } from 'src/engine/workspace-manager/standard-objects
 import { workflowsAllView } from 'src/engine/workspace-manager/standard-objects-prefill-data/views/workflows-all.view';
 import {
   crewsAllView,
+  materialsAllView,
   servicesAllView,
   workOrdersAllView,
 } from 'src/funnelmink/funnelmink-views';
@@ -44,6 +45,7 @@ export const viewPrefillData = async (
     await workOrdersAllView(objectMetadataMap),
     await servicesAllView(objectMetadataMap),
     await crewsAllView(objectMetadataMap),
+    await materialsAllView(objectMetadataMap),
     ...(isWorkflowEnabled ? [await workflowsAllView(objectMetadataMap)] : []),
   ];
 
