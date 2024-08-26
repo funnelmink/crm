@@ -29,6 +29,7 @@ import {
 } from 'src/funnelmink/funnelmink-server-constants';
 import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
 import { ServiceWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-service.workspace-entity';
+import { CrewWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-crew.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.timelineActivity,
@@ -257,4 +258,19 @@ export class TimelineActivityWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceJoinColumn('service')
   serviceId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.timelineActivityCrew,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Crew',
+    description: 'Event Crew',
+    icon: FUNNELMINK_ICONS.crew,
+    inverseSideTarget: () => CrewWorkspaceEntity,
+    inverseSideFieldKey: 'timelineActivities',
+  })
+  @WorkspaceIsNullable()
+  crew: Relation<ServiceWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('crew')
+  crewId: string | null;
 }

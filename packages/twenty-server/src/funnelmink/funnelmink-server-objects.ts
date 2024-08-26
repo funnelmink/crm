@@ -4,23 +4,6 @@ import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metad
 
 export const FUNNELMINK_OBJECTS = [
   {
-    nameSingular: 'crew',
-    namePlural: 'crews',
-    labelSingular: 'Crew',
-    labelPlural: 'Crews',
-    description: 'A Crew',
-    isRemote: false,
-    icon: FUNNELMINK_ICONS.crew,
-    fields: [
-      {
-        name: 'stickyNote',
-        label: 'Sticky Note',
-        icon: FUNNELMINK_ICONS.stickyNote,
-        type: FieldMetadataType.TEXT,
-      },
-    ],
-  },
-  {
     // fm TODO: supplier, quantity, unitType, unitCost, defaultUnitPrice
     nameSingular: 'material',
     namePlural: 'materials',

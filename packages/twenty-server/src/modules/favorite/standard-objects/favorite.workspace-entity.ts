@@ -26,6 +26,7 @@ import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/sta
 import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
 import { FUNNELMINK_IDS } from 'src/funnelmink/funnelmink-server-constants';
 import { ServiceWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-service.workspace-entity';
+import { CrewWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-crew.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.favorite,
@@ -204,4 +205,19 @@ export class FavoriteWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceJoinColumn('service')
   serviceId: string;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.favoriteCrew,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Crew',
+    description: 'Favorite Crew',
+    icon: FUNNELMINK_IDS.service,
+    inverseSideTarget: () => CrewWorkspaceEntity,
+    inverseSideFieldKey: 'favorites',
+  })
+  @WorkspaceIsNullable()
+  crew: Relation<ServiceWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('crew')
+  crewId: string;
 }
