@@ -23,6 +23,7 @@ import {
   FUNNELMINK_IDS,
 } from 'src/funnelmink/funnelmink-server-constants';
 import { WorkOrderWorkspaceEntity } from 'src/funnelmink/funnelmink-workorder.workspace-entity';
+import { ServiceWorkspaceEntity } from 'src/funnelmink/funnelmink-service.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.noteTarget,
@@ -146,4 +147,19 @@ export class NoteTargetWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceJoinColumn('workOrder')
   workOrderId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.noteService,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Service',
+    description: 'NoteTarget Service',
+    icon: FUNNELMINK_ICONS.service,
+    inverseSideTarget: () => ServiceWorkspaceEntity,
+    inverseSideFieldKey: 'noteTargets',
+  })
+  @WorkspaceIsNullable()
+  service: Relation<ServiceWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('service')
+  serviceId: string | null;
 }

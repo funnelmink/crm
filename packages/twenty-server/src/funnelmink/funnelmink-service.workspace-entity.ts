@@ -1,4 +1,4 @@
-import { Relation } from 'src/engine/workspace-manager/workspace-sync-metadata/interfaces/relation.interface';
+import { Relation } from 'typeorm';
 
 import { WorkspaceEntity } from 'src/engine/twenty-orm/decorators/workspace-entity.decorator';
 import {
@@ -12,45 +12,51 @@ import {
   ActorMetadata,
   FieldActorSource,
 } from 'src/engine/metadata-modules/field-metadata/composite-types/actor.composite-type';
+import { WorkspaceIsSystem } from 'src/engine/twenty-orm/decorators/workspace-is-system.decorator';
+import { WorkspaceIsNullable } from 'src/engine/twenty-orm/decorators/workspace-is-nullable.decorator';
+import { ActivityTargetWorkspaceEntity } from 'src/modules/activity/standard-objects/activity-target.workspace-entity';
 import { WorkspaceRelation } from 'src/engine/twenty-orm/decorators/workspace-relation.decorator';
-import { CompanyWorkspaceEntity } from 'src/modules/company/standard-objects/company.workspace-entity';
 import {
   RelationMetadataType,
   RelationOnDeleteAction,
 } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
-import { WorkspaceJoinColumn } from 'src/engine/twenty-orm/decorators/workspace-join-column.decorator';
-import { WorkspaceIsNullable } from 'src/engine/twenty-orm/decorators/workspace-is-nullable.decorator';
-import { WorkspaceIsSystem } from 'src/engine/twenty-orm/decorators/workspace-is-system.decorator';
+import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/note-target.workspace-entity';
 import { FavoriteWorkspaceEntity } from 'src/modules/favorite/standard-objects/favorite.workspace-entity';
 import { AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
-import { ActivityTargetWorkspaceEntity } from 'src/modules/activity/standard-objects/activity-target.workspace-entity';
-import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
-import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
 
 @WorkspaceEntity({
-  standardId: FUNNELMINK_IDS.workOrder,
-  namePlural: 'workOrders',
-  labelSingular: 'Work Order',
-  labelPlural: 'Work Orders',
-  description: 'A Work Order',
-  icon: FUNNELMINK_ICONS.workOrder,
-  labelIdentifierStandardId: FUNNELMINK_IDS.workOrderName,
+  standardId: FUNNELMINK_IDS.service,
+  namePlural: 'services',
+  labelSingular: 'Service',
+  labelPlural: 'Services',
+  description: 'A Service',
+  icon: FUNNELMINK_ICONS.service,
+  labelIdentifierStandardId: FUNNELMINK_IDS.serviceName,
   softDelete: true,
 })
-export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
+export class ServiceWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({
-    standardId: FUNNELMINK_IDS.workOrderName,
+    standardId: FUNNELMINK_IDS.serviceName,
     type: FieldMetadataType.TEXT,
     label: 'Name',
-    description: 'The Work Order name',
-    icon: FUNNELMINK_ICONS.workOrder,
+    description: 'The Service name',
+    icon: FUNNELMINK_ICONS.service,
   })
   name: string;
 
   @WorkspaceField({
-    standardId: FUNNELMINK_IDS.workOrderCreatedBy,
+    standardId: FUNNELMINK_IDS.serviceDescription,
+    type: FieldMetadataType.TEXT,
+    label: 'Description',
+    description: 'The Service description',
+    icon: FUNNELMINK_ICONS.description,
+  })
+  description: string;
+
+  @WorkspaceField({
+    standardId: FUNNELMINK_IDS.serviceCreatedBy,
     type: FieldMetadataType.ACTOR,
     label: 'Created by',
     icon: FUNNELMINK_ICONS.createdBy,
@@ -63,10 +69,10 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   createdBy: ActorMetadata;
 
   @WorkspaceField({
-    standardId: FUNNELMINK_IDS.workOrderPosition,
+    standardId: FUNNELMINK_IDS.servicePosition,
     type: FieldMetadataType.POSITION,
     label: 'Position',
-    description: 'Work Order record position',
+    description: 'Service record position',
     icon: FUNNELMINK_ICONS.position,
   })
   @WorkspaceIsSystem()
@@ -74,42 +80,13 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   position: number;
 
   // First-class Relations
-  @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderPerson,
-    type: RelationMetadataType.MANY_TO_ONE,
-    label: 'Person',
-    description: 'Person the Work Order is assigned to.',
-    icon: FUNNELMINK_ICONS.person,
-    inverseSideTarget: () => PersonWorkspaceEntity,
-    onDelete: RelationOnDeleteAction.SET_NULL,
-  })
-  @WorkspaceIsNullable()
-  person: Relation<PersonWorkspaceEntity> | null;
-
-  @WorkspaceJoinColumn('person')
-  personId: string | null;
-
-  @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderCompany,
-    type: RelationMetadataType.MANY_TO_ONE,
-    label: 'Company',
-    description: 'Company the Work Order is assigned to.',
-    icon: FUNNELMINK_ICONS.company,
-    inverseSideTarget: () => CompanyWorkspaceEntity,
-    onDelete: RelationOnDeleteAction.SET_NULL,
-  })
-  @WorkspaceIsNullable()
-  company: Relation<CompanyWorkspaceEntity> | null;
-
-  @WorkspaceJoinColumn('company')
-  companyId: string | null;
 
   // Second-class Relations
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderActivityTargets,
+    standardId: FUNNELMINK_IDS.serviceActivityTargets,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Activities',
-    description: 'The Activities tied to this Work Order',
+    description: 'The Activities tied to this Service',
     icon: FUNNELMINK_ICONS.activityTargets,
     inverseSideTarget: () => ActivityTargetWorkspaceEntity,
     onDelete: RelationOnDeleteAction.CASCADE,
@@ -119,10 +96,10 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   activityTargets: Relation<ActivityTargetWorkspaceEntity>[];
 
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderTaskTargets,
+    standardId: FUNNELMINK_IDS.serviceTaskTargets,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Tasks',
-    description: 'Tasks tied to the Work Order',
+    description: 'Tasks tied to the Service',
     icon: FUNNELMINK_ICONS.tasks,
     inverseSideTarget: () => TaskTargetWorkspaceEntity,
     onDelete: RelationOnDeleteAction.CASCADE,
@@ -130,10 +107,10 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   taskTargets: Relation<TaskTargetWorkspaceEntity[]>;
 
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderNoteTargets,
+    standardId: FUNNELMINK_IDS.serviceNoteTargets,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Notes',
-    description: 'Notes tied to the Work Order',
+    description: 'Notes tied to the Service',
     icon: FUNNELMINK_ICONS.notes,
     inverseSideTarget: () => NoteTargetWorkspaceEntity,
     onDelete: RelationOnDeleteAction.CASCADE,
@@ -141,10 +118,10 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   noteTargets: Relation<NoteTargetWorkspaceEntity[]>;
 
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderFavorites,
+    standardId: FUNNELMINK_IDS.serviceFavorites,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Favorites',
-    description: 'Favorites linked to the Work Order',
+    description: 'Favorites linked to the Service',
     icon: FUNNELMINK_ICONS.favorite,
     inverseSideTarget: () => FavoriteWorkspaceEntity,
     onDelete: RelationOnDeleteAction.CASCADE,
@@ -154,10 +131,10 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   favorites: Relation<FavoriteWorkspaceEntity[]>;
 
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderAttachments,
+    standardId: FUNNELMINK_IDS.serviceAttachments,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Attachments',
-    description: 'Attachments linked to the Work Order',
+    description: 'Attachments linked to the Service',
     icon: FUNNELMINK_ICONS.attachments,
     inverseSideTarget: () => AttachmentWorkspaceEntity,
     onDelete: RelationOnDeleteAction.CASCADE,
@@ -166,10 +143,10 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   attachments: Relation<AttachmentWorkspaceEntity[]>;
 
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.workOrderTimelineActivities,
+    standardId: FUNNELMINK_IDS.serviceTimelineActivities,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Timeline Activities',
-    description: 'Timeline Activities linked to the Work Order',
+    description: 'Timeline Activities linked to the Service',
     icon: FUNNELMINK_ICONS.timelineActivities,
     inverseSideTarget: () => TimelineActivityWorkspaceEntity,
     onDelete: RelationOnDeleteAction.CASCADE,

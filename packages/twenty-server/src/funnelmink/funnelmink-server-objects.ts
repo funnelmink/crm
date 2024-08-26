@@ -4,52 +4,6 @@ import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metad
 
 export const FUNNELMINK_OBJECTS = [
   {
-    nameSingular: 'workOrder',
-    namePlural: 'workOrders',
-    labelSingular: 'Work Order',
-    labelPlural: 'Work Orders',
-    description: 'A Work Order',
-    isRemote: false,
-    icon: FUNNELMINK_ICONS.workOrder,
-    fields: [
-      {
-        name: 'stickyNote',
-        label: 'Sticky Note',
-        icon: FUNNELMINK_ICONS.stickyNote,
-        type: FieldMetadataType.TEXT,
-      },
-      {
-        name: 'description',
-        label: 'Description',
-        icon: FUNNELMINK_ICONS.description,
-        type: FieldMetadataType.TEXT,
-      },
-    ],
-  },
-  {
-    nameSingular: 'service',
-    namePlural: 'services',
-    labelSingular: 'Service',
-    labelPlural: 'Services',
-    description: 'A Service',
-    isRemote: false,
-    icon: FUNNELMINK_ICONS.service,
-    fields: [
-      {
-        name: 'stickyNote',
-        label: 'Sticky Note',
-        icon: FUNNELMINK_ICONS.stickyNote,
-        type: FieldMetadataType.TEXT,
-      },
-      {
-        name: 'description',
-        label: 'Description',
-        icon: FUNNELMINK_ICONS.description,
-        type: FieldMetadataType.TEXT,
-      },
-    ],
-  },
-  {
     nameSingular: 'crew',
     namePlural: 'crews',
     labelSingular: 'Crew',
@@ -122,26 +76,6 @@ export const FUNNELMINK_OBJECTS = [
 ];
 
 export const FUNNELMINK_RELATIONSHIPS = [
-  {
-    description: 'The Work Orders for this Company',
-    fromIcon: FUNNELMINK_ICONS.workOrder,
-    fromLabel: 'Work Orders',
-    fromName: 'workOrders',
-    toIcon: FUNNELMINK_ICONS.company,
-    toLabel: 'Company',
-    toName: 'companies',
-    type: RelationMetadataType.ONE_TO_MANY,
-  },
-  {
-    description: 'The Work Orders for this Person',
-    fromIcon: FUNNELMINK_ICONS.workOrder,
-    fromLabel: 'Work Orders',
-    fromName: 'workOrders',
-    toIcon: FUNNELMINK_ICONS.person,
-    toLabel: 'Person',
-    toName: 'people',
-    type: RelationMetadataType.ONE_TO_MANY,
-  },
   {
     description: 'The Jobs this Work Order represents',
     fromIcon: FUNNELMINK_ICONS.job,

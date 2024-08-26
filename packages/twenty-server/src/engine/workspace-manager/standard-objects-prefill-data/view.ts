@@ -13,7 +13,10 @@ import { peopleAllView } from 'src/engine/workspace-manager/standard-objects-pre
 import { tasksAllView } from 'src/engine/workspace-manager/standard-objects-prefill-data/views/tasks-all.view';
 import { tasksByStatusView } from 'src/engine/workspace-manager/standard-objects-prefill-data/views/tasks-by-status.view';
 import { workflowsAllView } from 'src/engine/workspace-manager/standard-objects-prefill-data/views/workflows-all.view';
-import { workOrdersAllView } from 'src/funnelmink/funnelmink-views';
+import {
+  servicesAllView,
+  workOrdersAllView,
+} from 'src/funnelmink/funnelmink-views';
 
 export const viewPrefillData = async (
   entityManager: EntityManager,
@@ -38,6 +41,7 @@ export const viewPrefillData = async (
 
     // Funnelmink
     await workOrdersAllView(objectMetadataMap),
+    await servicesAllView(objectMetadataMap),
     ...(isWorkflowEnabled ? [await workflowsAllView(objectMetadataMap)] : []),
   ];
 
