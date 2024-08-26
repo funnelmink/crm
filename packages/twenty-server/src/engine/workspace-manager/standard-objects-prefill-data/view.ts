@@ -18,6 +18,7 @@ import {
   materialsAllView,
   servicesAllView,
   workOrdersAllView,
+  jobsAllView,
 } from 'src/funnelmink/funnelmink-views';
 
 export const viewPrefillData = async (
@@ -46,6 +47,7 @@ export const viewPrefillData = async (
     await servicesAllView(objectMetadataMap),
     await crewsAllView(objectMetadataMap),
     await materialsAllView(objectMetadataMap),
+    await jobsAllView(objectMetadataMap),
     ...(isWorkflowEnabled ? [await workflowsAllView(objectMetadataMap)] : []),
   ];
 

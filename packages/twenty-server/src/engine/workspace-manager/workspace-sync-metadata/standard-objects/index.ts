@@ -40,6 +40,7 @@ import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-wor
 import { ServiceWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-service.workspace-entity';
 import { CrewWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-crew.workspace-entity';
 import { MaterialWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-material.workspace-entity';
+import { JobWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-job.workspace-entity';
 
 // TODO: Maybe we should automate this with the DiscoverService of Nest.JS
 export const standardObjectMetadataDefinitions = [
@@ -95,4 +96,5 @@ export const standardObjectMetadataDefinitions = [
   ServiceWorkspaceEntity,
   CrewWorkspaceEntity,
   MaterialWorkspaceEntity,
+  JobWorkspaceEntity,
 ];
