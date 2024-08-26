@@ -28,6 +28,8 @@ import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-o
 import { ActivityTargetWorkspaceEntity } from 'src/modules/activity/standard-objects/activity-target.workspace-entity';
 import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
+import { WorkspaceIndex } from 'src/engine/twenty-orm/decorators/workspace-index.decorator';
+import { JobWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-job.workspace-entity';
 
 @WorkspaceEntity({
   standardId: FUNNELMINK_IDS.workOrder,
@@ -73,7 +75,51 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceIsNullable()
   position: number;
 
+  @WorkspaceField({
+    standardId: FUNNELMINK_IDS.workOrderStage,
+    type: FieldMetadataType.SELECT,
+    label: 'Status',
+    description: 'Work Order status',
+    icon: FUNNELMINK_ICONS.status,
+    options: [
+      {
+        value: 'NEW',
+        label: 'New',
+        position: 0,
+        color: 'green',
+      },
+      {
+        value: 'IN_PROGRESS',
+        label: 'In Progress',
+        position: 1,
+        color: 'sky',
+      },
+      {
+        value: 'COMPLETED',
+        label: 'Completed',
+        position: 2,
+        color: 'purple',
+      },
+      {
+        value: 'ON_HOLD',
+        label: 'On Hold',
+        position: 3,
+        color: 'yellow',
+      },
+      {
+        value: 'CANCELLED',
+        label: 'Cancelled',
+        position: 4,
+        color: 'gray',
+      },
+    ],
+    defaultValue: "'NEW'",
+  })
+  @WorkspaceIndex()
+  stage: string;
+
   // First-class Relations
+  // TODO: invoice
   @WorkspaceRelation({
     standardId: FUNNELMINK_IDS.workOrderPerson,
     type: RelationMetadataType.MANY_TO_ONE,
@@ -103,6 +149,17 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceJoinColumn('company')
   companyId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.workOrderJobs,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Jobs',
+    description: 'Jobs linked to the Work Order',
+    icon: FUNNELMINK_ICONS.job,
+    inverseSideTarget: () => JobWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.CASCADE,
+  })
+  jobs: Relation<JobWorkspaceEntity[]>;
 
   // Second-class Relations
   @WorkspaceRelation({
