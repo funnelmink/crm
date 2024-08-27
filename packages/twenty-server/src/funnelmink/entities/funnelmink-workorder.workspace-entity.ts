@@ -65,6 +65,17 @@ export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   createdBy: ActorMetadata;
 
   @WorkspaceField({
+    standardId: FUNNELMINK_IDS.workOrderClosedDate,
+    type: FieldMetadataType.DATE_TIME,
+    label: 'Closed date',
+    description: 'Closed date',
+    icon: FUNNELMINK_ICONS.closedDate,
+    defaultValue: null,
+  })
+  @WorkspaceIsNullable()
+  closedDate: string;
+
+  @WorkspaceField({
     standardId: FUNNELMINK_IDS.workOrderPosition,
     type: FieldMetadataType.POSITION,
     label: 'Position',

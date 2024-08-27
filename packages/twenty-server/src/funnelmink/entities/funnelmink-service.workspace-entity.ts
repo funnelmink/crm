@@ -26,6 +26,7 @@ import { FavoriteWorkspaceEntity } from 'src/modules/favorite/standard-objects/f
 import { AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
 
+// fm TODO: supplier, quantity, unitType, unitCost, defaultUnitPrice (probably not these exact things, but you get the idea)
 @WorkspaceEntity({
   standardId: FUNNELMINK_IDS.service,
   namePlural: 'services',
