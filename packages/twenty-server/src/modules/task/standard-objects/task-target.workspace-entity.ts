@@ -18,6 +18,15 @@ import { OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-obj
 import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
 import { TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
 import { WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
+import {
+  FUNNELMINK_ICONS,
+  FUNNELMINK_IDS,
+} from 'src/funnelmink/funnelmink-server-constants';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
+import { ServiceWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-service.workspace-entity';
+import { CrewWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-crew.workspace-entity';
+import { MaterialWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-material.workspace-entity';
+import { JobWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-job.workspace-entity';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.taskTarget,
@@ -125,4 +134,80 @@ export class TaskTargetWorkspaceEntity extends BaseWorkspaceEntity {
     featureFlag: FeatureFlagKey.IsWorkflowEnabled,
   })
   workflowId: string | null;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.taskWorkOrder,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Work Order',
+    description: 'TaskTarget Work Order',
+    icon: FUNNELMINK_ICONS.workOrder,
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    inverseSideFieldKey: 'taskTargets',
+  })
+  @WorkspaceIsNullable()
+  workOrder: Relation<WorkOrderWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('workOrder')
+  workOrderId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.taskService,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Service',
+    description: 'TaskTarget Service',
+    icon: FUNNELMINK_ICONS.service,
+    inverseSideTarget: () => ServiceWorkspaceEntity,
+    inverseSideFieldKey: 'taskTargets',
+  })
+  @WorkspaceIsNullable()
+  service: Relation<ServiceWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('service')
+  serviceId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.taskCrew,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Crew',
+    description: 'TaskTarget Crew',
+    icon: FUNNELMINK_ICONS.crew,
+    inverseSideTarget: () => CrewWorkspaceEntity,
+    inverseSideFieldKey: 'taskTargets',
+  })
+  @WorkspaceIsNullable()
+  crew: Relation<CrewWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('crew')
+  crewId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.taskMaterial,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Material',
+    description: 'TaskTarget Material',
+    icon: FUNNELMINK_ICONS.material,
+    inverseSideTarget: () => MaterialWorkspaceEntity,
+    inverseSideFieldKey: 'taskTargets',
+  })
+  @WorkspaceIsNullable()
+  material: Relation<MaterialWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('material')
+  materialId: string | null;
+
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.taskJob,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'Job',
+    description: 'TaskTarget Job',
+    icon: FUNNELMINK_ICONS.job,
+    inverseSideTarget: () => JobWorkspaceEntity,
+    inverseSideFieldKey: 'taskTargets',
+  })
+  @WorkspaceIsNullable()
+  job: Relation<JobWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('job')
+  jobId: string | null;
 }
