@@ -383,7 +383,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   // Funnelmink
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.memberCrewLeadCrew,
+    standardId: FUNNELMINK_IDS.memberCrewLeadCrews,
     type: RelationMetadataType.ONE_TO_MANY,
     label: 'Crew Lead',
     description: 'Crew Lead',
@@ -393,7 +393,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
     onDelete: RelationOnDeleteAction.SET_NULL,
   })
   @WorkspaceIsNullable()
-  crewLeadCrew: Relation<CrewWorkspaceEntity[]>;
+  crewLeadCrews: Relation<CrewWorkspaceEntity[]>;
 
   @WorkspaceRelation({
     standardId: FUNNELMINK_IDS.memberCrew,

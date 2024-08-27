@@ -136,7 +136,7 @@ export class ActivityTargetWorkspaceEntity extends BaseWorkspaceEntity {
 
   // Funnelmink
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.activityWorkorder,
+    standardId: FUNNELMINK_IDS.activityWorkOrder,
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Work Order',
     description: 'ActivityTarget Work Order',

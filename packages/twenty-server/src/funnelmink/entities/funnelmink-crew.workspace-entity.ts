@@ -101,7 +101,7 @@ export class CrewWorkspaceEntity extends BaseWorkspaceEntity {
     description: 'The team member responsible for managing this Crew',
     icon: FUNNELMINK_ICONS.crewLead,
     inverseSideTarget: () => WorkspaceMemberWorkspaceEntity,
-    inverseSideFieldKey: 'crewLeadCrew',
+    inverseSideFieldKey: 'crewLeadCrews',
     onDelete: RelationOnDeleteAction.SET_NULL,
   })
   @WorkspaceIsNullable()

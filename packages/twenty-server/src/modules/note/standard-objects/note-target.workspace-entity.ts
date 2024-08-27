@@ -137,7 +137,7 @@ export class NoteTargetWorkspaceEntity extends BaseWorkspaceEntity {
 
   // Funnelmink
   @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.noteWorkorder,
+    standardId: FUNNELMINK_IDS.noteWorkOrder,
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Work Order',
     description: 'NoteTarget Work Order',
@@ -171,7 +171,7 @@ export class NoteTargetWorkspaceEntity extends BaseWorkspaceEntity {
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Crew',
     description: 'NoteTarget Crew',
-    icon: FUNNELMINK_ICONS.service,
+    icon: FUNNELMINK_ICONS.crew,
     inverseSideTarget: () => CrewWorkspaceEntity,
     inverseSideFieldKey: 'noteTargets',
   })

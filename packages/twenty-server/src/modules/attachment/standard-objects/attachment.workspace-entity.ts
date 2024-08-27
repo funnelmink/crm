@@ -249,7 +249,7 @@ export class AttachmentWorkspaceEntity extends BaseWorkspaceEntity {
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Crew',
     description: 'Attachment Crew',
-    icon: FUNNELMINK_ICONS.service,
+    icon: FUNNELMINK_ICONS.crew,
     inverseSideTarget: () => CrewWorkspaceEntity,
     inverseSideFieldKey: 'attachments',
   })
