@@ -213,12 +213,12 @@ export class FavoriteWorkspaceEntity extends BaseWorkspaceEntity {
     type: RelationMetadataType.MANY_TO_ONE,
     label: 'Crew',
     description: 'Favorite Crew',
-    icon: FUNNELMINK_IDS.service,
+    icon: FUNNELMINK_IDS.crew,
     inverseSideTarget: () => CrewWorkspaceEntity,
     inverseSideFieldKey: 'favorites',
   })
   @WorkspaceIsNullable()
-  crew: Relation<ServiceWorkspaceEntity> | null;
+  crew: Relation<CrewWorkspaceEntity> | null;
 
   @WorkspaceJoinColumn('crew')
   crewId: string;
