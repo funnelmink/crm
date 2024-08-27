@@ -84,6 +84,28 @@ export class JobWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceIsNullable()
   position: number;
 
+  @WorkspaceField({
+    standardId: FUNNELMINK_IDS.jobScheduledDate,
+    type: FieldMetadataType.DATE_TIME,
+    label: 'Scheduled date',
+    description: 'Scheduled date',
+    icon: FUNNELMINK_ICONS.scheduledDate,
+    defaultValue: null,
+  })
+  @WorkspaceIsNullable()
+  scheduledDate: string;
+
+  @WorkspaceField({
+    standardId: FUNNELMINK_IDS.jobScheduledDuration,
+    type: FieldMetadataType.DATE_TIME,
+    label: 'Scheduled duration',
+    description: 'Scheduled duration',
+    icon: FUNNELMINK_ICONS.scheduledDuration,
+    defaultValue: null,
+  })
+  @WorkspaceIsNullable()
+  scheduledDuration: string;
+
   // First-class Relations
   // fm TODO: material, service (need many-to-many)
   @WorkspaceRelation({

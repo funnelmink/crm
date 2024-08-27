@@ -225,10 +225,35 @@ export const jobsAllView = async (
       },
       {
         fieldMetadataId:
-          objectMetadataMap[FUNNELMINK_IDS.job].fields[
-            FUNNELMINK_IDS.jobCreatedBy
-          ],
+          objectMetadataMap[FUNNELMINK_IDS.job].fields[FUNNELMINK_IDS.jobCrew],
         position: 1,
+        isVisible: true,
+        size: 150,
+      },
+      {
+        fieldMetadataId:
+          objectMetadataMap[FUNNELMINK_IDS.job].fields[
+            FUNNELMINK_IDS.jobScheduledDate
+          ],
+        position: 2,
+        isVisible: true,
+        size: 150,
+      },
+      {
+        fieldMetadataId:
+          objectMetadataMap[FUNNELMINK_IDS.job].fields[
+            FUNNELMINK_IDS.jobScheduledDuration
+          ],
+        position: 3,
+        isVisible: true,
+        size: 150,
+      },
+      {
+        fieldMetadataId:
+          objectMetadataMap[FUNNELMINK_IDS.job].fields[
+            FUNNELMINK_IDS.jobWorkOrder
+          ],
+        position: 4,
         isVisible: true,
         size: 150,
       },
