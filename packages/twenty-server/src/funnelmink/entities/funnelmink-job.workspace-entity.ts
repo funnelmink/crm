@@ -85,7 +85,7 @@ export class JobWorkspaceEntity extends BaseWorkspaceEntity {
   position: number;
 
   // First-class Relations
-  // fm TODO: material, service
+  // fm TODO: material, service (need many-to-many)
   @WorkspaceRelation({
     standardId: FUNNELMINK_IDS.jobWorkOrder,
     type: RelationMetadataType.MANY_TO_ONE,
