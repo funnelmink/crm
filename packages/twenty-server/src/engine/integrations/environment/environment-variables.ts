@@ -422,14 +422,12 @@ export class EnvironmentVariables {
 
   CHROME_EXTENSION_ID: string;
 
-  // ---------------------------------------
-  // Funnelmink
-  // ---------------------------------------
+  @CastToPositiveNumber()
+  SERVERLESS_FUNCTION_EXEC_THROTTLE_LIMIT = 10;
 
-  @CastToBoolean()
-  @IsBoolean()
-  @IsOptional()
-  FUNNELMINK_PREFILL_NEW_WORKSPACES_WITH_FSM_OBJECTS = true;
+  // milliseconds
+  @CastToPositiveNumber()
+  SERVERLESS_FUNCTION_EXEC_THROTTLE_TTL = 1000;
 }
 
 export const validate = (

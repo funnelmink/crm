@@ -5,7 +5,7 @@ import console from 'console';
 
 import { Query, QueryOptions } from '@ptc-org/nestjs-query-core';
 import { TypeOrmQueryService } from '@ptc-org/nestjs-query-typeorm';
-import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, In, Repository } from 'typeorm';
 
 import { FieldMetadataSettings } from 'src/engine/metadata-modules/field-metadata/interfaces/field-metadata-settings.interface';
 
@@ -209,6 +209,7 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
       isCustom: isCustom,
       isSystem: false,
       isRemote: objectMetadataInput.isRemote,
+      isSoftDeletable: true,
       fields: isCustom
         ? // Creating default fields.
           // No need to create a custom migration for this though as the default columns are already
@@ -369,6 +370,10 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
 
     const updatedObject = await super.updateOne(input.id, input.update);
 
+    if (input.update.isActive !== undefined) {
+      await this.updateObjectRelationships(input.id, input.update.isActive);
+    }
+
     await this.workspaceMetadataVersionService.incrementMetadataVersion(
       workspaceId,
     );
@@ -392,31 +397,6 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
         workspaceId,
       },
     });
-  }
-
-  public async findOneOrFailWithinWorkspace(
-    workspaceId: string,
-    options: FindOneOptions<ObjectMetadataEntity>,
-  ): Promise<ObjectMetadataEntity> {
-    try {
-      return this.objectMetadataRepository.findOneOrFail({
-        relations: [
-          'fields',
-          'fields.fromRelationMetadata',
-          'fields.toRelationMetadata',
-        ],
-        ...options,
-        where: {
-          ...options.where,
-          workspaceId,
-        },
-      });
-    } catch (error) {
-      throw new ObjectMetadataException(
-        'Object does not exist',
-        ObjectMetadataExceptionCode.OBJECT_METADATA_NOT_FOUND,
-      );
-    }
   }
 
   public async findManyWithinWorkspace(
@@ -1237,5 +1217,33 @@ export class ObjectMetadataService extends TypeOrmQueryService<ObjectMetadataEnt
         },
       ],
     );
+  }
+
+  private async updateObjectRelationships(
+    objectMetadataId: string,
+    isActive: boolean,
+  ) {
+    const affectedRelations = await this.relationMetadataRepository.find({
+      where: [
+        { fromObjectMetadataId: objectMetadataId },
+        { toObjectMetadataId: objectMetadataId },
+      ],
+    });
+
+    const affectedFieldIds = affectedRelations.reduce(
+      (acc, { fromFieldMetadataId, toFieldMetadataId }) => {
+        acc.push(fromFieldMetadataId, toFieldMetadataId);
+
+        return acc;
+      },
+      [] as string[],
+    );
+
+    if (affectedFieldIds.length > 0) {
+      await this.fieldMetadataRepository.update(
+        { id: In(affectedFieldIds) },
+        { isActive: isActive },
+      );
+    }
   }
 }

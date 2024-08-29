@@ -21,7 +21,35 @@ import {
 import { STANDARD_OBJECT_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
 import { WorkflowRunWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow-run.workspace-entity';
 import { WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
+import { WorkflowStep } from 'src/modules/workflow/common/types/workflow-step.type';
 import { WorkflowTrigger } from 'src/modules/workflow/common/types/workflow-trigger.type';
+
+export enum WorkflowVersionStatus {
+  DRAFT = 'DRAFT',
+  ACTIVE = 'ACTIVE',
+  DEACTIVATED = 'DEACTIVATED',
+}
+
+export const WorkflowVersionStatusOptions = [
+  {
+    value: WorkflowVersionStatus.DRAFT,
+    label: 'Draft',
+    position: 0,
+    color: 'yellow',
+  },
+  {
+    value: WorkflowVersionStatus.ACTIVE,
+    label: 'Active',
+    position: 1,
+    color: 'green',
+  },
+  {
+    value: WorkflowVersionStatus.DEACTIVATED,
+    label: 'Deactivated',
+    position: 2,
+    color: 'gray',
+  },
+];
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.workflowVersion,
@@ -51,10 +79,28 @@ export class WorkflowVersionWorkspaceEntity extends BaseWorkspaceEntity {
     type: FieldMetadataType.RAW_JSON,
     label: 'Version trigger',
     description: 'Json object to provide trigger',
-    icon: 'IconPlayerPlay',
   })
   @WorkspaceIsNullable()
   trigger: WorkflowTrigger | null;
+
+  @WorkspaceField({
+    standardId: WORKFLOW_VERSION_STANDARD_FIELD_IDS.steps,
+    type: FieldMetadataType.RAW_JSON,
+    label: 'Version steps',
+    description: 'Json object to provide steps',
+  })
+  @WorkspaceIsNullable()
+  steps: WorkflowStep[] | null;
+
+  @WorkspaceField({
+    standardId: WORKFLOW_VERSION_STANDARD_FIELD_IDS.status,
+    type: FieldMetadataType.SELECT,
+    label: 'Version status',
+    description: 'The workflow version status',
+    options: WorkflowVersionStatusOptions,
+    defaultValue: "'DRAFT'",
+  })
+  status: WorkflowVersionStatus;
 
   // Relations
   @WorkspaceRelation({
