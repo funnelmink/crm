@@ -12,7 +12,6 @@ export const mockedEmptyPersonData = {
   lastName: '',
   phone: null,
   email: null,
-  city: null,
   createdBy: null,
   displayName: null,
   avatarUrl: null,
@@ -44,7 +43,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:52:46.814Z',
-          city: 'ASd',
           phone: '',
           id: 'da3c2c4b-da01-4b81-9734-226069eb4cd0',
           jobTitle: '',
@@ -171,7 +169,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-01T09:50:00.000Z',
-          city: 'Seattle',
           phone: '+33789012345',
           id: '20202020-1c0e-494c-a1b6-85b1c6fefaa5',
           jobTitle: '',
@@ -298,7 +295,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Los Angeles',
           phone: '+33780123456',
           id: '20202020-ac73-4797-824e-87a1f5aea9e0',
           jobTitle: '',
@@ -394,7 +390,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phone: '+33789012345',
           id: '20202020-f517-42fd-80ae-14173b3b70ae',
           jobTitle: '',
@@ -490,7 +485,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Los Angeles',
           phone: '+33780123456',
           id: '20202020-eee1-4690-ad2c-8619e5b56a2e',
           jobTitle: '',
@@ -586,7 +580,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phone: '+33781234567',
           id: '20202020-6784-4449-afdf-dc62cb8702f2',
           jobTitle: '',
@@ -682,7 +675,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'New York',
           phone: '+33782345678',
           id: '20202020-490f-4466-8391-733cfd66a0c8',
           jobTitle: '',
@@ -778,7 +770,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phone: '+33783456789',
           id: '20202020-80f1-4dff-b570-a74942528de3',
           jobTitle: '',
@@ -874,7 +865,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'New York',
           phone: '+33784567890',
           id: '20202020-338b-46df-8811-fa08c7d19d35',
           jobTitle: '',
@@ -970,7 +960,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'San Francisco',
           phone: '+33785678901',
           id: '20202020-64ad-4b0e-bbfd-e9fd795b7016',
           jobTitle: '',
@@ -1066,7 +1055,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'New York',
           phone: '+33786789012',
           id: '20202020-5d54-41b7-ba36-f0d20e1417ae',
           jobTitle: '',
@@ -1162,7 +1150,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Los Angeles',
           phone: '+33787890123',
           id: '20202020-623d-41fe-92e7-dd45b7c568e1',
           jobTitle: '',
@@ -1258,7 +1245,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phone: '+33788901234',
           id: '20202020-2d40-4e49-8df4-9c6a049190ef',
           jobTitle: '',
@@ -1354,7 +1340,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phone: '+33788901234',
           id: '20202020-2d40-4e49-8df4-9c6a049190df',
           jobTitle: '',
@@ -1450,7 +1435,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phone: '+33788901234',
           id: '20202020-2d40-4e49-8df4-9c6a049191de',
           jobTitle: '',
@@ -1546,7 +1530,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phone: '+33788901235',
           id: '20202020-2d40-4e49-8df4-9c6a049191df',
           jobTitle: '',

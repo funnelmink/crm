@@ -108,17 +108,6 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
   phone: string;
 
   @WorkspaceField({
-    standardId: PERSON_STANDARD_FIELD_IDS.city,
-    type: FieldMetadataType.TEXT,
-    label: 'City (deprecated)',
-    description: 'Contact’s city - deprecated in favor of new address field',
-    icon: FUNNELMINK_ICONS.address,
-  })
-  // @WorkspaceIsDeprecated()
-  @WorkspaceIsNullable()
-  city: string;
-
-  @WorkspaceField({
     standardId: PERSON_STANDARD_FIELD_IDS.avatarUrl,
     type: FieldMetadataType.TEXT,
     label: 'Avatar',

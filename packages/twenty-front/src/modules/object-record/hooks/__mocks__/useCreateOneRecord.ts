@@ -25,7 +25,6 @@ export const responseData = {
   company: {
     id: '',
   },
-  city: '',
   email: '',
   activityTargets: {
     edges: [],

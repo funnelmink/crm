@@ -98,7 +98,6 @@ export const companiesQueryResult = {
             testUuid: null,
             phone: '+33788901234',
             createdAt: '2024-06-05T09:00:20.412Z',
-            city: 'Seattle',
             testPhone: '',
             jobTitle: 'CTO',
             testCurrency: {

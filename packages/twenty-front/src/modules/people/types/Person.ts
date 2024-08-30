@@ -21,7 +21,6 @@ export type Person = {
     primaryLinkUrl: string;
     primaryLinkLabel: string;
   };
-  city: string;
   email: string;
   phone: string;
   companyId?: string;

@@ -48,7 +48,7 @@ export const LabelIdentifier: Story = {
 export const Text: Story = {
   args: {
     fieldMetadataItem: mockedPersonObjectMetadataItem.fields.find(
-      ({ name, type }) => name === 'city' && type === FieldMetadataType.Text,
+      ({ name, type }) => name === 'address' && type === FieldMetadataType.Text,
     ),
   },
 };

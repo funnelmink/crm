@@ -97,7 +97,6 @@ export const query = gql`
             id
             idealCustomerProfile
           }
-          city
           email
           activityTargets {
             edges {

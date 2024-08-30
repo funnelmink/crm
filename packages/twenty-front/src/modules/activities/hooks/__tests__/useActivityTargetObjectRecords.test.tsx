@@ -27,7 +27,6 @@ const taskTarget = {
     id: '89bb825c-171e-4bcc-9cf7-43448d6fb280',
     createdAt: '2023-04-26T10:12:42.33625+00:00',
     updatedAt: '2023-04-26T10:23:42.33625+00:00',
-    city: 'City',
     name: {
       firstName: 'John',
       lastName: 'Doe',
@@ -73,7 +72,6 @@ cache.writeFragment({
         id
         createdAt
         updatedAt
-        city
         name {
           firstName
           lastName
