@@ -292,4 +292,22 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
   })
   @WorkspaceIsNullable()
   workOrders: Relation<WorkOrderWorkspaceEntity[]>;
+
+  @WorkspaceField({
+    standardId: COMPANY_STANDARD_FIELD_IDS.phone,
+    type: FieldMetadataType.TEXT,
+    label: 'Phone',
+    description: 'Company phone number',
+    icon: FUNNELMINK_ICONS.phone,
+  })
+  phone: string;
+
+  @WorkspaceField({
+    standardId: COMPANY_STANDARD_FIELD_IDS.email,
+    type: FieldMetadataType.EMAIL,
+    label: 'Email',
+    description: 'Company Email',
+    icon: FUNNELMINK_ICONS.email,
+  })
+  email: string;
 }

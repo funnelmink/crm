@@ -35,6 +35,8 @@ import {
   FUNNELMINK_IDS,
 } from 'src/funnelmink/funnelmink-server-constants';
 import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
+import { WorkspaceIsDeprecated } from 'src/engine/twenty-orm/decorators/workspace-is-deprecated.decorator';
+import { AddressMetadata } from 'src/engine/metadata-modules/field-metadata/composite-types/address.composite-type';
 
 @WorkspaceEntity({
   standardId: STANDARD_OBJECT_IDS.person,
@@ -108,10 +110,12 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({
     standardId: PERSON_STANDARD_FIELD_IDS.city,
     type: FieldMetadataType.TEXT,
-    label: 'City',
-    description: 'Contact’s city',
-    icon: 'IconMap',
+    label: 'City (deprecated)',
+    description: 'Contact’s city - deprecated in favor of new address field',
+    icon: FUNNELMINK_ICONS.address,
   })
+  // @WorkspaceIsDeprecated()
+  @WorkspaceIsNullable()
   city: string;
 
   @WorkspaceField({
@@ -286,4 +290,14 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
   })
   @WorkspaceIsNullable()
   workOrders: Relation<WorkOrderWorkspaceEntity[]>;
+
+  @WorkspaceField({
+    standardId: PERSON_STANDARD_FIELD_IDS.address,
+    type: FieldMetadataType.ADDRESS,
+    label: 'Address',
+    description: 'Contact’s address',
+    icon: FUNNELMINK_ICONS.address,
+  })
+  @WorkspaceIsNullable()
+  address: AddressMetadata;
 }
