@@ -17,7 +17,12 @@ import { EnvironmentService } from 'src/engine/integrations/environment/environm
 import { DataSourceService } from 'src/engine/metadata-modules/data-source/data-source.service';
 import { ApiKeyWorkspaceEntity } from 'src/modules/api-key/standard-objects/api-key.workspace-entity';
 
-export type JwtPayload = { sub: string; workspaceId: string; jti?: string };
+export type JwtPayload = {
+  sub: string;
+  workspaceId: string;
+  workspaceMemberId?: string;
+  jti?: string;
+};
 
 @Injectable()
 export class JwtAuthStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -47,7 +52,7 @@ export class JwtAuthStrategy extends PassportStrategy(Strategy, 'jwt') {
     if (!workspace) {
       throw new AuthException(
         'Workspace not found',
-        AuthExceptionCode.INVALID_INPUT,
+        AuthExceptionCode.WORKSPACE_NOT_FOUND,
       );
     }
 
@@ -95,6 +100,9 @@ export class JwtAuthStrategy extends PassportStrategy(Strategy, 'jwt') {
       }
     }
 
-    return { user, apiKey, workspace };
+    // We don't check if the user is a member of the workspace yet
+    const workspaceMemberId = payload.workspaceMemberId;
+
+    return { user, apiKey, workspace, workspaceMemberId };
   }
 }

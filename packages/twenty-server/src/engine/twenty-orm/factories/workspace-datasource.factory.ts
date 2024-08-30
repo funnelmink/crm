@@ -9,11 +9,13 @@ import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadat
 import { WorkspaceMetadataVersionService } from 'src/engine/metadata-modules/workspace-metadata-version/workspace-metadata-version.service';
 import { WorkspaceDataSource } from 'src/engine/twenty-orm/datasource/workspace.datasource';
 import { EntitySchemaFactory } from 'src/engine/twenty-orm/factories/entity-schema.factory';
-import { workspaceDataSourceCacheInstance } from 'src/engine/twenty-orm/twenty-orm-core.module';
+import { CacheManager } from 'src/engine/twenty-orm/storage/cache-manager.storage';
 import { WorkspaceCacheStorageService } from 'src/engine/workspace-cache-storage/workspace-cache-storage.service';
 
 @Injectable()
 export class WorkspaceDatasourceFactory {
+  private cacheManager = new CacheManager<WorkspaceDataSource>();
+
   constructor(
     private readonly dataSourceService: DataSourceService,
     private readonly environmentService: EnvironmentService,
@@ -28,11 +30,13 @@ export class WorkspaceDatasourceFactory {
     workspaceId: string,
     workspaceMetadataVersion: string | null,
   ): Promise<WorkspaceDataSource> {
-    const desiredWorkspaceMetadataVersion =
-      workspaceMetadataVersion ??
-      (await this.workspaceMetadataVersionService.getMetadataVersion(
+    const latestWorkspaceMetadataVersion =
+      await this.workspaceMetadataVersionService.getMetadataVersion(
         workspaceId,
-      ));
+      );
+
+    const desiredWorkspaceMetadataVersion =
+      workspaceMetadataVersion ?? latestWorkspaceMetadataVersion;
 
     if (!desiredWorkspaceMetadataVersion) {
       throw new Error(
@@ -40,46 +44,41 @@ export class WorkspaceDatasourceFactory {
       );
     }
 
-    const latestWorkspaceMetadataVersion =
-      await this.workspaceMetadataVersionService.getMetadataVersion(
-        workspaceId,
-      );
-
     if (latestWorkspaceMetadataVersion !== desiredWorkspaceMetadataVersion) {
       throw new Error(
         `Workspace metadata version mismatch detected for workspace ${workspaceId}. Current version: ${latestWorkspaceMetadataVersion}. Desired version: ${desiredWorkspaceMetadataVersion}`,
       );
     }
 
-    let cachedObjectMetadataCollection =
-      await this.workspaceCacheStorageService.getObjectMetadataCollection(
-        workspaceId,
-      );
-
-    if (!cachedObjectMetadataCollection) {
-      const freshObjectMetadataCollection =
-        await this.objectMetadataRepository.find({
-          where: { workspaceId },
-          relations: [
-            'fields.object',
-            'fields',
-            'fields.fromRelationMetadata',
-            'fields.toRelationMetadata',
-            'fields.fromRelationMetadata.toObjectMetadata',
-          ],
-        });
-
-      await this.workspaceCacheStorageService.setObjectMetadataCollection(
-        workspaceId,
-        freshObjectMetadataCollection,
-      );
-
-      cachedObjectMetadataCollection = freshObjectMetadataCollection;
-    }
-
-    const workspaceDataSource = await workspaceDataSourceCacheInstance.execute(
+    const workspaceDataSource = await this.cacheManager.execute(
       `${workspaceId}-${latestWorkspaceMetadataVersion}`,
       async () => {
+        let cachedObjectMetadataCollection =
+          await this.workspaceCacheStorageService.getObjectMetadataCollection(
+            workspaceId,
+          );
+
+        if (!cachedObjectMetadataCollection) {
+          const freshObjectMetadataCollection =
+            await this.objectMetadataRepository.find({
+              where: { workspaceId },
+              relations: [
+                'fields.object',
+                'fields',
+                'fields.fromRelationMetadata',
+                'fields.toRelationMetadata',
+                'fields.fromRelationMetadata.toObjectMetadata',
+              ],
+            });
+
+          await this.workspaceCacheStorageService.setObjectMetadataCollection(
+            workspaceId,
+            freshObjectMetadataCollection,
+          );
+
+          cachedObjectMetadataCollection = freshObjectMetadataCollection;
+        }
+
         const dataSourceMetadata =
           await this.dataSourceService.getLastDataSourceMetadataFromWorkspaceId(
             workspaceId,

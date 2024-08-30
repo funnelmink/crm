@@ -12,7 +12,7 @@ import {
 export class WorkflowCommonWorkspaceService {
   constructor(private readonly twentyORMManager: TwentyORMManager) {}
 
-  async getWorkflowVersion(workflowVersionId: string): Promise<
+  async getWorkflowVersionOrFail(workflowVersionId: string): Promise<
     Omit<WorkflowVersionWorkspaceEntity, 'trigger'> & {
       trigger: WorkflowTrigger;
     }
@@ -35,7 +35,7 @@ export class WorkflowCommonWorkspaceService {
       );
     }
 
-    if (!workflowVersion.trigger || !workflowVersion.trigger?.type) {
+    if (!workflowVersion.trigger) {
       throw new WorkflowTriggerException(
         'Workflow version does not contains trigger',
         WorkflowTriggerExceptionCode.INVALID_WORKFLOW_VERSION,
