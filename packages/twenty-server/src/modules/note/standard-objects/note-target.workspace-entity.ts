@@ -32,7 +32,6 @@ import { JobWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-job.works
   labelPlural: 'Note Targets',
   description: 'A note target',
   icon: 'IconCheckbox',
-  softDelete: true,
 })
 @WorkspaceIsSystem()
 export class NoteTargetWorkspaceEntity extends BaseWorkspaceEntity {

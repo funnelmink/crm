@@ -13,7 +13,6 @@ import { useUpdateOneObjectMetadataItem } from '@/object-metadata/hooks/useUpdat
 import { getObjectSlug } from '@/object-metadata/utils/getObjectSlug';
 import { RecordFieldValueSelectorContextProvider } from '@/object-record/record-store/contexts/RecordFieldValueSelectorContext';
 import { SaveAndCancelButtons } from '@/settings/components/SaveAndCancelButtons/SaveAndCancelButtons';
-import { SettingsHeaderContainer } from '@/settings/components/SettingsHeaderContainer';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
 import {
   SettingsDataModelObjectAboutForm,
@@ -111,35 +110,36 @@ export const SettingsObjectEdit = () => {
       <FormProvider {...formConfig}>
         <SubMenuTopBarContainer
           Icon={IconHierarchy2}
-          title={
-            <Breadcrumb
-              links={[
-                {
-                  children: 'Objects',
-                  href: settingsObjectsPagePath,
-                },
-                {
-                  children: activeObjectMetadataItem.labelPlural,
-                  href: `${settingsObjectsPagePath}/${objectSlug}`,
-                },
-                { children: 'Edit' },
-              ]}
-            />
+          title="Edit"
+          links={[
+            {
+              children: 'Workspace',
+              href: getSettingsPagePath(SettingsPath.Workspace),
+            },
+            {
+              children: 'Objects',
+              href: settingsObjectsPagePath,
+            },
+            {
+              children: activeObjectMetadataItem.labelPlural,
+              href: `${settingsObjectsPagePath}/${objectSlug}`,
+            },
+            { children: 'Edit Object' },
+          ]}
+          actionButton={
+            activeObjectMetadataItem.isCustom && (
+              <SaveAndCancelButtons
+                isSaveDisabled={!canSave}
+                isCancelDisabled={isSubmitting}
+                onCancel={() =>
+                  navigate(`${settingsObjectsPagePath}/${objectSlug}`)
+                }
+                onSave={formConfig.handleSubmit(handleSave)}
+              />
+            )
           }
         >
           <SettingsPageContainer>
-            <SettingsHeaderContainer>
-              {activeObjectMetadataItem.isCustom && (
-                <SaveAndCancelButtons
-                  isSaveDisabled={!canSave}
-                  isCancelDisabled={isSubmitting}
-                  onCancel={() =>
-                    navigate(`${settingsObjectsPagePath}/${objectSlug}`)
-                  }
-                  onSave={formConfig.handleSubmit(handleSave)}
-                />
-              )}
-            </SettingsHeaderContainer>
             <Section>
               <H2Title
                 title="About"

@@ -17,13 +17,12 @@ const basePerson = {
     secondaryLinks: null,
   },
   createdAt: '',
-  email: '',
+  city: '',
   jobTitle: '',
   name: {
     firstName: '',
     lastName: '',
   },
-  phone: '',
   linkedinLink: {
     primaryLinkUrl: '',
     primaryLinkLabel: '',

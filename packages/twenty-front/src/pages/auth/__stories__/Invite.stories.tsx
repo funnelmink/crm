@@ -33,7 +33,7 @@ const meta: Meta<PageDecoratorArgs> = {
                 findWorkspaceFromInviteHash: {
                   __typename: 'Workspace',
                   id: '20202020-91f0-46d0-acab-cb5afef3cc3b',
-                  displayName: 'Funnelmink dev',
+                  displayName: 'Twenty dev',
                   logo: null,
                   allowImpersonation: false,
                 },
@@ -73,7 +73,9 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await canvas.findByText('Join Funnelmink dev team');
+    await canvas.findByText('Join Twenty dev team', undefined, {
+      timeout: 5000,
+    });
 
     const continueWithEmailButton = await canvas.findByText(
       'Continue With Email',
