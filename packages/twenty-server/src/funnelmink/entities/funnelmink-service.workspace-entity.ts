@@ -35,7 +35,6 @@ import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-o
   description: 'A Service',
   icon: FUNNELMINK_ICONS.service,
   labelIdentifierStandardId: FUNNELMINK_IDS.serviceName,
-  softDelete: true,
 })
 export class ServiceWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({

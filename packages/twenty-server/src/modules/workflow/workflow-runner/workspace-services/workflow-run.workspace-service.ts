@@ -7,15 +7,10 @@ import {
   WorkflowRunStatus,
   WorkflowRunWorkspaceEntity,
 } from 'src/modules/workflow/common/standard-objects/workflow-run.workspace-entity';
-import { WorkflowCommonWorkspaceService } from 'src/modules/workflow/common/workflow-common.workspace-service';
 import {
   WorkflowRunException,
   WorkflowRunExceptionCode,
-<<<<<<<< HEAD:packages/twenty-server/src/modules/workflow/workflow-runner/workflow-run/workflow-run.workspace-service.ts
-} from 'src/modules/workflow/workflow-runner/workflow-run/workflow-run.exception';
-========
 } from 'src/modules/workflow/workflow-runner/exceptions/workflow-run.exception';
->>>>>>>> e4959ad53412fded1d88f3e3400f46402de894b4:packages/twenty-server/src/modules/workflow/workflow-runner/workspace-services/workflow-run.workspace-service.ts
 
 @Injectable()
 export class WorkflowRunWorkspaceService {

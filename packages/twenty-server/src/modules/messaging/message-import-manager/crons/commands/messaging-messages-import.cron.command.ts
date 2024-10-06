@@ -8,8 +8,6 @@ import {
   MessagingMessagesImportCronJob,
 } from 'src/modules/messaging/message-import-manager/crons/jobs/messaging-messages-import.cron.job';
 
-const MESSAGING_MESSAGES_IMPORT_CRON_PATTERN = '*/1 * * * *';
-
 @Command({
   name: 'cron:messaging:messages-import',
   description: 'Starts a cron job to fetch all messages from cache',

@@ -39,7 +39,6 @@ import { JobWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-job.works
   description: 'A Work Order',
   icon: FUNNELMINK_ICONS.workOrder,
   labelIdentifierStandardId: FUNNELMINK_IDS.workOrderName,
-  softDelete: true,
 })
 export class WorkOrderWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({

@@ -35,7 +35,6 @@ import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-o
   description: 'A Material',
   icon: FUNNELMINK_ICONS.material,
   labelIdentifierStandardId: FUNNELMINK_IDS.materialName,
-  softDelete: true,
 })
 export class MaterialWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({
