@@ -17,7 +17,6 @@ const basePerson = {
     secondaryLinks: null,
   },
   createdAt: '',
-  city: '',
   email: '',
   jobTitle: '',
   name: {

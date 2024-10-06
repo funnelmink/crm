@@ -4470,29 +4470,6 @@ export const mockedStandardObjectMetadataQueryResult: ObjectMetadataItemsQuery =
                             "__typename": "fieldEdge",
                             "node": {
                                 "__typename": "field",
-                                "id": "a420a3c3-f245-4ab4-9094-bb4cfb7edc9b",
-                                "type": "TEXT",
-                                "name": "city",
-                                "label": "City",
-                                "description": "Contact’s city",
-                                "icon": "IconMap",
-                                "isCustom": false,
-                                "isActive": true,
-                                "isSystem": false,
-                                "isNullable": false,
-                                "createdAt": "2024-08-02T16:00:05.938Z",
-                                "updatedAt": "2024-08-02T16:00:05.938Z",
-                                "defaultValue": "''",
-                                "options": null,
-                                "relationDefinition": null,
-                                "fromRelationMetadata": null,
-                                "toRelationMetadata": null
-                            }
-                        },
-                        {
-                            "__typename": "fieldEdge",
-                            "node": {
-                                "__typename": "field",
                                 "id": "19f77ace-4b00-4fac-ba7d-8c7a3dde409b",
                                 "type": "RELATION",
                                 "name": "messageParticipants",

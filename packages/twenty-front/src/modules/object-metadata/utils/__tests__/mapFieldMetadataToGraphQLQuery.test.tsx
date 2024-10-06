@@ -184,7 +184,6 @@ xLink
 }
 id
 createdAt
-city
 email
 jobTitle
 name

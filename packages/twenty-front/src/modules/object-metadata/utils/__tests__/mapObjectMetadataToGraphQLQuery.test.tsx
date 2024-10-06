@@ -22,7 +22,6 @@ describe('mapObjectMetadataToGraphQLQuery', () => {
         xLink: true,
         id: true,
         createdAt: true,
-        city: true,
         email: true,
         jobTitle: true,
         name: true,
@@ -46,7 +45,6 @@ describe('mapObjectMetadataToGraphQLQuery', () => {
     createdAt
     avatarUrl
     jobTitle
-    city
     id
     xLink
     {

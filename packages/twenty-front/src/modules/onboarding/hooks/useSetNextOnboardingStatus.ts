@@ -12,11 +12,12 @@ const getNextOnboardingStatus = (
   currentUser: CurrentUser | null,
   currentWorkspace: CurrentWorkspace | null,
 ) => {
-  if (currentUser?.onboardingStatus === OnboardingStatus.ProfileCreation) {
-    return OnboardingStatus.SyncEmail;
-  }
+  // Funnelmink - disabled for now
+  // if (currentUser?.onboardingStatus === OnboardingStatus.ProfileCreation) {
+  //   return OnboardingStatus.SyncEmail;
+  // }
   if (
-    currentUser?.onboardingStatus === OnboardingStatus.SyncEmail &&
+    currentUser?.onboardingStatus === OnboardingStatus.ProfileCreation &&
     currentWorkspace?.workspaceMembersCount === 1
   ) {
     return OnboardingStatus.InviteTeam;

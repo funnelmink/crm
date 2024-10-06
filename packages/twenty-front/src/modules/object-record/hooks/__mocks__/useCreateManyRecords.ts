@@ -29,7 +29,6 @@ export const responseData = {
     secondaryLinks: null,
   },
   createdAt: '',
-  city: '',
   email: '',
   jobTitle: '',
   name: {

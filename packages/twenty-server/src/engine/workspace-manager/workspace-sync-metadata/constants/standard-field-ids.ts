@@ -135,6 +135,10 @@ export const COMPANY_STANDARD_FIELD_IDS = {
   favorites: '20202020-4d1d-41ac-b13b-621631298d55',
   attachments: '20202020-c1b5-4120-b0f0-987ca401ed53',
   timelineActivities: '20202020-0414-4daf-9c0d-64fe7b27f89f',
+
+  // Funnelmink
+  email: '24242424-551c-402c-bb6d-dfe9efe86bcb',
+  phone: '24242424-2c57-4c75-93c5-2ac950a6ed67',
 };
 
 export const CONNECTED_ACCOUNT_STANDARD_FIELD_IDS = {
@@ -308,7 +312,7 @@ export const PERSON_STANDARD_FIELD_IDS = {
   xLink: '20202020-8fc2-487c-b84a-55a99b145cfd',
   jobTitle: '20202020-b0d0-415a-bef9-640a26dacd9b',
   phone: '20202020-4564-4b8b-a09f-05445f2e0bce',
-  city: '20202020-5243-4ffb-afc5-2c675da41346',
+  // city: '20202020-5243-4ffb-afc5-2c675da41346',
   avatarUrl: '20202020-b8a6-40df-961c-373dc5d2ec21',
   position: '20202020-fcd5-4231-aff5-fff583eaa0b1',
   createdBy: '20202020-f6ab-4d98-af24-a3d5b664148a',
@@ -322,6 +326,9 @@ export const PERSON_STANDARD_FIELD_IDS = {
   messageParticipants: '20202020-498e-4c61-8158-fa04f0638334',
   calendarEventParticipants: '20202020-52ee-45e9-a702-b64b3753e3a9',
   timelineActivities: '20202020-a43e-4873-9c23-e522de906ce5',
+
+  // Funnelmink
+  address: '24242424-2554-4ee1-a617-17907f6bab21',
 };
 
 export const TASK_STANDARD_FIELD_IDS = {

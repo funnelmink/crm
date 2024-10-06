@@ -53,7 +53,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Bertrand',
               lastName: 'Voulzy',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: 'asd',
@@ -176,7 +175,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Madison',
               lastName: 'Perez',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -208,7 +206,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Avery',
               lastName: 'Carter',
             },
-            city: 'New York',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -240,7 +237,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Ethan',
               lastName: 'Mitchell',
             },
-            city: 'Los Angeles',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -272,7 +268,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Elizabeth',
               lastName: 'Baker',
             },
-            city: 'New York',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -304,7 +299,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Christopher',
               lastName: 'Nelson',
             },
-            city: 'San Francisco',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -402,7 +396,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Christopher',
               lastName: 'Gonzalez',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -434,7 +427,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Ashley',
               lastName: 'Parker',
             },
-            city: 'Los Angeles',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -617,7 +609,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Isabella',
               lastName: 'Scott',
             },
-            city: 'New York',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -649,7 +640,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Matthew',
               lastName: 'Green',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -681,7 +671,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Nicholas',
               lastName: 'Wright',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -1013,7 +1002,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Lorie',
               lastName: 'Vladim',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -1111,7 +1099,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Louis',
               lastName: 'Duss',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -1339,7 +1326,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Sylvie',
               lastName: 'Palmer',
             },
-            city: 'Los Angeles',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
@@ -1371,7 +1357,6 @@ export const SIGN_IN_BACKGROUND_MOCK_COMPANIES = [
               firstName: 'Christoph',
               lastName: 'Callisto',
             },
-            city: 'Seattle',
             updatedAt: '2023-11-23T15:38:03.700Z',
             linkedinLink: {
               primaryLinkLabel: null,
