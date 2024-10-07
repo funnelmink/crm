@@ -16,22 +16,22 @@ export const WhatIsTwenty = () => {
       <Row>
         <Column>
           <ShadowText>
-            <Link href="https://twenty.com/" value="Website" />
+            <Link href="https://funnelmink.com/" value="Website" />
           </ShadowText>
         </Column>
         <Column>
           <ShadowText>
-            <Link href="https://github.com/twentyhq/twenty" value="Github" />
+            <Link href="https://github.com/funnelmink/crm" value="Github" />
           </ShadowText>
         </Column>
         <Column>
           <ShadowText>
-            <Link href="https://twenty.com/user-guide" value="User guide" />
+            <Link href="https://funnelmink.com/user-guide" value="User guide" />
           </ShadowText>
         </Column>
         <Column>
           <ShadowText>
-            <Link href="https://docs.twenty.com/" value="Developers" />
+            <Link href="https://docs.funnelmink.com/" value="Developers" />
           </ShadowText>
         </Column>
       </Row>

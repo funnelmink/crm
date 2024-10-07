@@ -17,7 +17,7 @@ export async function searchIssuesPRs(
   const { search } = await query<SearchIssuesPRsQuery>(
     `
         query searchPullRequestsAndIssues($cursor: String) {
-          search(query: "repo:twentyhq/twenty ${
+          search(query: "repo:funnelmink/crm ${
             isIssues ? 'is:issue' : 'is:pr'
           } updated:>${since}", type: ISSUE, first: 100, after: $cursor) {
             edges {

@@ -38,6 +38,10 @@ import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/perso
 import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
 import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
+import { FUNNELMINK_ICONS, FUNNELMINK_IDS } from 'src/funnelmink/funnelmink-server-constants';
+import { PhonesMetadata } from 'src/engine/metadata-modules/field-metadata/composite-types/phones.composite-type';
+import { EmailsMetadata } from 'src/engine/metadata-modules/field-metadata/composite-types/emails.composite-type';
 
 const NAME_FIELD_NAME = 'name';
 const DOMAIN_NAME_FIELD_NAME = 'domainName';
@@ -296,4 +300,35 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceIsSystem()
   @WorkspaceFieldIndex({ indexType: IndexType.GIN })
   [SEARCH_VECTOR_FIELD.name]: any;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.companyWorkOrders,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Work Orders',
+    description: 'Work Orders linked to the company.',
+    icon: FUNNELMINK_ICONS.workOrder,
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  workOrders: Relation<WorkOrderWorkspaceEntity[]>;
+
+  @WorkspaceField({
+    standardId: COMPANY_STANDARD_FIELD_IDS.phones,
+    type: FieldMetadataType.PHONES,
+    label: 'Phones',
+    description: 'Company phone numbers',
+    icon: FUNNELMINK_ICONS.phone,
+  })
+  phones: PhonesMetadata;
+
+  @WorkspaceField({
+    standardId: COMPANY_STANDARD_FIELD_IDS.emails,
+    type: FieldMetadataType.EMAILS,
+    label: 'Emails',
+    description: 'Company Emails',
+    icon: FUNNELMINK_ICONS.email,
+  })
+  emails: EmailsMetadata;
 }

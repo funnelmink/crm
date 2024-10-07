@@ -13,13 +13,13 @@ export const baseSchema = (
     info: {
       title: 'Twenty Api',
       description: `This is a **Twenty REST/API** playground based on the **OpenAPI 3.0 specification**.`,
-      termsOfService: 'https://github.com/twentyhq/twenty?tab=coc-ov-file',
+      termsOfService: 'https://github.com/funnelmink/crm?tab=coc-ov-file',
       contact: {
-        email: 'felix@twenty.com',
+        email: 'felix@funnelmink.com',
       },
       license: {
         name: 'AGPL-3.0',
-        url: 'https://github.com/twentyhq/twenty?tab=AGPL-3.0-1-ov-file#readme',
+        url: 'https://github.com/funnelmink/crm?tab=AGPL-3.0-1-ov-file#readme',
       },
       version: API_Version,
     },
@@ -48,7 +48,7 @@ export const baseSchema = (
     ],
     externalDocs: {
       description: 'Find out more about **Twenty**',
-      url: 'https://twenty.com',
+      url: 'https://funnelmink.com',
     },
     paths: { [`/open-api/${schemaName}`]: computeOpenApiPath(serverUrl) },
   };

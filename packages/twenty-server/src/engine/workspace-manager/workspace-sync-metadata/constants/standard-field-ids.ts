@@ -141,6 +141,10 @@ export const COMPANY_STANDARD_FIELD_IDS = {
   attachments: '20202020-c1b5-4120-b0f0-987ca401ed53',
   timelineActivities: '20202020-0414-4daf-9c0d-64fe7b27f89f',
   searchVector: '85c71601-72f9-4b7b-b343-d46100b2c74d',
+
+  // Funnelmink
+  emails: '24242424-551c-402c-bb6d-dfe9efe86bcb',
+  phones: '24242424-2c57-4c75-93c5-2ac950a6ed67',
 };
 
 export const CONNECTED_ACCOUNT_STANDARD_FIELD_IDS = {
@@ -342,6 +346,9 @@ export const PERSON_STANDARD_FIELD_IDS = {
   calendarEventParticipants: '20202020-52ee-45e9-a702-b64b3753e3a9',
   timelineActivities: '20202020-a43e-4873-9c23-e522de906ce5',
   searchVector: '57d1d7ad-fa10-44fc-82f3-ad0959ec2534',
+
+  // Funnelmink
+  address: '24242424-2554-4ee1-a617-17907f6bab21',
 };
 
 export const TASK_STANDARD_FIELD_IDS = {

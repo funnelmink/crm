@@ -42,7 +42,7 @@ export const AddToBlocklist: Story = {
 
     const addToBlocklistInput = canvas.getByRole('textbox');
 
-    await userEvent.type(addToBlocklistInput, 'test@twenty.com');
+    await userEvent.type(addToBlocklistInput, 'test@funnelmink.com');
 
     const addToBlocklistButton = canvas.getByRole('button', {
       name: /add to blocklist/i,
@@ -52,7 +52,7 @@ export const AddToBlocklist: Story = {
 
     expect(updateBlockedEmailListJestFn).toHaveBeenCalledTimes(1);
     expect(updateBlockedEmailListJestFn).toHaveBeenCalledWith(
-      'test@twenty.com',
+      'test@funnelmink.com',
     );
   },
 };

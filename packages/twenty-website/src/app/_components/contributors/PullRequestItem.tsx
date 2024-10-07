@@ -88,7 +88,7 @@ export const PullRequestItem = ({
         </StyledTitle>
         <StyledDescription>
           <StyledPrLink
-            href={'https://github.com/twentyhq/twenty/pull/' + prNumber}
+            href={'https://github.com/funnelmink/crm/pull/' + prNumber}
             target="__blank"
           >
             #{prNumber}

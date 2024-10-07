@@ -38,8 +38,8 @@ export const workspaceLogoUrl =
 export const mockDefaultWorkspace: Workspace = {
   id: '7dfbc3f7-6e5e-4128-957e-8d86808cdf6w',
   displayName: 'Twenty',
-  domainName: 'twenty.com',
-  inviteHash: 'twenty.com-invite-hash',
+  domainName: 'funnelmink.com',
+  inviteHash: 'funnelmink.com-invite-hash',
   logo: workspaceLogoUrl,
   isPublicInviteLinkEnabled: true,
   allowImpersonation: true,

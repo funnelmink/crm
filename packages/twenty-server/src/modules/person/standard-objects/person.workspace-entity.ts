@@ -40,6 +40,12 @@ import { NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/not
 import { OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
 import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
+import {
+  FUNNELMINK_ICONS,
+  FUNNELMINK_IDS,
+} from 'src/funnelmink/funnelmink-server-constants';
+import { AddressMetadata } from 'src/engine/metadata-modules/field-metadata/composite-types/address.composite-type';
 
 const NAME_FIELD_NAME = 'name';
 const EMAILS_FIELD_NAME = 'emails';
@@ -138,6 +144,7 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
     description: 'Contact’s city',
     icon: 'IconMap',
   })
+  @WorkspaceIsDeprecated()
   city: string;
 
   @WorkspaceField({
@@ -303,4 +310,27 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceIsSystem()
   @WorkspaceFieldIndex({ indexType: IndexType.GIN })
   [SEARCH_VECTOR_FIELD.name]: any;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.personWorkOrders,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Work Orders',
+    description: 'Work Orders linked to the Person.',
+    icon: FUNNELMINK_ICONS.workOrder,
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  workOrders: Relation<WorkOrderWorkspaceEntity[]>;
+
+  @WorkspaceField({
+    standardId: PERSON_STANDARD_FIELD_IDS.address,
+    type: FieldMetadataType.ADDRESS,
+    label: 'Address',
+    description: 'Contact’s address',
+    icon: FUNNELMINK_ICONS.address,
+  })
+  @WorkspaceIsNullable()
+  address: AddressMetadata;
 }

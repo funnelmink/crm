@@ -75,7 +75,7 @@ export const peopleAllView = (
       {
         fieldMetadataId:
           objectMetadataMap[STANDARD_OBJECT_IDS.person].fields[
-            PERSON_STANDARD_FIELD_IDS.city
+            PERSON_STANDARD_FIELD_IDS.jobTitle
           ],
         position: 6,
         isVisible: true,
@@ -84,7 +84,7 @@ export const peopleAllView = (
       {
         fieldMetadataId:
           objectMetadataMap[STANDARD_OBJECT_IDS.person].fields[
-            PERSON_STANDARD_FIELD_IDS.jobTitle
+            PERSON_STANDARD_FIELD_IDS.linkedinLink
           ],
         position: 7,
         isVisible: true,
@@ -93,18 +93,9 @@ export const peopleAllView = (
       {
         fieldMetadataId:
           objectMetadataMap[STANDARD_OBJECT_IDS.person].fields[
-            PERSON_STANDARD_FIELD_IDS.linkedinLink
-          ],
-        position: 8,
-        isVisible: true,
-        size: 150,
-      },
-      {
-        fieldMetadataId:
-          objectMetadataMap[STANDARD_OBJECT_IDS.person].fields[
             PERSON_STANDARD_FIELD_IDS.xLink
           ],
-        position: 9,
+        position: 8,
         isVisible: true,
         size: 150,
       },
