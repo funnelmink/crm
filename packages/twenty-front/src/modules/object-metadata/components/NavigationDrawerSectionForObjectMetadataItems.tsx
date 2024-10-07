@@ -13,6 +13,8 @@ import { useLastVisitedView } from '@/navigation/hooks/useLastVisitedView';
 import { ObjectMetadataItem } from '@/object-metadata/types/ObjectMetadataItem';
 import { View } from '@/views/types/View';
 
+type Section = 'CRM' | 'Scheduling' | 'Billing' | 'Custom';
+
 export const NavigationDrawerSectionForObjectMetadataItems = ({
   sectionTitle,
   isRemote,
@@ -25,7 +27,9 @@ export const NavigationDrawerSectionForObjectMetadataItems = ({
   objectMetadataItems: ObjectMetadataItem[];
 }) => {
   const { toggleNavigationSection, isNavigationSectionOpenState } =
-    useNavigationSection(sectionTitle + (isRemote ? 'Remote' : 'Workspace'));
+    useNavigationSection(
+      'Objects' + sectionTitle + (isRemote ? 'Remote' : 'Workspace'),
+    );
   const isNavigationSectionOpen = useRecoilValue(isNavigationSectionOpenState);
 
   const { getIcon } = useIcons();
@@ -33,15 +37,52 @@ export const NavigationDrawerSectionForObjectMetadataItems = ({
 
   const { getLastVisitedViewIdFromObjectMetadataItemId } = useLastVisitedView();
 
-  return (
-    objectMetadataItems.length > 0 && (
-      <NavigationDrawerSection>
-        <NavigationDrawerSectionTitle
-          label={sectionTitle}
-          onClick={() => toggleNavigationSection()}
-        />
-        {isNavigationSectionOpen &&
-          objectMetadataItems.map((objectMetadataItem) => {
+  // Define the sections and their corresponding items
+  const sectionItems: Record<Section, string[]> = {
+    CRM: ['Companies', 'People', 'Opportunities', 'Tasks', 'Notes'],
+    Scheduling: ['Crews', 'Jobs'],
+    Billing: ['Work Orders', 'Materials', 'Services'],
+    Custom: [],
+  };
+
+  // Group items into sections
+  const categorizedItems = (Object.keys(sectionItems) as Section[]).reduce(
+    (acc, section) => {
+      if (section !== 'Custom') {
+        acc[section] = objectMetadataItems.filter((item) =>
+          sectionItems[section].includes(item.labelPlural),
+        );
+      }
+      return acc;
+    },
+    {} as Record<Section, ObjectMetadataItem[]>,
+  );
+
+  // Any items not included in predefined sections are 'Custom'
+  categorizedItems['Custom'] = objectMetadataItems.filter(
+    (item) => !Object.values(sectionItems).flat().includes(item.labelPlural),
+  );
+
+  // Function to render each section
+  const renderSection = (section: Section) => {
+    const items = categorizedItems[section];
+    if (items.length === 0) return null;
+
+    return (
+      <div key={section}>
+        <NavigationDrawerSectionTitle label={section} />
+        {items
+          .sort((a, b) => {
+            // For defined sections, sort according to sectionItems order
+            if (section in sectionItems && section !== 'Custom') {
+              const indexA = sectionItems[section]?.indexOf(a.labelPlural) ?? 0;
+              const indexB = sectionItems[section]?.indexOf(b.labelPlural) ?? 0;
+              return indexA - indexB;
+            }
+            // For 'Custom', sort alphabetically
+            return a.labelPlural.localeCompare(b.labelPlural);
+          })
+          .map((objectMetadataItem) => {
             const objectMetadataViews = getObjectMetadataItemViews(
               objectMetadataItem.id,
               views,
@@ -99,6 +140,21 @@ export const NavigationDrawerSectionForObjectMetadataItems = ({
               </div>
             );
           })}
+      </div>
+    );
+  };
+
+  return (
+    objectMetadataItems.length > 0 && (
+      <NavigationDrawerSection>
+        <NavigationDrawerSectionTitle
+          label={sectionTitle}
+          onClick={() => toggleNavigationSection()}
+        />
+        {isNavigationSectionOpen &&
+          (Object.keys(categorizedItems) as Section[]).map((section) =>
+            renderSection(section),
+          )}
       </NavigationDrawerSection>
     )
   );

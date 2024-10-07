@@ -3,48 +3,48 @@ import { generatedMockObjectMetadataItems } from '~/testing/mock-data/objectMeta
 import { normalizeGQLField } from '~/utils/normalizeGQLField';
 
 const personObjectMetadataItem = generatedMockObjectMetadataItems.find(
-    (item) => item.nameSingular === 'person',
+  (item) => item.nameSingular === 'person',
 );
 
 if (!personObjectMetadataItem) {
-    throw new Error('ObjectMetadataItem not found');
+  throw new Error('ObjectMetadataItem not found');
 }
 
 describe('mapFieldMetadataToGraphQLQuery', () => {
-    it('should return fieldName if simpleValue', async () => {
-        const res = mapFieldMetadataToGraphQLQuery({
-            objectMetadataItems: generatedMockObjectMetadataItems,
-            field: personObjectMetadataItem.fields.find(
-                (field) => field.name === 'id',
-            )!,
-        });
-        expect(normalizeGQLField(res)).toEqual(normalizeGQLField('id'));
+  it('should return fieldName if simpleValue', async () => {
+    const res = mapFieldMetadataToGraphQLQuery({
+      objectMetadataItems: generatedMockObjectMetadataItems,
+      field: personObjectMetadataItem.fields.find(
+        (field) => field.name === 'id',
+      )!,
     });
-    it('should return fieldName if composite', async () => {
-        const res = mapFieldMetadataToGraphQLQuery({
-            objectMetadataItems: generatedMockObjectMetadataItems,
-            field: personObjectMetadataItem.fields.find(
-                (field) => field.name === 'name',
-            )!,
-        });
-        expect(normalizeGQLField(res)).toEqual(
-            normalizeGQLField(`name
+    expect(normalizeGQLField(res)).toEqual(normalizeGQLField('id'));
+  });
+  it('should return fieldName if composite', async () => {
+    const res = mapFieldMetadataToGraphQLQuery({
+      objectMetadataItems: generatedMockObjectMetadataItems,
+      field: personObjectMetadataItem.fields.find(
+        (field) => field.name === 'name',
+      )!,
+    });
+    expect(normalizeGQLField(res)).toEqual(
+      normalizeGQLField(`name
 {
   firstName
   lastName
 }`),
-        );
-    });
+    );
+  });
 
-    it('should return non relation subFields if relation', async () => {
-        const res = mapFieldMetadataToGraphQLQuery({
-            objectMetadataItems: generatedMockObjectMetadataItems,
-            field: personObjectMetadataItem.fields.find(
-                (field) => field.name === 'company',
-            )!,
-        });
-        expect(normalizeGQLField(res)).toEqual(
-            normalizeGQLField(`company
+  it('should return non relation subFields if relation', async () => {
+    const res = mapFieldMetadataToGraphQLQuery({
+      objectMetadataItems: generatedMockObjectMetadataItems,
+      field: personObjectMetadataItem.fields.find(
+        (field) => field.name === 'company',
+      )!,
+    });
+    expect(normalizeGQLField(res)).toEqual(
+      normalizeGQLField(`company
 {
 __typename
 xLink
@@ -89,38 +89,38 @@ employees
 id
 idealCustomerProfile
 }`),
-        );
-    });
+    );
+  });
 
-    it('should return only return relation subFields that are in recordGqlFields', async () => {
-        const res = mapFieldMetadataToGraphQLQuery({
-            objectMetadataItems: generatedMockObjectMetadataItems,
-            relationrecordFields: {
-                accountOwner: { id: true, name: true },
-                people: true,
-                xLink: true,
-                linkedinLink: true,
-                domainName: {
-                    primaryLinkUrl: true,
-                    primaryLinkLabel: true,
-                    secondaryLinks: true,
-                },
-                annualRecurringRevenue: true,
-                createdAt: true,
-                address: { addressStreet1: true },
-                updatedAt: true,
-                name: true,
-                accountOwnerId: true,
-                employees: true,
-                id: true,
-                idealCustomerProfile: true,
-            },
-            field: personObjectMetadataItem.fields.find(
-                (field) => field.name === 'company',
-            )!,
-        });
-        expect(normalizeGQLField(res)).toEqual(
-            normalizeGQLField(`company
+  it('should return only return relation subFields that are in recordGqlFields', async () => {
+    const res = mapFieldMetadataToGraphQLQuery({
+      objectMetadataItems: generatedMockObjectMetadataItems,
+      relationrecordFields: {
+        accountOwner: { id: true, name: true },
+        people: true,
+        xLink: true,
+        linkedinLink: true,
+        domainName: {
+          primaryLinkUrl: true,
+          primaryLinkLabel: true,
+          secondaryLinks: true,
+        },
+        annualRecurringRevenue: true,
+        createdAt: true,
+        address: { addressStreet1: true },
+        updatedAt: true,
+        name: true,
+        accountOwnerId: true,
+        employees: true,
+        id: true,
+        idealCustomerProfile: true,
+      },
+      field: personObjectMetadataItem.fields.find(
+        (field) => field.name === 'company',
+      )!,
+    });
+    expect(normalizeGQLField(res)).toEqual(
+      normalizeGQLField(`company
 {
 __typename
 xLink
@@ -217,6 +217,6 @@ employees
 id
 idealCustomerProfile
 }`),
-        );
-    });
+    );
+  });
 });
