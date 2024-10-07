@@ -37,6 +37,8 @@ import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-o
 import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
 import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
 import { FUNNELMINK_ICONS, FUNNELMINK_IDS } from 'src/funnelmink/funnelmink-server-constants';
+import { PhonesMetadata } from 'src/engine/metadata-modules/field-metadata/composite-types/phones.composite-type';
+import { EmailsMetadata } from 'src/engine/metadata-modules/field-metadata/composite-types/emails.composite-type';
 
 const NAME_FIELD_NAME = 'name';
 const DOMAIN_NAME_FIELD_NAME = 'domainName';
@@ -314,20 +316,20 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
   workOrders: Relation<WorkOrderWorkspaceEntity[]>;
 
   @WorkspaceField({
-    standardId: COMPANY_STANDARD_FIELD_IDS.phone,
-    type: FieldMetadataType.TEXT,
-    label: 'Phone',
-    description: 'Company phone number',
+    standardId: COMPANY_STANDARD_FIELD_IDS.phones,
+    type: FieldMetadataType.PHONES,
+    label: 'Phones',
+    description: 'Company phone numbers',
     icon: FUNNELMINK_ICONS.phone,
   })
-  phone: string;
+  phones: PhonesMetadata;
 
   @WorkspaceField({
-    standardId: COMPANY_STANDARD_FIELD_IDS.email,
-    type: FieldMetadataType.EMAIL,
-    label: 'Email',
-    description: 'Company Email',
+    standardId: COMPANY_STANDARD_FIELD_IDS.emails,
+    type: FieldMetadataType.EMAILS,
+    label: 'Emails',
+    description: 'Company Emails',
     icon: FUNNELMINK_ICONS.email,
   })
-  email: string;
+  emails: EmailsMetadata;
 }

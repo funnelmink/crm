@@ -138,8 +138,8 @@ export const COMPANY_STANDARD_FIELD_IDS = {
   searchVector: '85c71601-72f9-4b7b-b343-d46100b2c74d',
 
   // Funnelmink
-  email: '24242424-551c-402c-bb6d-dfe9efe86bcb',
-  phone: '24242424-2c57-4c75-93c5-2ac950a6ed67',
+  emails: '24242424-551c-402c-bb6d-dfe9efe86bcb',
+  phones: '24242424-2c57-4c75-93c5-2ac950a6ed67',
 };
 
 export const CONNECTED_ACCOUNT_STANDARD_FIELD_IDS = {
