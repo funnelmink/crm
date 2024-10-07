@@ -21,6 +21,7 @@ import { NoteWorkspaceEntity } from 'src/modules/note/standard-objects/note.work
 import { OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
 import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
 import { TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
+import { ViewWorkspaceEntity } from 'src/modules/view/standard-objects/view.workspace-entity';
 import { WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
 import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
 import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
@@ -61,6 +62,7 @@ export class FavoriteWorkspaceEntity extends BaseWorkspaceEntity {
     inverseSideFieldKey: 'favorites',
     inverseSideTarget: () => WorkspaceMemberWorkspaceEntity,
   })
+  @WorkspaceIsNullable()
   workspaceMember: Relation<WorkspaceMemberWorkspaceEntity>;
 
   @WorkspaceJoinColumn('workspaceMember')
@@ -161,6 +163,21 @@ export class FavoriteWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceJoinColumn('note')
   noteId: string;
+
+  @WorkspaceRelation({
+    standardId: FAVORITE_STANDARD_FIELD_IDS.view,
+    type: RelationMetadataType.MANY_TO_ONE,
+    label: 'View',
+    description: 'Favorite view',
+    icon: 'IconLayoutCollage',
+    inverseSideTarget: () => ViewWorkspaceEntity,
+    inverseSideFieldKey: 'favorites',
+  })
+  @WorkspaceIsNullable()
+  view: Relation<ViewWorkspaceEntity> | null;
+
+  @WorkspaceJoinColumn('view')
+  viewId: string;
 
   @WorkspaceDynamicRelation({
     type: RelationMetadataType.MANY_TO_ONE,

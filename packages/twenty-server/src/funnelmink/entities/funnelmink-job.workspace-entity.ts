@@ -39,7 +39,6 @@ import { CrewWorkspaceEntity } from './funnelmink-crew.workspace-entity';
   description: 'A Job',
   icon: FUNNELMINK_ICONS.job,
   labelIdentifierStandardId: FUNNELMINK_IDS.jobName,
-  softDelete: true,
 })
 export class JobWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({

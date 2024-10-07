@@ -14,7 +14,7 @@ export const personPrefillDemoData = async (
   const people = peopleDemo.map((person, index) => ({
     nameFirstName: person.firstName,
     nameLastName: person.lastName,
-    email: person.email,
+    emailsPrimaryEmail: person.email,
     linkedinLinkPrimaryLinkUrl: person.linkedinUrl,
     jobTitle: person.jobTitle,
     avatarUrl: person.avatarUrl,
@@ -31,7 +31,7 @@ export const personPrefillDemoData = async (
     .into(`${schemaName}.person`, [
       'nameFirstName',
       'nameLastName',
-      'email',
+      'emailsPrimaryEmail',
       'linkedinLinkPrimaryLinkUrl',
       'jobTitle',
       'avatarUrl',

@@ -37,7 +37,6 @@ import { WorkspaceJoinColumn } from 'src/engine/twenty-orm/decorators/workspace-
   description: 'A Crew',
   icon: FUNNELMINK_ICONS.crew,
   labelIdentifierStandardId: FUNNELMINK_IDS.crewName,
-  softDelete: true,
 })
 export class CrewWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({

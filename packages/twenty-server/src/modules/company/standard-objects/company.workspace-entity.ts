@@ -45,7 +45,6 @@ import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-wor
   description: 'A company',
   icon: 'IconBuildingSkyscraper',
   labelIdentifierStandardId: COMPANY_STANDARD_FIELD_IDS.name,
-  softDelete: true,
 })
 export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceField({
