@@ -25,6 +25,14 @@ export const viewPrefillData = async (
     await notesAllView(objectMetadataMap),
     await tasksAllView(objectMetadataMap),
     await tasksByStatusView(objectMetadataMap),
+
+    // Funnelmink
+    await workOrdersAllView(objectMetadataMap),
+    await workOrdersByStatusView(objectMetadataMap),
+    await servicesAllView(objectMetadataMap),
+    await crewsAllView(objectMetadataMap),
+    await materialsAllView(objectMetadataMap),
+    await jobsAllView(objectMetadataMap),
     ...(isWorkflowEnabled ? [await workflowsAllView(objectMetadataMap)] : []),
   ];
 

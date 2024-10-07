@@ -35,6 +35,8 @@ import { PersonWorkspaceEntity } from 'src/modules/person/standard-objects/perso
 import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
 import { WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { WorkOrderWorkspaceEntity } from 'src/funnelmink/entities/funnelmink-workorder.workspace-entity';
+import { FUNNELMINK_ICONS, FUNNELMINK_IDS } from 'src/funnelmink/funnelmink-server-constants';
 
 const NAME_FIELD_NAME = 'name';
 const DOMAIN_NAME_FIELD_NAME = 'domainName';
@@ -297,4 +299,35 @@ export class CompanyWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceIsSystem()
   @WorkspaceIndex({ indexType: IndexType.GIN })
   [SEARCH_VECTOR_FIELD.name]: any;
+
+  // Funnelmink
+  @WorkspaceRelation({
+    standardId: FUNNELMINK_IDS.companyWorkOrders,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: 'Work Orders',
+    description: 'Work Orders linked to the company.',
+    icon: FUNNELMINK_ICONS.workOrder,
+    inverseSideTarget: () => WorkOrderWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  workOrders: Relation<WorkOrderWorkspaceEntity[]>;
+
+  @WorkspaceField({
+    standardId: COMPANY_STANDARD_FIELD_IDS.phone,
+    type: FieldMetadataType.TEXT,
+    label: 'Phone',
+    description: 'Company phone number',
+    icon: FUNNELMINK_ICONS.phone,
+  })
+  phone: string;
+
+  @WorkspaceField({
+    standardId: COMPANY_STANDARD_FIELD_IDS.email,
+    type: FieldMetadataType.EMAIL,
+    label: 'Email',
+    description: 'Company Email',
+    icon: FUNNELMINK_ICONS.email,
+  })
+  email: string;
 }
