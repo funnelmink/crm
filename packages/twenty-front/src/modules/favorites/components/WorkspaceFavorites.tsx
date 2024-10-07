@@ -1,10 +1,11 @@
+import { useFavorites } from '@/favorites/hooks/useFavorites';
 import { useFilteredObjectMetadataItemsForWorkspaceFavorites } from '@/navigation/hooks/useObjectMetadataItemsInWorkspaceFavorites';
-import { NavigationDrawerSectionForObjectMetadataItems } from '@/object-metadata/components/NavigationDrawerSectionForObjectMetadataItems';
 import { NavigationDrawerSectionForObjectMetadataItemsSkeletonLoader } from '@/object-metadata/components/NavigationDrawerSectionForObjectMetadataItemsSkeletonLoader';
 import { useIsPrefetchLoading } from '@/prefetch/hooks/useIsPrefetchLoading';
 import { usePrefetchedData } from '@/prefetch/hooks/usePrefetchedData';
 import { PrefetchKey } from '@/prefetch/types/PrefetchKey';
 import { View } from '@/views/types/View';
+import { FunnelminkNavigationDrawerSectionForObjectMetadataItems } from '~/funnelmink/FunnelminkNavigationDrawerSectionForObjectMetadataItems';
 
 export const WorkspaceFavorites = () => {
   const { records: views } = usePrefetchedData<View>(PrefetchKey.AllViews);
@@ -18,7 +19,7 @@ export const WorkspaceFavorites = () => {
   }
 
   return (
-    <NavigationDrawerSectionForObjectMetadataItems
+    <FunnelminkNavigationDrawerSectionForObjectMetadataItems
       sectionTitle={'Workspace'}
       objectMetadataItems={objectMetadataItemsToDisplay}
       views={views}

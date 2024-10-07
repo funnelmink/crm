@@ -148,7 +148,7 @@ export const HeaderDesktop = ({ numberOfStars }: Props) => {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <ListItem href="https://github.com/twentyhq/twenty">
+        <ListItem href="https://github.com/funnelmink/crm">
           <GithubIcon color="rgb(71,71,71)" />
           {formatNumberOfStars(numberOfStars)}
           <ExternalArrow />
