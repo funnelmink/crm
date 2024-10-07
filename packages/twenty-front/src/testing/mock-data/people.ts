@@ -12,7 +12,6 @@ export const mockedEmptyPersonData = {
   lastName: '',
   phone: null,
   email: null,
-  city: null,
   createdBy: null,
   displayName: null,
   avatarUrl: null,
@@ -44,7 +43,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:52:46.814Z',
-          city: 'ASd',
           phones: {
             primaryPhoneNumber: '781234562',
             primaryPhoneCountryCode: '+33',
@@ -174,7 +172,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-01T09:50:00.000Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '781234562',
             primaryPhoneCountryCode: '+33',
@@ -304,7 +301,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Los Angeles',
           phones: {
             primaryPhoneNumber: '781234576',
             primaryPhoneCountryCode: '+33',
@@ -403,7 +399,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '781234545',
             primaryPhoneCountryCode: '+33',
@@ -502,7 +497,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Los Angeles',
           phones: {
             primaryPhoneNumber: '781234587',
             primaryPhoneCountryCode: '+33',
@@ -601,7 +595,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '781234599',
             primaryPhoneCountryCode: '+33',
@@ -700,7 +693,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'New York',
           phones: {
             primaryPhoneNumber: '781234572',
             primaryPhoneCountryCode: '+33',
@@ -799,7 +791,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '781234582',
             primaryPhoneCountryCode: '+33',
@@ -898,7 +889,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'New York',
           phones: {
             primaryPhoneNumber: '781234569',
             primaryPhoneCountryCode: '+33',
@@ -997,7 +987,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'San Francisco',
           phones: {
             primaryPhoneNumber: '781234962',
             primaryPhoneCountryCode: '+33',
@@ -1096,7 +1085,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'New York',
           phones: {
             primaryPhoneNumber: '781234502',
             primaryPhoneCountryCode: '+33',
@@ -1195,7 +1183,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Los Angeles',
           phones: {
             primaryPhoneNumber: '781234563',
             primaryPhoneCountryCode: '+33',
@@ -1294,7 +1281,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '781234542',
             primaryPhoneCountryCode: '+33',
@@ -1393,7 +1379,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '782234562',
             primaryPhoneCountryCode: '+33',
@@ -1492,7 +1477,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '781274562',
             primaryPhoneCountryCode: '+33',
@@ -1591,7 +1575,6 @@ export const peopleQueryResult: { people: RecordGqlConnection } = {
         node: {
           __typename: 'Person',
           createdAt: '2024-08-02T09:48:36.193Z',
-          city: 'Seattle',
           phones: {
             primaryPhoneNumber: '781239562',
             primaryPhoneCountryCode: '+33',
