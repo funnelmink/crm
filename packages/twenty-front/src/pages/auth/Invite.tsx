@@ -94,7 +94,7 @@ export const Invite = () => {
           <FooterNote>
             By using Twenty, you agree to the{' '}
             <a
-              href="https://twenty.com/legal/terms"
+              href="https://funnelmink.com/legal/terms"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -102,7 +102,7 @@ export const Invite = () => {
             </a>{' '}
             and{' '}
             <a
-              href="https://twenty.com/legal/privacy"
+              href="https://funnelmink.com/legal/privacy"
               target="_blank"
               rel="noopener noreferrer"
             >

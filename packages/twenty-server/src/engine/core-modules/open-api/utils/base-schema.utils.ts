@@ -15,7 +15,7 @@ export const baseSchema = (
       description: `This is a **Twenty REST/API** playground based on the **OpenAPI 3.0 specification**.`,
       termsOfService: 'https://github.com/twentyhq/twenty?tab=coc-ov-file',
       contact: {
-        email: 'felix@twenty.com',
+        email: 'felix@funnelmink.com',
       },
       license: {
         name: 'AGPL-3.0',
@@ -48,7 +48,7 @@ export const baseSchema = (
     ],
     externalDocs: {
       description: 'Find out more about **Twenty**',
-      url: 'https://twenty.com',
+      url: 'https://funnelmink.com',
     },
     paths: { [`/open-api/${schemaName}`]: computeOpenApiPath(serverUrl) },
   };

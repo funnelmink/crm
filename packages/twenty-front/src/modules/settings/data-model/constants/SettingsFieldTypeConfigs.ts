@@ -65,13 +65,13 @@ export const SETTINGS_FIELD_TYPE_CONFIGS = {
   [FieldMetadataType.Link]: {
     label: 'Link',
     Icon: IllustrationIconLink,
-    exampleValue: { url: 'www.twenty.com', label: '' },
+    exampleValue: { url: 'www.funnelmink.com', label: '' },
     category: 'Basic',
   },
   [FieldMetadataType.Links]: {
     label: 'Links',
     Icon: IllustrationIconLink,
-    exampleValue: { primaryLinkUrl: 'twenty.com', primaryLinkLabel: '' },
+    exampleValue: { primaryLinkUrl: 'funnelmink.com', primaryLinkLabel: '' },
     category: 'Basic',
   },
   [FieldMetadataType.Boolean]: {
@@ -121,7 +121,7 @@ export const SETTINGS_FIELD_TYPE_CONFIGS = {
   [FieldMetadataType.Emails]: {
     label: 'Emails',
     Icon: IllustrationIconMail,
-    exampleValue: { primaryEmail: 'john@twenty.com' },
+    exampleValue: { primaryEmail: 'john@funnelmink.com' },
     category: 'Basic',
   },
   [FieldMetadataType.Phone]: {

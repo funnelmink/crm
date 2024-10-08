@@ -12,21 +12,21 @@ describe('getUniqueContactsAndHandles', () => {
 
   it('should return unique contacts and handles', () => {
     const contacts: Contact[] = [
-      { handle: 'john@twenty.com', displayName: 'John Doe' },
-      { handle: 'john@twenty.com', displayName: 'John Doe' },
-      { handle: 'jane@twenty.com', displayName: 'Jane Smith' },
-      { handle: 'jane@twenty.com', displayName: 'Jane Smith' },
-      { handle: 'jane@twenty.com', displayName: 'Jane Smith' },
+      { handle: 'john@funnelmink.com', displayName: 'John Doe' },
+      { handle: 'john@funnelmink.com', displayName: 'John Doe' },
+      { handle: 'jane@funnelmink.com', displayName: 'Jane Smith' },
+      { handle: 'jane@funnelmink.com', displayName: 'Jane Smith' },
+      { handle: 'jane@funnelmink.com', displayName: 'Jane Smith' },
     ];
     const result = getUniqueContactsAndHandles(contacts);
 
     expect(result.uniqueContacts).toEqual([
-      { handle: 'john@twenty.com', displayName: 'John Doe' },
-      { handle: 'jane@twenty.com', displayName: 'Jane Smith' },
+      { handle: 'john@funnelmink.com', displayName: 'John Doe' },
+      { handle: 'jane@funnelmink.com', displayName: 'Jane Smith' },
     ]);
     expect(result.uniqueHandles).toEqual([
-      'john@twenty.com',
-      'jane@twenty.com',
+      'john@funnelmink.com',
+      'jane@funnelmink.com',
     ]);
   });
 });
