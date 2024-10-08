@@ -55,7 +55,7 @@ const runCongratulate = async () => {
 
   const { data: pullRequests } =
     await danger.github.api.rest.search.issuesAndPullRequests({
-      q: `is:pr author:${userName} is:closed repo:twentyhq/twenty`,
+      q: `is:pr author:${userName} is:closed repo:funnelmink/crm`,
       per_page: 2,
       page: 1,
     });

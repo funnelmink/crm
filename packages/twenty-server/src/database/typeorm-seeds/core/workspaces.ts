@@ -39,7 +39,7 @@ export const seedWorkspaces = async (
       displayName: 'Twenty',
       domainName: 'twenty.dev',
       inviteHash: 'twenty.dev-invite-hash',
-      logo: 'https://twentyhq.github.io/placeholder-images/workspaces/twenty-logo.png',
+      logo: 'https://twentyhq.github.io/placeholder-images/workspaces/funnelmink-logo.png',
       activationStatus: WorkspaceActivationStatus.ACTIVE,
     },
   };

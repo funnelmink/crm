@@ -79,7 +79,7 @@ export default function ArticleEditContent() {
         </p>
         <StyledButtonContainer>
           <a
-            href={`https://github.com/twentyhq/twenty/blob/main/packages/twenty-website/src/content${pathname}.mdx`}
+            href={`https://github.com/funnelmink/crm/blob/main/packages/twenty-website/src/content${pathname}.mdx`}
             target="_blank"
             style={{ textDecoration: 'none' }}
           >

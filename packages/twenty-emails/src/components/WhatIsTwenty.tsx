@@ -21,7 +21,7 @@ export const WhatIsTwenty = () => {
         </Column>
         <Column>
           <ShadowText>
-            <Link href="https://github.com/twentyhq/twenty" value="Github" />
+            <Link href="https://github.com/funnelmink/crm" value="Github" />
           </ShadowText>
         </Column>
         <Column>

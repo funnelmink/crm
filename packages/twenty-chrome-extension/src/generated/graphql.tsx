@@ -6778,9 +6778,9 @@ export type User = {
   lastName: Scalars['String'];
   onboardingStatus?: Maybe<OnboardingStatus>;
   passwordHash?: Maybe<Scalars['String']>;
-  /** @deprecated field migrated into the AppTokens Table ref: https://github.com/twentyhq/twenty/issues/5021 */
+  /** @deprecated field migrated into the AppTokens Table ref: https://github.com/funnelmink/crm/issues/5021 */
   passwordResetToken?: Maybe<Scalars['String']>;
-  /** @deprecated field migrated into the AppTokens Table ref: https://github.com/twentyhq/twenty/issues/5021 */
+  /** @deprecated field migrated into the AppTokens Table ref: https://github.com/funnelmink/crm/issues/5021 */
   passwordResetTokenExpiresAt?: Maybe<Scalars['DateTime']>;
   supportUserHash?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
