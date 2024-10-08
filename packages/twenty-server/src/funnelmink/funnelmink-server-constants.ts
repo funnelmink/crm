@@ -7,7 +7,7 @@ export const FUNNELMINK_ICONS = {
   job: 'IconPlant',
   material: 'IconPaperBag',
   service: 'IconHeartHandshake',
-  workOrder: 'IconChecklist',
+  workOrder: 'IconListDetails',
   member: 'IconUserCircle',
 
   // fields
