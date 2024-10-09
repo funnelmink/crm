@@ -4,7 +4,7 @@ import {
   FUNNELMINK_IDS,
 } from 'src/funnelmink/funnelmink-server-constants';
 
-const workOrderFields = async (
+const workOrderFields = (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => [
   {
@@ -54,7 +54,7 @@ const workOrderFields = async (
   },
 ];
 
-export const workOrdersAllView = async (
+export const workOrdersAllView =  (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -66,11 +66,11 @@ export const workOrdersAllView = async (
     icon: FUNNELMINK_ICONS.listView,
     kanbanFieldMetadataId: '',
     filters: [],
-    fields: await workOrderFields(objectMetadataMap),
+    fields: workOrderFields(objectMetadataMap),
   };
 };
 
-export const workOrdersByStatusView = async (
+export const workOrdersByStatusView =  (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -85,11 +85,11 @@ export const workOrdersByStatusView = async (
         FUNNELMINK_IDS.workOrderStage
       ],
     filters: [],
-    fields: await workOrderFields(objectMetadataMap),
+    fields: workOrderFields(objectMetadataMap),
   };
 };
 
-export const servicesAllView = async (
+export const servicesAllView =  (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -124,7 +124,7 @@ export const servicesAllView = async (
   };
 };
 
-export const crewsAllView = async (
+export const crewsAllView =  (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -168,7 +168,7 @@ export const crewsAllView = async (
   };
 };
 
-export const materialsAllView = async (
+export const materialsAllView =  (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -203,7 +203,7 @@ export const materialsAllView = async (
   };
 };
 
-export const jobsAllView = async (
+export const jobsAllView =  (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
