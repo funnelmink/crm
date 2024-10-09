@@ -1,4 +1,3 @@
-import { useFavorites } from '@/favorites/hooks/useFavorites';
 import { useFilteredObjectMetadataItemsForWorkspaceFavorites } from '@/navigation/hooks/useObjectMetadataItemsInWorkspaceFavorites';
 import { NavigationDrawerSectionForObjectMetadataItemsSkeletonLoader } from '@/object-metadata/components/NavigationDrawerSectionForObjectMetadataItemsSkeletonLoader';
 import { useIsPrefetchLoading } from '@/prefetch/hooks/useIsPrefetchLoading';
