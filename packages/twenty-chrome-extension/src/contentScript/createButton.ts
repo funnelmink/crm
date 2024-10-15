@@ -19,7 +19,7 @@ export const createDefaultButton = (
   img.src = FUNNELMINK_CHROME_CONSTANTS.logoBase64;
   img.height = 16;
   img.width = 16;
-  img.alt = 'Twenty logo';
+  img.alt = 'Funnelmink logo';
 
   // Write universal styles for the button
   const divStyles = {

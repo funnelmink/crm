@@ -66,7 +66,7 @@ export const Default: Story = {
 
     // await canvas.findAllByText(peopleMock[0].name.firstName);
     expect(
-      await canvas.findByText('Twenty', undefined, {
+      await canvas.findByText('Funnelmink', undefined, {
         timeout: 5000,
       }),
     ).toBeInTheDocument();

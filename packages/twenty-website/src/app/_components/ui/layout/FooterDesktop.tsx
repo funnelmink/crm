@@ -2,12 +2,7 @@
 
 import styled from '@emotion/styled';
 
-import {
-  DiscordIcon,
-  GithubIcon2,
-  LinkedInIcon,
-  XIcon,
-} from '../icons/SvgIcons';
+import { DiscordIcon, GithubIcon2 } from '../icons/SvgIcons';
 
 import { Logo } from './Logo';
 
@@ -79,33 +74,28 @@ export const FooterDesktop = () => {
       >
         <LeftSideFooter>
           <Logo />
-          <div>The #1 Open Source CRM</div>
+          <div>Landscaping CRM</div>
         </LeftSideFooter>
         <RightSideFooter>
           <RightSideFooterColumn>
             <RightSideFooterColumnTitle>Company</RightSideFooterColumnTitle>
             <RightSideFooterLink href="/pricing">Pricing</RightSideFooterLink>
-            <RightSideFooterLink href="/story">Story</RightSideFooterLink>
           </RightSideFooterColumn>
           <RightSideFooterColumn>
             <RightSideFooterColumnTitle>Resources</RightSideFooterColumnTitle>
-            <RightSideFooterLink href="/developers">
-              Developers
+            <RightSideFooterLink href="/fm-releases">
+              Changelog
             </RightSideFooterLink>
-            <RightSideFooterLink href="/user-guide">
-              User-Guide
+            <RightSideFooterLink
+              href="https://twenty.com/user-guide"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              User Guide
             </RightSideFooterLink>
-            <RightSideFooterLink href="/releases">Releases</RightSideFooterLink>
-            <RightSideFooterLink href="/jobs">Jobs</RightSideFooterLink>
           </RightSideFooterColumn>
           <RightSideFooterColumn>
-            <RightSideFooterColumnTitle>Other</RightSideFooterColumnTitle>
-            <RightSideFooterLink href="/contributors">
-              Contributors
-            </RightSideFooterLink>
-            <RightSideFooterLink href="/oss-friends">
-              OSS Friends
-            </RightSideFooterLink>
+            <RightSideFooterColumnTitle>Legal</RightSideFooterColumnTitle>
             <RightSideFooterLink href="/legal/terms">
               Terms of Service
             </RightSideFooterLink>
@@ -128,7 +118,7 @@ export const FooterDesktop = () => {
       >
         <div>
           <span style={{ fontFamily: 'Inter, sans-serif' }}>©</span>
-          {new Date().getFullYear()} Twenty PBC
+          {new Date().getFullYear()} FunnelMink LLC
         </div>
         <div
           style={{
@@ -138,9 +128,6 @@ export const FooterDesktop = () => {
             gap: '10px',
           }}
         >
-          <a href="https://x.com/twentycrm" target="_blank" rel="noreferrer">
-            <XIcon size="M" />
-          </a>
           <a
             href="https://github.com/funnelmink/crm"
             target="_blank"
@@ -149,14 +136,7 @@ export const FooterDesktop = () => {
             <GithubIcon2 size="M" />
           </a>
           <a
-            href="https://www.linkedin.com/company/twenty"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <LinkedInIcon size="M" />
-          </a>
-          <a
-            href="https://discord.gg/UfGNZJfAG6"
+            href="https://discord.gg/rDcRJBrWUf"
             target="_blank"
             rel="noreferrer"
           >
