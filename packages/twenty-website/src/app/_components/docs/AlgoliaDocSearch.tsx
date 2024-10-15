@@ -1,5 +1,4 @@
 import { DocSearch } from '@docsearch/react';
-import { env } from 'next-runtime-env';
 
 interface AlgoliaDocSearchProps {
   pathname: string;
@@ -41,8 +40,8 @@ export const AlgoliaDocSearch = ({ pathname }: AlgoliaDocSearchProps) => {
           </a>
         </section>
       )}
-      appId={env('NEXT_PUBLIC_ALGOLIA_APP_ID') ?? ''}
-      apiKey={env('NEXT_PUBLIC_ALGOLIA_API_KEY') ?? ''}
+      appId={''}
+      apiKey={''}
       indexName={`twenty-${indexName}`}
     />
   );

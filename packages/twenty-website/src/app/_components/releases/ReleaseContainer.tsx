@@ -5,17 +5,14 @@ import { Line } from '@/app/_components/releases/Line';
 import { Release } from '@/app/_components/releases/Release';
 import { ReleaseNote } from '@/app/releases/api/route';
 import { getGithubReleaseDateFromReleaseNote } from '@/app/releases/utils/get-github-release-date-from-release-note';
-import { GithubReleases } from '@/database/model';
 
 interface ReleaseProps {
   visibleReleasesNotes: ReleaseNote[];
-  githubReleases: GithubReleases[];
   mdxReleasesContent: any;
 }
 
 export const ReleaseContainer = ({
   visibleReleasesNotes,
-  githubReleases,
   mdxReleasesContent,
 }: ReleaseProps) => {
   const [page, setPage] = useState(1);
@@ -65,11 +62,21 @@ export const ReleaseContainer = ({
 
   return (
     <>
+      <p
+        style={{
+          fontSize: '1.2rem',
+          fontWeight: 600,
+          color: '#333',
+          marginBottom: '1rem',
+          textAlign: 'center',
+        }}
+      >
+        Twenty is the core technology that powers Funnelmink's CRM features.
+      </p>
       {releases.map((note, index) => (
         <React.Fragment key={note.slug}>
           <Release
             githubPublishedAt={getGithubReleaseDateFromReleaseNote(
-              githubReleases,
               note.release,
               note.date,
             )}

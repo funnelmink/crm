@@ -9,8 +9,6 @@ export interface ReleaseNote {
   content: string;
 }
 
-export const dynamic = 'force-dynamic';
-
 export async function GET(request: NextRequest) {
   const host = request.nextUrl.hostname;
   const protocol = request.nextUrl.protocol;

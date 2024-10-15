@@ -1,15 +1,5 @@
-import { ContentContainer } from './_components/ui/layout/ContentContainer';
-
-export const dynamic = 'force-dynamic';
+import { IFrameContainer } from './_components/funnelmink/IFrameContainer';
 
 export default function Home() {
-  return (
-    <ContentContainer>
-      <div style={{ minHeight: '60vh', marginTop: '50px' }}>
-        Part of the website is built directly with Framer, including the
-        homepage. <br />
-        We use Clouflare to split the traffic between the two sites.
-      </div>
-    </ContentContainer>
-  );
+  return <IFrameContainer src={'https://funnelmink-home.carrd.co'} />;
 }

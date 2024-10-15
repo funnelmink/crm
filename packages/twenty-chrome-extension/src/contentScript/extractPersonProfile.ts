@@ -109,7 +109,7 @@ export const insertButtonForPerson = async () => {
     const person = await checkIfPersonExists();
 
     const openPersonOnSidePanel = (personId: string) => {
-      personButtonSpan.textContent = 'View in Twenty';
+      personButtonSpan.textContent = 'View in Funnelmink';
       personButtonDiv.onClickHandler(async () => {
         await changeSidePanelUrl(`/object/person/${personId}`);
         chrome.runtime.sendMessage({ action: 'openSidepanel' });
@@ -121,7 +121,7 @@ export const insertButtonForPerson = async () => {
       if (isDefined(person.id)) openPersonOnSidePanel(person.id);
     } else {
       await changeSidePanelUrl(`/objects/people`);
-      personButtonSpan.textContent = 'Add to Twenty';
+      personButtonSpan.textContent = 'Add to Funnelmink';
       personButtonDiv.onClickHandler(async () => {
         personButtonSpan.textContent = 'Saving...';
         const personId = await addPerson();

@@ -2,9 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { IconBook, IconChevronDown, IconRobotFace } from '@tabler/icons-react';
+import { IconChevronDown, IconNumber20Small } from '@tabler/icons-react';
 
-import { ExternalArrow, GithubIcon } from '@/app/_components/ui/icons/SvgIcons';
 import { CallToAction } from '@/app/_components/ui/layout/header/callToAction';
 import {
   DesktopNav,
@@ -12,9 +11,8 @@ import {
   ListItem,
   LogoContainer,
 } from '@/app/_components/ui/layout/header/styled';
-import { Logo } from '@/app/_components/ui/layout/Logo';
+import { LogoBw, WideLogo } from '@/app/_components/ui/layout/Logo';
 import { Theme } from '@/app/_components/ui/theme/theme';
-import { formatNumberOfStars } from '@/shared-utils/formatNumberOfStars';
 
 const DropdownMenu = styled.ul<{ open: boolean }>`
   display: ${(props) => (props.open ? 'block' : 'none')};
@@ -86,24 +84,27 @@ const Arrow = styled.div<{ open: boolean }>`
   transform: ${(props) => (props.open ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
 
-type Props = {
-  numberOfStars: number;
-};
+export const HeaderDesktop = () => {
+  const [releaseDropdownOpen, setReleaseDropdownOpen] = useState(false);
+  const releaseDropdownRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
-export const HeaderDesktop = ({ numberOfStars }: Props) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev);
+  const toggleReleaseDropdown = () => {
+    if (mounted) {
+      setReleaseDropdownOpen((prev) => !prev);
+    }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
+      releaseDropdownRef.current &&
+      !releaseDropdownRef.current.contains(event.target as Node)
     ) {
-      setDropdownOpen(false);
+      setReleaseDropdownOpen(false);
     }
   };
 
@@ -113,46 +114,49 @@ export const HeaderDesktop = ({ numberOfStars }: Props) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   return (
     <DesktopNav>
       <LogoContainer>
-        <Logo />
+        <WideLogo />
       </LogoContainer>
       <LinkList>
-        <ListItem href="/story">Story</ListItem>
         <ListItem href="/pricing">Pricing</ListItem>
-        <ListItem href="/releases">Releases</ListItem>
-        <Dropdown
-          ref={dropdownRef}
-          style={{ position: 'relative' }}
-          onClick={toggleDropdown}
+        <ListItem
+          href="https://twenty.com/user-guide"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Docs
-          <Arrow open={dropdownOpen}>
+          User Guide
+        </ListItem>
+        <Dropdown
+          ref={releaseDropdownRef}
+          style={{ position: 'relative' }}
+          onClick={toggleReleaseDropdown}
+        >
+          Releases
+          <Arrow open={releaseDropdownOpen}>
             <StyledChevron>
               <IconChevronDown size={Theme.icon.size.sm} />
             </StyledChevron>
           </Arrow>
-          <DropdownMenu open={dropdownOpen}>
-            <DropdownItem href="/user-guide">
-              <StyledIconContainer>
-                <IconBook size={Theme.icon.size.md} />
-              </StyledIconContainer>
-              User Guide
-            </DropdownItem>
-            <DropdownItem href="/developers">
-              <StyledIconContainer>
-                <IconRobotFace size={Theme.icon.size.md} />
-              </StyledIconContainer>
-              Developers
-            </DropdownItem>
-          </DropdownMenu>
+          {mounted && (
+            <DropdownMenu open={releaseDropdownOpen}>
+              <DropdownItem href="/fm-releases">
+                <StyledIconContainer>
+                  <LogoBw size={Theme.icon.size.md} />
+                </StyledIconContainer>
+                Funnelmink
+              </DropdownItem>
+              <DropdownItem href="/releases">
+                <StyledIconContainer>
+                  <IconNumber20Small size={Theme.icon.size.md} />
+                </StyledIconContainer>
+                Twenty
+              </DropdownItem>
+            </DropdownMenu>
+          )}
         </Dropdown>
-        <ListItem href="https://github.com/funnelmink/crm">
-          <GithubIcon color="rgb(71,71,71)" />
-          {formatNumberOfStars(numberOfStars)}
-          <ExternalArrow />
-        </ListItem>
       </LinkList>
       <CallToAction />
     </DesktopNav>

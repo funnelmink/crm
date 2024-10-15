@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { Gabarito } from 'next/font/google';
 
 import mq from '@/app/_components/ui/theme/mq';
+import { FUNNELMINK_WEBSITE_CONSTANTS } from '@/funnelmink-website-constants';
 
 const gabarito = Gabarito({
   weight: ['400', '500'],
@@ -103,7 +104,7 @@ export const StyledButton = styled.div`
   padding-left: 16px;
   padding-right: 16px;
   align-items: center;
-  background-color: #000;
+  background-color: ${FUNNELMINK_WEBSITE_CONSTANTS.accentDarker};
   color: #fff;
   border-radius: 8px;
   font-weight: 500;

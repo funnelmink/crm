@@ -1,5 +1,4 @@
 import React from 'react';
-import { desc } from 'drizzle-orm';
 import { Metadata } from 'next';
 
 import { ReleaseContainer } from '@/app/_components/releases/ReleaseContainer';
@@ -9,32 +8,14 @@ import {
   getMdxReleasesContent,
   getReleases,
 } from '@/app/releases/utils/get-releases';
-import { getVisibleReleases } from '@/app/releases/utils/get-visible-releases';
-import { findAll } from '@/database/database';
-import { GithubReleases, githubReleasesModel } from '@/database/model';
-import { pgGithubReleasesModel } from '@/database/schema-postgres';
 
 export const metadata: Metadata = {
-  title: 'Twenty - Releases',
-  description:
-    'Discover the newest features and improvements in Twenty, the #1 open-source CRM.',
+  title: 'Twenty Releases',
+  description: 'Discover the newest features and improvements in Twenty.',
 };
 
-export const dynamic = 'force-dynamic';
-
 const Home = async () => {
-  const githubReleases = (await findAll(
-    githubReleasesModel,
-    desc(pgGithubReleasesModel.publishedAt),
-  )) as GithubReleases[];
-
-  const latestGithubRelease = githubReleases[0];
   const releaseNotes = await getReleases();
-
-  const visibleReleasesNotes = getVisibleReleases(
-    releaseNotes,
-    latestGithubRelease.tagName,
-  );
 
   const mdxReleasesContent = await getMdxReleasesContent(releaseNotes);
 
@@ -42,8 +23,7 @@ const Home = async () => {
     <ContentContainer>
       <Title />
       <ReleaseContainer
-        visibleReleasesNotes={visibleReleasesNotes}
-        githubReleases={githubReleases}
+        visibleReleasesNotes={releaseNotes}
         mdxReleasesContent={mdxReleasesContent}
       />
     </ContentContainer>

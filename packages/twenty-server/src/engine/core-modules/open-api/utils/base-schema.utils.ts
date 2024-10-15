@@ -11,11 +11,11 @@ export const baseSchema = (
   return {
     openapi: '3.0.3',
     info: {
-      title: 'Twenty Api',
-      description: `This is a **Twenty REST/API** playground based on the **OpenAPI 3.0 specification**.`,
+      title: 'Funnelmink Api',
+      description: `This is a **Funnelmink REST/API** playground based on the **OpenAPI 3.0 specification**.`,
       termsOfService: 'https://github.com/funnelmink/crm?tab=coc-ov-file',
       contact: {
-        email: 'felix@funnelmink.com',
+        email: 'ron@funnelmink.com',
       },
       license: {
         name: 'AGPL-3.0',
@@ -47,7 +47,7 @@ export const baseSchema = (
       },
     ],
     externalDocs: {
-      description: 'Find out more about **Twenty**',
+      description: 'Find out more about **Funnelmink**',
       url: 'https://funnelmink.com',
     },
     paths: { [`/open-api/${schemaName}`]: computeOpenApiPath(serverUrl) },

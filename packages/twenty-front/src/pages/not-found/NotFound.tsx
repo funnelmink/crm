@@ -35,7 +35,7 @@ const StyledButtonContainer = styled.div`
 export const NotFound = () => {
   return (
     <>
-      <PageTitle title="Page Not Found | Twenty" />
+      <PageTitle title="Page Not Found | Funnelmink" />
       <StyledBackDrop>
         <AnimatedPlaceholderErrorContainer>
           <AnimatedPlaceholder type="error404" />

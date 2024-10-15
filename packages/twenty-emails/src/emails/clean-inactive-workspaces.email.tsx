@@ -40,7 +40,7 @@ export const CleanInactiveWorkspaceEmail = ({
         next {remainingDays}
         {dayOrDays} to retain access.
       </MainText>
-      <CallToAction href="https://app.funnelmink.com" value="Connect to Twenty" />
+      <CallToAction href="https://app.funnelmink.com" value="Connect to Funnelmink" />
     </BaseEmail>
   );
 };
