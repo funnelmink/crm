@@ -54,7 +54,7 @@ const workOrderFields = (
   },
 ];
 
-export const workOrdersAllView =  (
+export const workOrdersAllView = (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -70,7 +70,7 @@ export const workOrdersAllView =  (
   };
 };
 
-export const workOrdersByStatusView =  (
+export const workOrdersByStatusView = (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -89,7 +89,7 @@ export const workOrdersByStatusView =  (
   };
 };
 
-export const servicesAllView =  (
+export const servicesAllView = (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -124,7 +124,7 @@ export const servicesAllView =  (
   };
 };
 
-export const crewsAllView =  (
+export const crewsAllView = (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -168,7 +168,7 @@ export const crewsAllView =  (
   };
 };
 
-export const materialsAllView =  (
+export const materialsAllView = (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {
@@ -203,7 +203,7 @@ export const materialsAllView =  (
   };
 };
 
-export const jobsAllView =  (
+export const jobsAllView = (
   objectMetadataMap: Record<string, ObjectMetadataEntity>,
 ) => {
   return {

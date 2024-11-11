@@ -19,7 +19,6 @@ import {
   RelationMetadataType,
   RelationOnDeleteAction,
 } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
-import { ActivityTargetWorkspaceEntity } from 'src/modules/activity/standard-objects/activity-target.workspace-entity';
 import { TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/note-target.workspace-entity';
 import { FavoriteWorkspaceEntity } from 'src/modules/favorite/standard-objects/favorite.workspace-entity';
@@ -138,19 +137,6 @@ export class JobWorkspaceEntity extends BaseWorkspaceEntity {
   crewId: string | null;
 
   // Second-class Relations
-  @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.jobActivityTargets,
-    type: RelationMetadataType.ONE_TO_MANY,
-    label: 'Activities',
-    description: 'The Activities tied to this Job',
-    icon: FUNNELMINK_ICONS.activityTargets,
-    inverseSideTarget: () => ActivityTargetWorkspaceEntity,
-    onDelete: RelationOnDeleteAction.CASCADE,
-  })
-  @WorkspaceIsNullable()
-  @WorkspaceIsSystem()
-  activityTargets: Relation<ActivityTargetWorkspaceEntity>[];
-
   @WorkspaceRelation({
     standardId: FUNNELMINK_IDS.jobTaskTargets,
     type: RelationMetadataType.ONE_TO_MANY,

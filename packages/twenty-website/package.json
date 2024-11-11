@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@docsearch/react": "^3.6.2",
-    "gray-matter": "^4.0.3",
-    "@nivo/calendar": "^0.87.0"
+    "@nivo/calendar": "^0.87.0",
+    "gray-matter": "^4.0.3"
   }
 }

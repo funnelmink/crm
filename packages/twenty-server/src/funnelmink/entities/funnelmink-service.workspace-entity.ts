@@ -14,7 +14,6 @@ import {
 } from 'src/engine/metadata-modules/field-metadata/composite-types/actor.composite-type';
 import { WorkspaceIsSystem } from 'src/engine/twenty-orm/decorators/workspace-is-system.decorator';
 import { WorkspaceIsNullable } from 'src/engine/twenty-orm/decorators/workspace-is-nullable.decorator';
-import { ActivityTargetWorkspaceEntity } from 'src/modules/activity/standard-objects/activity-target.workspace-entity';
 import { WorkspaceRelation } from 'src/engine/twenty-orm/decorators/workspace-relation.decorator';
 import {
   RelationMetadataType,
@@ -83,19 +82,6 @@ export class ServiceWorkspaceEntity extends BaseWorkspaceEntity {
   // TODO: job (need many-to-many)
 
   // Second-class Relations
-  @WorkspaceRelation({
-    standardId: FUNNELMINK_IDS.serviceActivityTargets,
-    type: RelationMetadataType.ONE_TO_MANY,
-    label: 'Activities',
-    description: 'The Activities tied to this Service',
-    icon: FUNNELMINK_ICONS.activityTargets,
-    inverseSideTarget: () => ActivityTargetWorkspaceEntity,
-    onDelete: RelationOnDeleteAction.CASCADE,
-  })
-  @WorkspaceIsNullable()
-  @WorkspaceIsSystem()
-  activityTargets: Relation<ActivityTargetWorkspaceEntity>[];
-
   @WorkspaceRelation({
     standardId: FUNNELMINK_IDS.serviceTaskTargets,
     type: RelationMetadataType.ONE_TO_MANY,
