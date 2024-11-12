@@ -230,11 +230,11 @@ export const SettingsNavigationDrawerItems = () => {
       </AnimatePresence>
       <NavigationDrawerSection>
         <NavigationDrawerSectionTitle label="Other" />
-        <SettingsNavigationDrawerItem
-          label="Releases"
-          path={SettingsPath.Releases}
-          Icon={IconRocket}
-        />
+        {/*<SettingsNavigationDrawerItem*/}
+        {/*  label="Releases"*/}
+        {/*  path={SettingsPath.Releases}*/}
+        {/*  Icon={IconRocket}*/}
+        {/*/>*/}
         <NavigationDrawerItem
           label="Logout"
           onClick={signOut}
