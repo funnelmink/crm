@@ -176,11 +176,11 @@ export const SettingsNavigationDrawerItems = () => {
           path={SettingsPath.Objects}
           Icon={IconHierarchy2}
         />
-        <SettingsNavigationDrawerItem
-          label="Integrations"
-          path={SettingsPath.Integrations}
-          Icon={IconApps}
-        />
+        {/*<SettingsNavigationDrawerItem*/}
+        {/*  label="Integrations"*/}
+        {/*  path={SettingsPath.Integrations}*/}
+        {/*  Icon={IconApps}*/}
+        {/*/>*/}
         {isCRMMigrationEnabled && (
           <SettingsNavigationDrawerItem
             label="CRM Migration"
