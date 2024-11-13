@@ -215,7 +215,7 @@ describe('people resolvers (integration)', () => {
       filter: {
         name: {
           firstName: {
-            eq: 'New Name',
+            eq: 'Updated Name',
           },
         },
       },

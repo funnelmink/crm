@@ -11,7 +11,6 @@ describe('peopleResolver (e2e)', () => {
             edges {
               node {
                 jobTitle
-                city
                 avatarUrl
                 position
                 searchVector
@@ -51,7 +50,6 @@ describe('peopleResolver (e2e)', () => {
           const people = edges[0].node;
 
           expect(people).toHaveProperty('jobTitle');
-          expect(people).toHaveProperty('city');
           expect(people).toHaveProperty('avatarUrl');
           expect(people).toHaveProperty('position');
           expect(people).toHaveProperty('searchVector');
