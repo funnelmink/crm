@@ -17,7 +17,6 @@ const PERSON_3_ID = '777a8457-eb2d-40ac-a707-551b615b6989';
 
 const PERSON_GQL_FIELDS = `
     id
-    city
     jobTitle
     avatarUrl
     intro
@@ -32,8 +31,8 @@ const PERSON_GQL_FIELDS = `
 
 describe('people resolvers (integration)', () => {
   it('1. should create and return people', async () => {
-    const personCity1 = generateRecordName(PERSON_1_ID);
-    const personCity2 = generateRecordName(PERSON_2_ID);
+    const personName1 = generateRecordName(PERSON_1_ID);
+    const personName2 = generateRecordName(PERSON_2_ID);
     const graphqlOperation = createManyOperationFactory({
       objectMetadataSingularName: 'person',
       objectMetadataPluralName: 'people',
@@ -41,11 +40,15 @@ describe('people resolvers (integration)', () => {
       data: [
         {
           id: PERSON_1_ID,
-          city: personCity1,
+          name: {
+            firstName: personName1,
+          },
         },
         {
           id: PERSON_2_ID,
-          city: personCity2,
+          name: {
+            firstName: personName2,
+          },
         },
       ],
     });
@@ -55,8 +58,8 @@ describe('people resolvers (integration)', () => {
     expect(response.body.data.createPeople).toHaveLength(2);
 
     response.body.data.createPeople.forEach((person) => {
-      expect(person).toHaveProperty('city');
-      expect([personCity1, personCity2]).toContain(person.city);
+      expect(person).toHaveProperty('name');
+      expect([personName1, personName2]).toContain(person.name.firstName);
 
       expect(person).toHaveProperty('id');
       expect(person).toHaveProperty('jobTitle');
@@ -70,14 +73,16 @@ describe('people resolvers (integration)', () => {
   });
 
   it('1b. should create and return one person', async () => {
-    const personCity3 = generateRecordName(PERSON_3_ID);
+    const personName3 = generateRecordName(PERSON_3_ID);
 
     const graphqlOperation = createOneOperationFactory({
       objectMetadataSingularName: 'person',
       gqlFields: PERSON_GQL_FIELDS,
       data: {
         id: PERSON_3_ID,
-        city: personCity3,
+        name: {
+          firstName: personName3,
+        },
       },
     });
 
@@ -85,8 +90,8 @@ describe('people resolvers (integration)', () => {
 
     const createdPerson = response.body.data.createPerson;
 
-    expect(createdPerson).toHaveProperty('city');
-    expect(createdPerson.city).toEqual(personCity3);
+    expect(createdPerson).toHaveProperty('name');
+    expect(createdPerson.name.firstName).toEqual(personName3);
 
     expect(createdPerson).toHaveProperty('id');
     expect(createdPerson).toHaveProperty('jobTitle');
@@ -143,7 +148,7 @@ describe('people resolvers (integration)', () => {
 
     const person = response.body.data.person;
 
-    expect(person).toHaveProperty('city');
+    expect(person).toHaveProperty('name');
 
     expect(person).toHaveProperty('id');
     expect(person).toHaveProperty('jobTitle');
@@ -161,7 +166,9 @@ describe('people resolvers (integration)', () => {
       objectMetadataPluralName: 'people',
       gqlFields: PERSON_GQL_FIELDS,
       data: {
-        city: 'Updated City',
+        name: {
+          firstName: 'Updated Name',
+        },
       },
       filter: {
         id: {
@@ -177,7 +184,7 @@ describe('people resolvers (integration)', () => {
     expect(updatedPeople).toHaveLength(2);
 
     updatedPeople.forEach((person) => {
-      expect(person.city).toEqual('Updated City');
+      expect(person.name.firstName).toEqual('Updated Name');
     });
   });
 
@@ -186,7 +193,9 @@ describe('people resolvers (integration)', () => {
       objectMetadataSingularName: 'person',
       gqlFields: PERSON_GQL_FIELDS,
       data: {
-        city: 'New City',
+        name: {
+          firstName: 'New Name',
+        },
       },
       recordId: PERSON_3_ID,
     });
@@ -195,17 +204,19 @@ describe('people resolvers (integration)', () => {
 
     const updatedPerson = response.body.data.updatePerson;
 
-    expect(updatedPerson.city).toEqual('New City');
+    expect(updatedPerson.name.firstName).toEqual('New Name');
   });
 
-  it('4. should find many people with updated city', async () => {
+  it('4. should find many people with updated name', async () => {
     const graphqlOperation = findManyOperationFactory({
       objectMetadataSingularName: 'person',
       objectMetadataPluralName: 'people',
       gqlFields: PERSON_GQL_FIELDS,
       filter: {
-        city: {
-          eq: 'Updated City',
+        name: {
+          firstName: {
+            eq: 'New Name',
+          },
         },
       },
     });
@@ -215,20 +226,22 @@ describe('people resolvers (integration)', () => {
     expect(response.body.data.people.edges).toHaveLength(2);
   });
 
-  it('4b. should find one person with updated city', async () => {
+  it('4b. should find one person with updated name', async () => {
     const graphqlOperation = findOneOperationFactory({
       objectMetadataSingularName: 'person',
       gqlFields: PERSON_GQL_FIELDS,
       filter: {
-        city: {
-          eq: 'New City',
+        name: {
+          firstName: {
+            eq: 'New Name',
+          },
         },
       },
     });
 
     const response = await makeGraphqlAPIRequest(graphqlOperation);
 
-    expect(response.body.data.person.city).toEqual('New City');
+    expect(response.body.data.person.name.firstName).toEqual('New Name');
   });
 
   it('5. should delete many people', async () => {
