@@ -19,12 +19,12 @@ export const Default: Story = {
       <>
         <Modal.Header>Stay in touch</Modal.Header>
         <Modal.Content>
-          This is a dummy newletter form so don't bother trying to test it. Not
+          This is a dummy newsletter form so don't bother trying to test it. Not
           that I expect you to, anyways. :)
         </Modal.Content>
         <Modal.Footer>
-          By using Twenty, you're opting for the finest CRM experience you'll
-          ever encounter.
+          By using Funnelmink, you're opting for the finest CRM experience
+          you'll ever encounter.
         </Modal.Footer>
       </>
     ),
