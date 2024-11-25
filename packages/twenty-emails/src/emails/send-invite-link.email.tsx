@@ -30,7 +30,7 @@ export const SendInviteLinkEmail = ({
   const workspaceLogo = getImageAbsoluteURI(workspace.logo, serverUrl);
   return (
     <BaseEmail width={333}>
-      <Title value="Join your team on Twenty" />
+      <Title value="Join your team on Funnelmink" />
       <MainText>
         {capitalize(sender.firstName)} (
         <Link href={sender.email} value={sender.email} />) has invited you to

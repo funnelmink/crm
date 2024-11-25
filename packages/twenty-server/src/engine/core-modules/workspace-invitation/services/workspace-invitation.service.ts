@@ -251,7 +251,7 @@ export class WorkspaceInvitationService {
             'EMAIL_FROM_NAME',
           )} <${this.environmentService.get('EMAIL_FROM_ADDRESS')}>`,
           to: invitation.value.email,
-          subject: 'Join your team on Twenty',
+          subject: 'Join your team on Funnelmink',
           text,
           html,
         });

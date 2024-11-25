@@ -72,9 +72,9 @@ export const SETTINGS_COMPOSITE_FIELD_TYPE_CONFIGS = {
     label: 'Links',
     Icon: IllustrationIconLink,
     exampleValue: {
-      primaryLinkUrl: 'twenty.com',
+      primaryLinkUrl: 'funnelmink.com',
       primaryLinkLabel: '',
-      secondaryLinks: [{ url: 'twenty.com', label: 'Twenty' }],
+      secondaryLinks: [{ url: 'funnelmink.com', label: 'Funnelmink' }],
     },
     category: 'Basic',
     subFields: ['primaryLinkUrl', 'primaryLinkLabel', 'secondaryLinks'],
