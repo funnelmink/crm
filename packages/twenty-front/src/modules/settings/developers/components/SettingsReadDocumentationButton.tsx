@@ -8,7 +8,7 @@ export const SettingsReadDocumentationButton = () => {
       accent="default"
       size="small"
       Icon={IconBook2}
-      to={'https://docs.funnelmink.com'}
+      to={'https://docs.twenty.com'}
       target="_blank"
     ></Button>
   );
